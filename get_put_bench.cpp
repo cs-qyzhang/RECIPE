@@ -248,7 +248,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     std::string scan("SCAN");
 
     int count = 0;
-    while (infile_load.good()) {
+    while (count < LOAD_SIZE && infile_load.good()) {
         infile_load >> op >> key;
         if (op.compare(insert) != 0) {
             std::cout << "READING LOAD FILE FAIL!\n";
@@ -260,12 +260,12 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
     LOAD_SIZE = count;
     fprintf(stderr, "LOAD SIZE: %d\n", LOAD_SIZE);
-    assert(RUN_SIZE == 400000000);
+    assert(LOAD_SIZE == 400000000);
 
     std::ifstream infile_txn(txn_file);
 
     count = 0;
-    while (infile_txn.good()) {
+    while (count < RUN_SIZE && infile_txn.good()) {
         infile_txn >> op >> key;
         keys.push_back(key);
         count++;
