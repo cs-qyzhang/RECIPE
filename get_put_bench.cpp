@@ -218,7 +218,7 @@ void barrier_cross(barrier_t *b) {
 barrier_t barrier;
 
 static uint64_t LOAD_SIZE = 400000000;
-static uint64_t RUN_SIZE  = 10000000;
+static uint64_t RUN_SIZE  = 20000000;
 
 void loadKey(TID tid, Key &key) {
     return ;
