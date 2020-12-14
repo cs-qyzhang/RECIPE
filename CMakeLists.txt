@@ -84,6 +84,7 @@ include_directories(third-party/CCEH)
 include_directories(P-Masstree)
 include_directories(P-CLHT/include P-CLHT/external/include)
 include_directories(P-BwTree)
+include_directories(/home/qyzhang/Projects/ComboTree-v2.0/include)
 
 find_library(JemallocLib jemalloc)
 find_library(TbbLib tbb)
@@ -110,4 +111,5 @@ target_link_libraries(Indexes ${TbbLib} ${JemallocLib} ${CMAKE_THREAD_LIBS_INIT}
 set(YCSB_TEST ycsb.cpp)
 add_executable(ycsb ${YCSB_TEST})
 
-target_link_libraries(ycsb Indexes atomic boost_system boost_thread)
+target_link_directories(ycsb PUBLIC /home/qyzhang/Projects/ComboTree-v2.0/build)
+target_link_libraries(ycsb Indexes atomic boost_system boost_thread combotree)
