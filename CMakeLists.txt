@@ -113,3 +113,11 @@ add_executable(ycsb ${YCSB_TEST})
 
 target_link_directories(ycsb PUBLIC /home/qyzhang/Projects/ComboTree-v2.0/build)
 target_link_libraries(ycsb Indexes atomic boost_system boost_thread combotree)
+
+add_executable(get_put_bench get_put_bench.cpp)
+target_link_directories(get_put_bench PUBLIC /home/qyzhang/Projects/ComboTree-v2.0/build)
+target_link_libraries(get_put_bench Indexes atomic boost_system boost_thread combotree)
+
+add_executable(delete_bench ${YCSB_TEST})
+target_link_directories(delete_bench PUBLIC /home/qyzhang/Projects/ComboTree-v2.0/build)
+target_link_libraries(delete_bench Indexes atomic boost_system boost_thread combotree)
