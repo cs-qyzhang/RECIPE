@@ -867,14 +867,18 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         tree->Put(keys[i], keys[i]);
                     } else if (ops[i] == OP_READ) {
                         uint64_t value;
-                        assert(tree->Get(keys[i], value) == true);
+                        bool ret = tree->Get(keys[i], value);
+                        if (ret != true)
+                            printf("GET ERROR!\n");
                     } else if (ops[i] == OP_SCAN) {
                         uint64_t buf[200];
                         int resultsFound = 0;
                         uint64_t start_key = keys[i];
                         combotree::ComboTree::NoSortIter iter(tree, start_key);
                         for (size_t j = 0; j < ranges[i]; ++j) {
-                            assert(iter.key() == iter.value());
+                            if (iter.key() != iter.value())
+                                printf("SCAN ERROR!\n");
+                            iter.key() == iter.value();
                             if (!iter.next())
                                 break;
                         }

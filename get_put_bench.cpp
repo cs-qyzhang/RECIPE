@@ -260,7 +260,6 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
     LOAD_SIZE = count;
     fprintf(stderr, "LOAD SIZE: %d\n", LOAD_SIZE);
-    assert(LOAD_SIZE == 400000000);
 
     std::ifstream infile_txn(txn_file);
 
@@ -273,7 +272,6 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
     RUN_SIZE = count;
     fprintf(stderr, "RUN SIZE: %d\n", RUN_SIZE);
-    assert(RUN_SIZE == 20000000);
 
     std::atomic<int> range_complete, range_incomplete;
     range_complete.store(0);
@@ -717,7 +715,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE/2), [&](const tbb::blocked_range<uint64_t> &scope) {
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
                     uint64_t value;
-                    assert(tree->Get(keys[i], value) == true);
+                    bool ret = tree->Get(keys[i], value);
+                    if (ret != true)
+                        printf("ERROR!\n");
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
