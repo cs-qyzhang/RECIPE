@@ -1,0 +1,45 @@
+clht, workloada, threads 16
+Throughput: load, 2.296583 ,ops/us
+Throughput: get, 15.600405 ,ops/us
+Throughput: put, 5.648684 ,ops/us
+[GCOLLE-99] collected: 9   | took:   98012772940 ti = 46.672749 s
+clht, workloada, threads 1
+Throughput: load, 0.434730 ,ops/us
+Throughput: get, 7.370153 ,ops/us
+Throughput: put, 0.507903 ,ops/us
+[GCOLLE-99] collected: 9   | took:   87722054932 ti = 41.772407 s
+clht, workloada, threads 24
+Throughput: load, 2.131946 ,ops/us
+Throughput: get, 13.761632 ,ops/us
+Throughput: put, 5.864129 ,ops/us
+[GCOLLE-99] collected: 9   | took:  101234500638 ti = 48.206905 s
+clht, workloada, threads 2
+Throughput: load, 0.783063 ,ops/us
+Throughput: get, 12.334015 ,ops/us
+Throughput: put, 0.985579 ,ops/us
+[GCOLLE-99] collected: 9   | took:   89317877664 ti = 42.532323 s
+clht, workloada, threads 32
+Throughput: load, 1.971022 ,ops/us
+Throughput: get, 12.561678 ,ops/us
+Throughput: put, 5.407548 ,ops/us
+[GCOLLE-99] collected: 9   | took:  104801901530 ti = 49.905667 s
+clht, workloada, threads 40
+Throughput: load, 1.853681 ,ops/us
+Throughput: get, 10.146042 ,ops/us
+Throughput: put, 5.149524 ,ops/us
+[GCOLLE-99] collected: 9   | took:  107360599826 ti = 51.124095 s
+clht, workloada, threads 48
+Throughput: load, 0.852922 ,ops/us
+Throughput: get, 9.716369 ,ops/us
+Throughput: put, 5.290818 ,ops/us
+[GCOLLE-99] collected: 10  | took:  260979897384 ti = 124.276142 s
+clht, workloada, threads 4
+Throughput: load, 0.855708 ,ops/us
+Throughput: get, 16.643588 ,ops/us
+Throughput: put, 1.709138 ,ops/us
+[GCOLLE-99] collected: 10  | took:  122293387038 ti = 58.234946 s
+clht, workloada, threads 8
+Throughput: load, 1.043688 ,ops/us
+Throughput: get, 17.157662 ,ops/us
+Throughput: put, 3.200207 ,ops/us
+[GCOLLE-99] collected: 10  | took:  212565915164 ti = 101.221864 s

@@ -1,0 +1,1804 @@
+combotree, workloada, threads 1
+EXPAND_THREADS:        1
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12000
+INFO ExpandRange_: data in clevel: 10175, clevel count: 472, pairs per clevel: 21.557203
+INFO ExpandComboTree_: finish expanding combotree. current size is 12000, current entry count is 2000, expansion time is 0.017523s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 48000
+INFO ExpandRange_: data in clevel: 39909, clevel count: 2000, pairs per clevel: 19.954500
+INFO ExpandComboTree_: finish expanding combotree. current size is 48000, current entry count is 8000, expansion time is 0.051464s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 192000
+INFO ExpandRange_: data in clevel: 159783, clevel count: 8000, pairs per clevel: 19.972875
+INFO ExpandComboTree_: finish expanding combotree. current size is 192000, current entry count is 32000, expansion time is 0.112955s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 768000
+INFO ExpandRange_: data in clevel: 636400, clevel count: 31990, pairs per clevel: 19.893717
+INFO ExpandComboTree_: finish expanding combotree. current size is 768000, current entry count is 128000, expansion time is 0.335080s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 3072000
+INFO ExpandRange_: data in clevel: 2510392, clevel count: 127810, pairs per clevel: 19.641593
+INFO ExpandComboTree_: finish expanding combotree. current size is 3072000, current entry count is 512000, expansion time is 1.251717s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12288000
+INFO ExpandRange_: data in clevel: 10024768, clevel count: 511606, pairs per clevel: 19.594704
+INFO ExpandComboTree_: finish expanding combotree. current size is 12288000, current entry count is 2048000, expansion time is 4.848899s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 49152000
+INFO ExpandRange_: data in clevel: 39944592, clevel count: 2047915, pairs per clevel: 19.505005
+INFO ExpandComboTree_: finish expanding combotree. current size is 49152000, current entry count is 8192000, expansion time is 19.169557s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 196608000
+INFO ExpandRange_: data in clevel: 159840955, clevel count: 8189607, pairs per clevel: 19.517537
+INFO ExpandComboTree_: finish expanding combotree. current size is 196608000, current entry count is 32768000, expansion time is 76.742894s
+Throughput: load, 0.294717 ,ops/us
+Throughput: delete, 0.437297 ,ops/us
+
+combotree, workloada, threads 2
+EXPAND_THREADS:        1
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12024
+INFO ExpandRange_: data in clevel: 10042, clevel count: 500, pairs per clevel: 20.084000
+INFO ExpandComboTree_: finish expanding combotree. current size is 12282, current entry count is 2005, expansion time is 0.020127s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 48120
+INFO ExpandRange_: data in clevel: 40115, clevel count: 2004, pairs per clevel: 20.017465
+INFO ExpandComboTree_: finish expanding combotree. current size is 48662, current entry count is 8021, expansion time is 0.060677s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 192504
+INFO ExpandRange_: data in clevel: 160766, clevel count: 8019, pairs per clevel: 20.048136
+INFO ExpandComboTree_: finish expanding combotree. current size is 194231, current entry count is 32085, expansion time is 0.126840s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 770041
+INFO ExpandRange_: data in clevel: 638601, clevel count: 32062, pairs per clevel: 19.917691
+INFO ExpandComboTree_: finish expanding combotree. current size is 780300, current entry count is 128341, expansion time is 0.367821s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 3080185
+INFO ExpandRange_: data in clevel: 2519366, clevel count: 127977, pairs per clevel: 19.686084
+INFO ExpandComboTree_: finish expanding combotree. current size is 3118753, current entry count is 513365, expansion time is 1.317628s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12320760
+INFO ExpandRange_: data in clevel: 10019597, clevel count: 512989, pairs per clevel: 19.531797
+INFO ExpandComboTree_: finish expanding combotree. current size is 12444814, current entry count is 2053461, expansion time is 5.015178s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 49283064
+INFO ExpandRange_: data in clevel: 40065104, clevel count: 2052727, pairs per clevel: 19.517989
+INFO ExpandComboTree_: finish expanding combotree. current size is 49706818, current entry count is 8213845, expansion time is 19.759484s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 197132280
+INFO ExpandRange_: data in clevel: 160137013, clevel count: 8212227, pairs per clevel: 19.499828
+INFO ExpandComboTree_: finish expanding combotree. current size is 198375351, current entry count is 32855381, expansion time is 78.991875s
+Throughput: load, 0.538106 ,ops/us
+Throughput: delete, 0.832026 ,ops/us
+
+combotree, workloada, threads 4
+EXPAND_THREADS:        2
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12024
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 5796, clevel count: 252, pairs per clevel: 23.000000
+INFO ExpandRange_: data in clevel: 5814, clevel count: 248, pairs per clevel: 23.443548
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 16988, current entry count is 2267, expansion time is 0.019301s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 54408
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 24685, clevel count: 1131, pairs per clevel: 21.825818
+INFO ExpandRange_: data in clevel: 24832, clevel count: 1131, pairs per clevel: 21.955791
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 65298, current entry count is 9805, expansion time is 0.051329s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 235321
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 103534, clevel count: 4912, pairs per clevel: 21.077769
+INFO ExpandRange_: data in clevel: 103946, clevel count: 4890, pairs per clevel: 21.256851
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 272328, current entry count is 41114, expansion time is 0.127329s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 986737
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 434349, clevel count: 20472, pairs per clevel: 21.216735
+INFO ExpandRange_: data in clevel: 431299, clevel count: 20601, pairs per clevel: 20.935828
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 1130203, current entry count is 172609, expansion time is 0.359294s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 4142618
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 1780683, clevel count: 86191, pairs per clevel: 20.659732
+INFO ExpandRange_: data in clevel: 1778665, clevel count: 86023, pairs per clevel: 20.676621
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 4625292, current entry count is 720227, expansion time is 1.255468s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 17285451
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 7371493, clevel count: 360034, pairs per clevel: 20.474436
+INFO ExpandRange_: data in clevel: 7365183, clevel count: 359745, pairs per clevel: 20.473344
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 18989472, current entry count is 2993697, expansion time is 5.018954s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 71848729
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 353
+WARNING Put: wait too many! 353
+INFO ExpandRange_: data in clevel: 30533210, clevel count: 1496328, pairs per clevel: 20.405426
+INFO ExpandRange_: data in clevel: 30505065, clevel count: 1495185, pairs per clevel: 20.402201
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 78316564, current entry count is 12410875, expansion time is 20.685866s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 297861001
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 1569
+WARNING Put: wait too many! 1569
+INFO ExpandRange_: data in clevel: 126049703, clevel count: 6200930, pairs per clevel: 20.327548
+INFO ExpandRange_: data in clevel: 126193960, clevel count: 6207666, pairs per clevel: 20.328729
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 322271244, current entry count is 51341536, expansion time is 84.943665s
+Throughput: load, 0.929791 ,ops/us
+Throughput: delete, 1.525311 ,ops/us
+
+combotree, workloada, threads 8
+EXPAND_THREADS:        4
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12028
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 2771, clevel count: 120, pairs per clevel: 23.091667
+INFO ExpandRange_: data in clevel: 2976, clevel count: 125, pairs per clevel: 23.808000
+INFO ExpandRange_: data in clevel: 2978, clevel count: 130, pairs per clevel: 22.907692
+INFO ExpandRange_: data in clevel: 3024, clevel count: 126, pairs per clevel: 24.000000
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 19183, current entry count is 2292, expansion time is 0.017676s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 55011
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 13176, clevel count: 551, pairs per clevel: 23.912886
+INFO ExpandRange_: data in clevel: 13226, clevel count: 571, pairs per clevel: 23.162872
+INFO ExpandRange_: data in clevel: 13382, clevel count: 576, pairs per clevel: 23.232639
+INFO ExpandRange_: data in clevel: 13051, clevel count: 592, pairs per clevel: 22.045608
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 75370, current entry count is 10307, expansion time is 0.046452s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 247370
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 53914, clevel count: 2584, pairs per clevel: 20.864551
+INFO ExpandRange_: data in clevel: 54128, clevel count: 2583, pairs per clevel: 20.955478
+INFO ExpandRange_: data in clevel: 54232, clevel count: 2564, pairs per clevel: 21.151326
+INFO ExpandRange_: data in clevel: 54954, clevel count: 2575, pairs per clevel: 21.341359
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 297613, current entry count is 43109, expansion time is 0.102510s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 1034617
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 228597, clevel count: 10712, pairs per clevel: 21.340273
+INFO ExpandRange_: data in clevel: 230540, clevel count: 10762, pairs per clevel: 21.421669
+INFO ExpandRange_: data in clevel: 231042, clevel count: 10745, pairs per clevel: 21.502280
+INFO ExpandRange_: data in clevel: 232666, clevel count: 10863, pairs per clevel: 21.418209
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 1300914, current entry count is 183615, expansion time is 0.311460s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 4406764
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 949045, clevel count: 45437, pairs per clevel: 20.887052
+INFO ExpandRange_: data in clevel: 948796, clevel count: 45779, pairs per clevel: 20.725573
+INFO ExpandRange_: data in clevel: 949369, clevel count: 45816, pairs per clevel: 20.721342
+INFO ExpandRange_: data in clevel: 950241, clevel count: 46174, pairs per clevel: 20.579569
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 5148194, current entry count is 767826, expansion time is 1.000915s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 18427828
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 3913888, clevel count: 191444, pairs per clevel: 20.444036
+INFO ExpandRange_: data in clevel: 3932128, clevel count: 191598, pairs per clevel: 20.522803
+INFO ExpandRange_: data in clevel: 3916142, clevel count: 191779, pairs per clevel: 20.420077
+INFO ExpandRange_: data in clevel: 3937432, clevel count: 192286, pairs per clevel: 20.476956
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 20888082, current entry count is 3190267, expansion time is 3.659769s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 76566412
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 370
+WARNING Put: wait too many! 370
+WARNING Put: wait too many! 370
+WARNING Put: wait too many! 370
+INFO ExpandRange_: data in clevel: 16189802, clevel count: 794880, pairs per clevel: 20.367605
+INFO ExpandRange_: data in clevel: 16256895, clevel count: 797954, pairs per clevel: 20.373223
+INFO ExpandRange_: data in clevel: 16200415, clevel count: 795310, pairs per clevel: 20.369938
+INFO ExpandRange_: data in clevel: 16264654, clevel count: 799309, pairs per clevel: 20.348393
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 85703846, current entry count is 13209447, expansion time is 14.603999s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 317026732
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 1648
+WARNING Put: wait too many! 1648
+WARNING Put: wait too many! 1648
+WARNING Put: wait too many! 1648
+INFO ExpandRange_: data in clevel: 66892922, clevel count: 3290716, pairs per clevel: 20.327771
+INFO ExpandRange_: data in clevel: 67124380, clevel count: 3304323, pairs per clevel: 20.314110
+INFO ExpandRange_: data in clevel: 67034731, clevel count: 3293353, pairs per clevel: 20.354554
+INFO ExpandRange_: data in clevel: 67255665, clevel count: 3307608, pairs per clevel: 20.333626
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 352352211, current entry count is 54626710, expansion time is 60.865638s
+Throughput: load, 1.651560 ,ops/us
+Throughput: delete, 2.844114 ,ops/us
+
+combotree, workloada, threads 16
+EXPAND_THREADS:        8
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12051
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 1387, clevel count: 62, pairs per clevel: 22.370968
+INFO ExpandRange_: data in clevel: 1548, clevel count: 62, pairs per clevel: 24.967742
+INFO ExpandRange_: data in clevel: 1506, clevel count: 62, pairs per clevel: 24.290323
+INFO ExpandRange_: data in clevel: 1611, clevel count: 62, pairs per clevel: 25.983871
+INFO ExpandRange_: data in clevel: 1444, clevel count: 54, pairs per clevel: 26.740741
+INFO ExpandRange_: data in clevel: 1676, clevel count: 60, pairs per clevel: 27.933333
+INFO ExpandRange_: data in clevel: 1869, clevel count: 70, pairs per clevel: 26.700000
+INFO ExpandRange_: data in clevel: 2072, clevel count: 70, pairs per clevel: 29.600000
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 28060, current entry count is 2351, expansion time is 0.021767s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 56427
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 6443, clevel count: 284, pairs per clevel: 22.686620
+INFO ExpandRange_: data in clevel: 6457, clevel count: 312, pairs per clevel: 20.695513
+INFO ExpandRange_: data in clevel: 6222, clevel count: 302, pairs per clevel: 20.602649
+INFO ExpandRange_: data in clevel: 6797, clevel count: 301, pairs per clevel: 22.581395
+INFO ExpandRange_: data in clevel: 7199, clevel count: 277, pairs per clevel: 25.989170
+INFO ExpandRange_: data in clevel: 6714, clevel count: 272, pairs per clevel: 24.683824
+INFO ExpandRange_: data in clevel: 6784, clevel count: 293, pairs per clevel: 23.153584
+INFO ExpandRange_: data in clevel: 7856, clevel count: 306, pairs per clevel: 25.673203
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 94250, current entry count is 10560, expansion time is 0.052686s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 253443
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 27408, clevel count: 1295, pairs per clevel: 21.164479
+INFO ExpandRange_: data in clevel: 27613, clevel count: 1329, pairs per clevel: 20.777276
+INFO ExpandRange_: data in clevel: 27422, clevel count: 1328, pairs per clevel: 20.649096
+INFO ExpandRange_: data in clevel: 27745, clevel count: 1329, pairs per clevel: 20.876599
+INFO ExpandRange_: data in clevel: 27760, clevel count: 1323, pairs per clevel: 20.982615
+INFO ExpandRange_: data in clevel: 27922, clevel count: 1341, pairs per clevel: 20.821775
+INFO ExpandRange_: data in clevel: 28258, clevel count: 1341, pairs per clevel: 21.072334
+INFO ExpandRange_: data in clevel: 29520, clevel count: 1259, pairs per clevel: 23.447180
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 352454, current entry count is 44314, expansion time is 0.105488s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 1063539
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 115683, clevel count: 5424, pairs per clevel: 21.327987
+INFO ExpandRange_: data in clevel: 114745, clevel count: 5436, pairs per clevel: 21.108352
+INFO ExpandRange_: data in clevel: 117677, clevel count: 5483, pairs per clevel: 21.462156
+INFO ExpandRange_: data in clevel: 117814, clevel count: 5521, pairs per clevel: 21.339250
+INFO ExpandRange_: data in clevel: 119275, clevel count: 5562, pairs per clevel: 21.444624
+INFO ExpandRange_: data in clevel: 118948, clevel count: 5558, pairs per clevel: 21.401223
+INFO ExpandRange_: data in clevel: 122257, clevel count: 5650, pairs per clevel: 21.638407
+INFO ExpandRange_: data in clevel: 124711, clevel count: 5655, pairs per clevel: 22.053227
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 1588239, current entry count is 189194, expansion time is 0.336361s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 4540663
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 487469, clevel count: 24691, pairs per clevel: 19.742781
+INFO ExpandRange_: data in clevel: 494504, clevel count: 23398, pairs per clevel: 21.134456
+INFO ExpandRange_: data in clevel: 495490, clevel count: 23616, pairs per clevel: 20.981114
+INFO ExpandRange_: data in clevel: 492794, clevel count: 23710, pairs per clevel: 20.784226
+INFO ExpandRange_: data in clevel: 490189, clevel count: 23974, pairs per clevel: 20.446692
+INFO ExpandRange_: data in clevel: 494883, clevel count: 22997, pairs per clevel: 21.519459
+INFO ExpandRange_: data in clevel: 494157, clevel count: 22884, pairs per clevel: 21.593996
+INFO ExpandRange_: data in clevel: 495889, clevel count: 23613, pairs per clevel: 21.000678
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 5584264, current entry count is 796705, expansion time is 0.903040s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 19120922
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 2038953, clevel count: 99336, pairs per clevel: 20.525821
+INFO ExpandRange_: data in clevel: 2036354, clevel count: 99101, pairs per clevel: 20.548269
+INFO ExpandRange_: data in clevel: 2034817, clevel count: 99295, pairs per clevel: 20.492643
+INFO ExpandRange_: data in clevel: 2039241, clevel count: 99869, pairs per clevel: 20.419159
+INFO ExpandRange_: data in clevel: 2050057, clevel count: 99853, pairs per clevel: 20.530750
+INFO ExpandRange_: data in clevel: 2035562, clevel count: 99577, pairs per clevel: 20.442090
+INFO ExpandRange_: data in clevel: 2048694, clevel count: 99568, pairs per clevel: 20.575828
+INFO ExpandRange_: data in clevel: 2048502, clevel count: 99094, pairs per clevel: 20.672311
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 22978391, current entry count is 3316170, expansion time is 3.249262s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 79588089
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 387
+WARNING Put: wait too many! 387
+WARNING Put: wait too many! 387
+WARNING Put: wait too many! 387
+WARNING Put: wait too many! 387
+WARNING Put: wait too many! 387
+WARNING Put: wait too many! 387
+WARNING Put: wait too many! 387
+INFO ExpandRange_: data in clevel: 8445564, clevel count: 413251, pairs per clevel: 20.436887
+INFO ExpandRange_: data in clevel: 8435854, clevel count: 412761, pairs per clevel: 20.437624
+INFO ExpandRange_: data in clevel: 8489412, clevel count: 415388, pairs per clevel: 20.437307
+INFO ExpandRange_: data in clevel: 8438031, clevel count: 413043, pairs per clevel: 20.428941
+INFO ExpandRange_: data in clevel: 8436326, clevel count: 412410, pairs per clevel: 20.456163
+INFO ExpandRange_: data in clevel: 8489984, clevel count: 415136, pairs per clevel: 20.451091
+INFO ExpandRange_: data in clevel: 8473164, clevel count: 414038, pairs per clevel: 20.464701
+INFO ExpandRange_: data in clevel: 8449415, clevel count: 414660, pairs per clevel: 20.376730
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 93485112, current entry count is 13758983, expansion time is 12.778212s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 330215602
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 1689
+WARNING Put: wait too many! 1689
+WARNING Put: wait too many! 1689
+WARNING Put: wait too many! 1689
+WARNING Put: wait too many! 1689
+WARNING Put: wait too many! 1689
+WARNING Put: wait too many! 1689
+WARNING Put: wait too many! 1689
+INFO ExpandRange_: data in clevel: 35002831, clevel count: 1715749, pairs per clevel: 20.400904
+INFO ExpandRange_: data in clevel: 34935578, clevel count: 1713902, pairs per clevel: 20.383650
+INFO ExpandRange_: data in clevel: 34920808, clevel count: 1714079, pairs per clevel: 20.372928
+INFO ExpandRange_: data in clevel: 35159902, clevel count: 1723928, pairs per clevel: 20.395226
+INFO ExpandRange_: data in clevel: 34974697, clevel count: 1715976, pairs per clevel: 20.381810
+INFO ExpandRange_: data in clevel: 35027040, clevel count: 1721320, pairs per clevel: 20.348942
+INFO ExpandRange_: data in clevel: 35131450, clevel count: 1724832, pairs per clevel: 20.368042
+INFO ExpandRange_: data in clevel: 34900165, clevel count: 1717563, pairs per clevel: 20.319584
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 382096585, current entry count is 57000397, expansion time is 52.453821s
+Throughput: load, 2.571492 ,ops/us
+Throughput: delete, 4.369130 ,ops/us
+
+combotree, workloada, threads 24
+EXPAND_THREADS:        12
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12062
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 1073, clevel count: 40, pairs per clevel: 26.825000
+INFO ExpandRange_: data in clevel: 953, clevel count: 41, pairs per clevel: 23.243902
+INFO ExpandRange_: data in clevel: 1022, clevel count: 42, pairs per clevel: 24.333333
+INFO ExpandRange_: data in clevel: 1016, clevel count: 41, pairs per clevel: 24.780488
+INFO ExpandRange_: data in clevel: 1142, clevel count: 41, pairs per clevel: 27.853659
+INFO ExpandRange_: data in clevel: 1184, clevel count: 41, pairs per clevel: 28.878049
+INFO ExpandRange_: data in clevel: 1205, clevel count: 41, pairs per clevel: 29.390244
+INFO ExpandRange_: data in clevel: 1331, clevel count: 41, pairs per clevel: 32.463415
+INFO ExpandRange_: data in clevel: 1295, clevel count: 42, pairs per clevel: 30.833333
+INFO ExpandRange_: data in clevel: 1212, clevel count: 41, pairs per clevel: 29.560976
+INFO ExpandRange_: data in clevel: 1394, clevel count: 41, pairs per clevel: 34.000000
+INFO ExpandRange_: data in clevel: 1393, clevel count: 49, pairs per clevel: 28.428571
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 30555, current entry count is 2392, expansion time is 0.021062s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 57415
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 4619, clevel count: 190, pairs per clevel: 24.310526
+INFO ExpandRange_: data in clevel: 4551, clevel count: 195, pairs per clevel: 23.338462
+INFO ExpandRange_: data in clevel: 4924, clevel count: 193, pairs per clevel: 25.512953
+INFO ExpandRange_: data in clevel: 4778, clevel count: 192, pairs per clevel: 24.885417
+INFO ExpandRange_: data in clevel: 4764, clevel count: 185, pairs per clevel: 25.751351
+INFO ExpandRange_: data in clevel: 4943, clevel count: 209, pairs per clevel: 23.650718
+INFO ExpandRange_: data in clevel: 4688, clevel count: 212, pairs per clevel: 22.113208
+INFO ExpandRange_: data in clevel: 4977, clevel count: 217, pairs per clevel: 22.935484
+INFO ExpandRange_: data in clevel: 4991, clevel count: 203, pairs per clevel: 24.586207
+INFO ExpandRange_: data in clevel: 5188, clevel count: 209, pairs per clevel: 24.822967
+INFO ExpandRange_: data in clevel: 5492, clevel count: 185, pairs per clevel: 29.686486
+INFO ExpandRange_: data in clevel: 5902, clevel count: 202, pairs per clevel: 29.217822
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 119652, current entry count is 11243, expansion time is 0.058435s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 269839
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 18790, clevel count: 929, pairs per clevel: 20.226050
+INFO ExpandRange_: data in clevel: 18999, clevel count: 941, pairs per clevel: 20.190223
+INFO ExpandRange_: data in clevel: 19213, clevel count: 920, pairs per clevel: 20.883696
+INFO ExpandRange_: data in clevel: 19244, clevel count: 933, pairs per clevel: 20.625938
+INFO ExpandRange_: data in clevel: 20240, clevel count: 965, pairs per clevel: 20.974093
+INFO ExpandRange_: data in clevel: 20079, clevel count: 969, pairs per clevel: 20.721362
+INFO ExpandRange_: data in clevel: 20276, clevel count: 932, pairs per clevel: 21.755365
+INFO ExpandRange_: data in clevel: 20942, clevel count: 901, pairs per clevel: 23.243063
+INFO ExpandRange_: data in clevel: 21306, clevel count: 941, pairs per clevel: 22.641870
+INFO ExpandRange_: data in clevel: 20887, clevel count: 957, pairs per clevel: 21.825496
+INFO ExpandRange_: data in clevel: 22344, clevel count: 893, pairs per clevel: 25.021277
+INFO ExpandRange_: data in clevel: 21599, clevel count: 957, pairs per clevel: 22.569488
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 464897, current entry count is 48137, expansion time is 0.137475s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 1155293
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 82967, clevel count: 3840, pairs per clevel: 21.605990
+INFO ExpandRange_: data in clevel: 83939, clevel count: 3844, pairs per clevel: 21.836368
+INFO ExpandRange_: data in clevel: 84203, clevel count: 3793, pairs per clevel: 22.199578
+INFO ExpandRange_: data in clevel: 85133, clevel count: 3807, pairs per clevel: 22.362227
+INFO ExpandRange_: data in clevel: 86021, clevel count: 4032, pairs per clevel: 21.334573
+INFO ExpandRange_: data in clevel: 85049, clevel count: 4025, pairs per clevel: 21.130186
+INFO ExpandRange_: data in clevel: 85853, clevel count: 4049, pairs per clevel: 21.203507
+INFO ExpandRange_: data in clevel: 87110, clevel count: 4013, pairs per clevel: 21.706952
+INFO ExpandRange_: data in clevel: 87098, clevel count: 4129, pairs per clevel: 21.094212
+INFO ExpandRange_: data in clevel: 87868, clevel count: 4145, pairs per clevel: 21.198552
+INFO ExpandRange_: data in clevel: 88107, clevel count: 4128, pairs per clevel: 21.343750
+INFO ExpandRange_: data in clevel: 89673, clevel count: 4306, pairs per clevel: 20.825128
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 1887158, current entry count is 205453, expansion time is 0.398001s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 4930877
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 354233, clevel count: 16818, pairs per clevel: 21.062730
+INFO ExpandRange_: data in clevel: 352847, clevel count: 17307, pairs per clevel: 20.387531
+INFO ExpandRange_: data in clevel: 354960, clevel count: 16654, pairs per clevel: 21.313798
+INFO ExpandRange_: data in clevel: 358470, clevel count: 17073, pairs per clevel: 20.996310
+INFO ExpandRange_: data in clevel: 354400, clevel count: 16500, pairs per clevel: 21.478788
+INFO ExpandRange_: data in clevel: 354732, clevel count: 16920, pairs per clevel: 20.965248
+INFO ExpandRange_: data in clevel: 353531, clevel count: 17361, pairs per clevel: 20.363516
+INFO ExpandRange_: data in clevel: 354356, clevel count: 17082, pairs per clevel: 20.744409
+INFO ExpandRange_: data in clevel: 353433, clevel count: 17776, pairs per clevel: 19.882595
+INFO ExpandRange_: data in clevel: 358454, clevel count: 17685, pairs per clevel: 20.268815
+INFO ExpandRange_: data in clevel: 359603, clevel count: 16618, pairs per clevel: 21.639367
+INFO ExpandRange_: data in clevel: 359497, clevel count: 17496, pairs per clevel: 20.547382
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 6486209, current entry count is 862569, expansion time is 1.092285s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 20701665
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+WARNING Put: wait too many! 108
+INFO ExpandRange_: data in clevel: 1466985, clevel count: 71277, pairs per clevel: 20.581464
+INFO ExpandRange_: data in clevel: 1462211, clevel count: 71458, pairs per clevel: 20.462523
+INFO ExpandRange_: data in clevel: 1460193, clevel count: 71297, pairs per clevel: 20.480427
+INFO ExpandRange_: data in clevel: 1461411, clevel count: 71452, pairs per clevel: 20.453045
+INFO ExpandRange_: data in clevel: 1468847, clevel count: 71479, pairs per clevel: 20.549350
+INFO ExpandRange_: data in clevel: 1463733, clevel count: 71946, pairs per clevel: 20.344884
+INFO ExpandRange_: data in clevel: 1469752, clevel count: 71815, pairs per clevel: 20.465808
+INFO ExpandRange_: data in clevel: 1464887, clevel count: 71811, pairs per clevel: 20.399201
+INFO ExpandRange_: data in clevel: 1467919, clevel count: 71929, pairs per clevel: 20.407888
+INFO ExpandRange_: data in clevel: 1467430, clevel count: 72456, pairs per clevel: 20.252705
+INFO ExpandRange_: data in clevel: 1472264, clevel count: 72472, pairs per clevel: 20.314935
+INFO ExpandRange_: data in clevel: 1466974, clevel count: 72197, pairs per clevel: 20.319044
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 25839202, current entry count is 3576463, expansion time is 3.724776s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 85835125
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+WARNING Put: wait too many! 421
+INFO ExpandRange_: data in clevel: 5990168, clevel count: 295368, pairs per clevel: 20.280355
+INFO ExpandRange_: data in clevel: 6035225, clevel count: 296413, pairs per clevel: 20.360865
+INFO ExpandRange_: data in clevel: 6041183, clevel count: 297990, pairs per clevel: 20.273106
+INFO ExpandRange_: data in clevel: 6063502, clevel count: 298449, pairs per clevel: 20.316711
+INFO ExpandRange_: data in clevel: 6041443, clevel count: 297521, pairs per clevel: 20.305938
+INFO ExpandRange_: data in clevel: 6042387, clevel count: 298465, pairs per clevel: 20.244876
+INFO ExpandRange_: data in clevel: 6055023, clevel count: 298824, pairs per clevel: 20.262840
+INFO ExpandRange_: data in clevel: 6060498, clevel count: 297631, pairs per clevel: 20.362456
+INFO ExpandRange_: data in clevel: 6050118, clevel count: 298559, pairs per clevel: 20.264397
+INFO ExpandRange_: data in clevel: 6093512, clevel count: 299253, pairs per clevel: 20.362409
+INFO ExpandRange_: data in clevel: 6065503, clevel count: 296949, pairs per clevel: 20.426077
+INFO ExpandRange_: data in clevel: 6057861, clevel count: 297489, pairs per clevel: 20.363311
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 104528113, current entry count is 14780315, expansion time is 14.587384s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 354727573
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+WARNING Put: wait too many! 1831
+INFO ExpandRange_: data in clevel: 24906441, clevel count: 1226632, pairs per clevel: 20.304738
+INFO ExpandRange_: data in clevel: 24878992, clevel count: 1228065, pairs per clevel: 20.258693
+INFO ExpandRange_: data in clevel: 24969475, clevel count: 1229641, pairs per clevel: 20.306313
+INFO ExpandRange_: data in clevel: 24945650, clevel count: 1228939, pairs per clevel: 20.298526
+INFO ExpandRange_: data in clevel: 25030275, clevel count: 1232930, pairs per clevel: 20.301457
+INFO ExpandRange_: data in clevel: 25010035, clevel count: 1232211, pairs per clevel: 20.296877
+INFO ExpandRange_: data in clevel: 24952160, clevel count: 1232142, pairs per clevel: 20.251042
+INFO ExpandRange_: data in clevel: 24956683, clevel count: 1229254, pairs per clevel: 20.302300
+INFO ExpandRange_: data in clevel: 24971073, clevel count: 1230076, pairs per clevel: 20.300431
+INFO ExpandRange_: data in clevel: 24999578, clevel count: 1232184, pairs per clevel: 20.288835
+INFO ExpandRange_: data in clevel: 24980377, clevel count: 1231279, pairs per clevel: 20.288153
+INFO ExpandRange_: data in clevel: 24929180, clevel count: 1231727, pairs per clevel: 20.239209
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 399895350, current entry count is 61007385, expansion time is 53.848727s
+Throughput: load, 2.821148 ,ops/us
+Throughput: delete, 4.693989 ,ops/us
+
+combotree, workloada, threads 32
+EXPAND_THREADS:        16
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12038
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 851, clevel count: 31, pairs per clevel: 27.451613
+INFO ExpandRange_: data in clevel: 788, clevel count: 31, pairs per clevel: 25.419355
+INFO ExpandRange_: data in clevel: 760, clevel count: 31, pairs per clevel: 24.516129
+INFO ExpandRange_: data in clevel: 781, clevel count: 31, pairs per clevel: 25.193548
+INFO ExpandRange_: data in clevel: 851, clevel count: 24, pairs per clevel: 35.458333
+INFO ExpandRange_: data in clevel: 893, clevel count: 31, pairs per clevel: 28.806452
+INFO ExpandRange_: data in clevel: 970, clevel count: 31, pairs per clevel: 31.290323
+INFO ExpandRange_: data in clevel: 914, clevel count: 31, pairs per clevel: 29.483871
+INFO ExpandRange_: data in clevel: 775, clevel count: 23, pairs per clevel: 33.695652
+INFO ExpandRange_: data in clevel: 998, clevel count: 31, pairs per clevel: 32.193548
+INFO ExpandRange_: data in clevel: 1047, clevel count: 31, pairs per clevel: 33.774194
+INFO ExpandRange_: data in clevel: 1131, clevel count: 38, pairs per clevel: 29.763158
+INFO ExpandRange_: data in clevel: 1096, clevel count: 31, pairs per clevel: 35.354839
+INFO ExpandRange_: data in clevel: 1193, clevel count: 39, pairs per clevel: 30.589744
+INFO ExpandRange_: data in clevel: 1124, clevel count: 31, pairs per clevel: 36.258065
+INFO ExpandRange_: data in clevel: 1196, clevel count: 36, pairs per clevel: 33.222222
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 33460, current entry count is 2400, expansion time is 0.020515s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 57602
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 3365, clevel count: 142, pairs per clevel: 23.697183
+INFO ExpandRange_: data in clevel: 3171, clevel count: 147, pairs per clevel: 21.571429
+INFO ExpandRange_: data in clevel: 3238, clevel count: 136, pairs per clevel: 23.808824
+INFO ExpandRange_: data in clevel: 3422, clevel count: 134, pairs per clevel: 25.537313
+INFO ExpandRange_: data in clevel: 3259, clevel count: 157, pairs per clevel: 20.757962
+INFO ExpandRange_: data in clevel: 3334, clevel count: 166, pairs per clevel: 20.084337
+INFO ExpandRange_: data in clevel: 3434, clevel count: 150, pairs per clevel: 22.893333
+INFO ExpandRange_: data in clevel: 3565, clevel count: 166, pairs per clevel: 21.475904
+INFO ExpandRange_: data in clevel: 3602, clevel count: 150, pairs per clevel: 24.013333
+INFO ExpandRange_: data in clevel: 3579, clevel count: 166, pairs per clevel: 21.560241
+INFO ExpandRange_: data in clevel: 4039, clevel count: 126, pairs per clevel: 32.055556
+INFO ExpandRange_: data in clevel: 3797, clevel count: 158, pairs per clevel: 24.031646
+INFO ExpandRange_: data in clevel: 3889, clevel count: 150, pairs per clevel: 25.926667
+INFO ExpandRange_: data in clevel: 4142, clevel count: 142, pairs per clevel: 29.169014
+INFO ExpandRange_: data in clevel: 4055, clevel count: 159, pairs per clevel: 25.503145
+INFO ExpandRange_: data in clevel: 4218, clevel count: 150, pairs per clevel: 28.120000
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 125947, current entry count is 10986, expansion time is 0.058099s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 263675
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 14111, clevel count: 663, pairs per clevel: 21.283560
+INFO ExpandRange_: data in clevel: 14196, clevel count: 668, pairs per clevel: 21.251497
+INFO ExpandRange_: data in clevel: 14220, clevel count: 679, pairs per clevel: 20.942563
+INFO ExpandRange_: data in clevel: 14153, clevel count: 682, pairs per clevel: 20.752199
+INFO ExpandRange_: data in clevel: 14322, clevel count: 666, pairs per clevel: 21.504505
+INFO ExpandRange_: data in clevel: 14336, clevel count: 704, pairs per clevel: 20.363636
+INFO ExpandRange_: data in clevel: 14181, clevel count: 684, pairs per clevel: 20.732456
+INFO ExpandRange_: data in clevel: 14610, clevel count: 701, pairs per clevel: 20.841655
+INFO ExpandRange_: data in clevel: 14551, clevel count: 685, pairs per clevel: 21.242336
+INFO ExpandRange_: data in clevel: 15249, clevel count: 672, pairs per clevel: 22.691964
+INFO ExpandRange_: data in clevel: 15146, clevel count: 704, pairs per clevel: 21.514205
+INFO ExpandRange_: data in clevel: 15561, clevel count: 680, pairs per clevel: 22.883824
+INFO ExpandRange_: data in clevel: 15353, clevel count: 688, pairs per clevel: 22.315407
+INFO ExpandRange_: data in clevel: 15723, clevel count: 694, pairs per clevel: 22.655620
+INFO ExpandRange_: data in clevel: 15608, clevel count: 710, pairs per clevel: 21.983099
+INFO ExpandRange_: data in clevel: 16497, clevel count: 697, pairs per clevel: 23.668580
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 505934, current entry count is 46956, expansion time is 0.140492s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 1126955
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 60356, clevel count: 2827, pairs per clevel: 21.349841
+INFO ExpandRange_: data in clevel: 59683, clevel count: 2838, pairs per clevel: 21.029951
+INFO ExpandRange_: data in clevel: 59775, clevel count: 2843, pairs per clevel: 21.025325
+INFO ExpandRange_: data in clevel: 60904, clevel count: 2818, pairs per clevel: 21.612491
+INFO ExpandRange_: data in clevel: 61268, clevel count: 2847, pairs per clevel: 21.520197
+INFO ExpandRange_: data in clevel: 61196, clevel count: 2880, pairs per clevel: 21.248611
+INFO ExpandRange_: data in clevel: 62441, clevel count: 2806, pairs per clevel: 22.252673
+INFO ExpandRange_: data in clevel: 62768, clevel count: 2951, pairs per clevel: 21.270078
+INFO ExpandRange_: data in clevel: 64573, clevel count: 2952, pairs per clevel: 21.874322
+INFO ExpandRange_: data in clevel: 64461, clevel count: 2989, pairs per clevel: 21.566076
+INFO ExpandRange_: data in clevel: 64243, clevel count: 3065, pairs per clevel: 20.960196
+INFO ExpandRange_: data in clevel: 64914, clevel count: 2859, pairs per clevel: 22.705142
+INFO ExpandRange_: data in clevel: 66005, clevel count: 3069, pairs per clevel: 21.507006
+INFO ExpandRange_: data in clevel: 65772, clevel count: 3024, pairs per clevel: 21.750000
+INFO ExpandRange_: data in clevel: 66502, clevel count: 3001, pairs per clevel: 22.159947
+INFO ExpandRange_: data in clevel: 69127, clevel count: 3143, pairs per clevel: 21.993955
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 2175514, current entry count is 201617, expansion time is 0.457323s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 4838818
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 260770, clevel count: 12078, pairs per clevel: 21.590495
+INFO ExpandRange_: data in clevel: 259399, clevel count: 12184, pairs per clevel: 21.290135
+INFO ExpandRange_: data in clevel: 260911, clevel count: 11987, pairs per clevel: 21.766163
+INFO ExpandRange_: data in clevel: 258248, clevel count: 11944, pairs per clevel: 21.621567
+INFO ExpandRange_: data in clevel: 260368, clevel count: 12757, pairs per clevel: 20.409814
+INFO ExpandRange_: data in clevel: 259129, clevel count: 11930, pairs per clevel: 21.720788
+INFO ExpandRange_: data in clevel: 262626, clevel count: 12197, pairs per clevel: 21.532016
+INFO ExpandRange_: data in clevel: 261009, clevel count: 12991, pairs per clevel: 20.091525
+INFO ExpandRange_: data in clevel: 259738, clevel count: 12339, pairs per clevel: 21.050166
+INFO ExpandRange_: data in clevel: 260354, clevel count: 12502, pairs per clevel: 20.824988
+INFO ExpandRange_: data in clevel: 263582, clevel count: 12714, pairs per clevel: 20.731634
+INFO ExpandRange_: data in clevel: 265393, clevel count: 12842, pairs per clevel: 20.666018
+INFO ExpandRange_: data in clevel: 266166, clevel count: 13060, pairs per clevel: 20.380245
+INFO ExpandRange_: data in clevel: 271478, clevel count: 13101, pairs per clevel: 20.721930
+INFO ExpandRange_: data in clevel: 270310, clevel count: 13192, pairs per clevel: 20.490449
+INFO ExpandRange_: data in clevel: 267439, clevel count: 13682, pairs per clevel: 19.546777
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 6846285, current entry count is 849885, expansion time is 1.243742s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 20397257
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+WARNING Put: wait too many! 107
+INFO ExpandRange_: data in clevel: 1072466, clevel count: 52152, pairs per clevel: 20.564235
+INFO ExpandRange_: data in clevel: 1072765, clevel count: 52352, pairs per clevel: 20.491385
+INFO ExpandRange_: data in clevel: 1074290, clevel count: 51752, pairs per clevel: 20.758425
+INFO ExpandRange_: data in clevel: 1076376, clevel count: 52774, pairs per clevel: 20.395953
+INFO ExpandRange_: data in clevel: 1077558, clevel count: 52791, pairs per clevel: 20.411775
+INFO ExpandRange_: data in clevel: 1077900, clevel count: 53471, pairs per clevel: 20.158591
+INFO ExpandRange_: data in clevel: 1072841, clevel count: 52586, pairs per clevel: 20.401647
+INFO ExpandRange_: data in clevel: 1080689, clevel count: 52297, pairs per clevel: 20.664455
+INFO ExpandRange_: data in clevel: 1066794, clevel count: 53613, pairs per clevel: 19.898047
+INFO ExpandRange_: data in clevel: 1078545, clevel count: 51772, pairs per clevel: 20.832593
+INFO ExpandRange_: data in clevel: 1082304, clevel count: 52666, pairs per clevel: 20.550336
+INFO ExpandRange_: data in clevel: 1069001, clevel count: 53922, pairs per clevel: 19.824951
+INFO ExpandRange_: data in clevel: 1079470, clevel count: 54829, pairs per clevel: 19.687939
+INFO ExpandRange_: data in clevel: 1078589, clevel count: 54671, pairs per clevel: 19.728723
+INFO ExpandRange_: data in clevel: 1071303, clevel count: 54635, pairs per clevel: 19.608365
+INFO ExpandRange_: data in clevel: 1085702, clevel count: 52448, pairs per clevel: 20.700541
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 26400188, current entry count is 3504098, expansion time is 4.080580s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 84098372
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 406
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+WARNING Put: wait too many! 408
+INFO ExpandRange_: data in clevel: 4413554, clevel count: 217347, pairs per clevel: 20.306487
+INFO ExpandRange_: data in clevel: 4418067, clevel count: 217651, pairs per clevel: 20.298859
+INFO ExpandRange_: data in clevel: 4426960, clevel count: 218541, pairs per clevel: 20.256885
+INFO ExpandRange_: data in clevel: 4441535, clevel count: 219330, pairs per clevel: 20.250467
+INFO ExpandRange_: data in clevel: 4435902, clevel count: 218667, pairs per clevel: 20.286106
+INFO ExpandRange_: data in clevel: 4436207, clevel count: 218922, pairs per clevel: 20.263870
+INFO ExpandRange_: data in clevel: 4420103, clevel count: 217394, pairs per clevel: 20.332222
+INFO ExpandRange_: data in clevel: 4411656, clevel count: 218003, pairs per clevel: 20.236676
+INFO ExpandRange_: data in clevel: 4437504, clevel count: 219279, pairs per clevel: 20.236794
+INFO ExpandRange_: data in clevel: 4423919, clevel count: 219170, pairs per clevel: 20.184875
+INFO ExpandRange_: data in clevel: 4450546, clevel count: 220579, pairs per clevel: 20.176653
+INFO ExpandRange_: data in clevel: 4442339, clevel count: 220230, pairs per clevel: 20.171362
+INFO ExpandRange_: data in clevel: 4437482, clevel count: 218731, pairs per clevel: 20.287394
+INFO ExpandRange_: data in clevel: 4419514, clevel count: 218255, pairs per clevel: 20.249314
+INFO ExpandRange_: data in clevel: 4453789, clevel count: 218880, pairs per clevel: 20.348086
+INFO ExpandRange_: data in clevel: 4431564, clevel count: 218734, pairs per clevel: 20.260060
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 106756024, current entry count is 14442828, expansion time is 15.789043s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 346627887
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1785
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1786
+WARNING Put: wait too many! 1785
+WARNING Put: wait too many! 1784
+WARNING Put: wait too many! 1784
+WARNING Put: wait too many! 1786
+INFO ExpandRange_: data in clevel: 18130299, clevel count: 897960, pairs per clevel: 20.190542
+INFO ExpandRange_: data in clevel: 18162903, clevel count: 902400, pairs per clevel: 20.127330
+INFO ExpandRange_: data in clevel: 18228585, clevel count: 902614, pairs per clevel: 20.195327
+INFO ExpandRange_: data in clevel: 18139888, clevel count: 898833, pairs per clevel: 20.181600
+INFO ExpandRange_: data in clevel: 18192585, clevel count: 902435, pairs per clevel: 20.159441
+INFO ExpandRange_: data in clevel: 18263884, clevel count: 904105, pairs per clevel: 20.201065
+INFO ExpandRange_: data in clevel: 18191210, clevel count: 902768, pairs per clevel: 20.150482
+INFO ExpandRange_: data in clevel: 18228023, clevel count: 903130, pairs per clevel: 20.183166
+INFO ExpandRange_: data in clevel: 18206841, clevel count: 901520, pairs per clevel: 20.195715
+INFO ExpandRange_: data in clevel: 18278920, clevel count: 906280, pairs per clevel: 20.169175
+INFO ExpandRange_: data in clevel: 18158378, clevel count: 898670, pairs per clevel: 20.205835
+INFO ExpandRange_: data in clevel: 18103392, clevel count: 899590, pairs per clevel: 20.124048
+INFO ExpandRange_: data in clevel: 18147351, clevel count: 897898, pairs per clevel: 20.210927
+INFO ExpandRange_: data in clevel: 18239095, clevel count: 905730, pairs per clevel: 20.137453
+INFO ExpandRange_: data in clevel: 18258117, clevel count: 902991, pairs per clevel: 20.219600
+INFO ExpandRange_: data in clevel: 18196178, clevel count: 901747, pairs per clevel: 20.178806
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 398634309, current entry count is 59358545, expansion time is 56.767130s
+Throughput: load, 3.037170 ,ops/us
+Throughput: delete, 5.842726 ,ops/us
+
+combotree, workloada, threads 40
+EXPAND_THREADS:        20
+BLEVEL_EXPAND_BUF_KEY: 6
+EXPANSION_FACTOR:      4
+PMEMKV_THRESHOLD:      3000
+ENTRY_SIZE_FACTOR:     1.2
+USE_LIBPMEM = 1
+INFO ChangeToComboTree_: start to migrate data from pmemkv to combotree...
+INFO ChangeToComboTree_: finish migrating data from pmemkv to combotree
+INFO ExpandComboTree_: preparing to expand combotree. current size is 12058
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 528, clevel count: 25, pairs per clevel: 21.120000
+INFO ExpandRange_: data in clevel: 619, clevel count: 25, pairs per clevel: 24.760000
+INFO ExpandRange_: data in clevel: 577, clevel count: 25, pairs per clevel: 23.080000
+INFO ExpandRange_: data in clevel: 633, clevel count: 25, pairs per clevel: 25.320000
+INFO ExpandRange_: data in clevel: 452, clevel count: 17, pairs per clevel: 26.588235
+INFO ExpandRange_: data in clevel: 668, clevel count: 25, pairs per clevel: 26.720000
+INFO ExpandRange_: data in clevel: 529, clevel count: 17, pairs per clevel: 31.117647
+INFO ExpandRange_: data in clevel: 759, clevel count: 25, pairs per clevel: 30.360000
+INFO ExpandRange_: data in clevel: 731, clevel count: 25, pairs per clevel: 29.240000
+INFO ExpandRange_: data in clevel: 828, clevel count: 33, pairs per clevel: 25.090909
+INFO ExpandRange_: data in clevel: 613, clevel count: 17, pairs per clevel: 36.058824
+INFO ExpandRange_: data in clevel: 752, clevel count: 25, pairs per clevel: 30.080000
+INFO ExpandRange_: data in clevel: 808, clevel count: 25, pairs per clevel: 32.320000
+INFO ExpandRange_: data in clevel: 793, clevel count: 33, pairs per clevel: 24.030303
+INFO ExpandRange_: data in clevel: 780, clevel count: 25, pairs per clevel: 31.200000
+INFO ExpandRange_: data in clevel: 794, clevel count: 25, pairs per clevel: 31.760000
+INFO ExpandRange_: data in clevel: 766, clevel count: 25, pairs per clevel: 30.640000
+INFO ExpandRange_: data in clevel: 827, clevel count: 27, pairs per clevel: 30.629630
+INFO ExpandRange_: data in clevel: 794, clevel count: 25, pairs per clevel: 31.760000
+INFO ExpandRange_: data in clevel: 982, clevel count: 33, pairs per clevel: 29.757576
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 34233, current entry count is 2333, expansion time is 0.021186s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 55998
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 2368, clevel count: 103, pairs per clevel: 22.990291
+INFO ExpandRange_: data in clevel: 2549, clevel count: 104, pairs per clevel: 24.509615
+INFO ExpandRange_: data in clevel: 2504, clevel count: 121, pairs per clevel: 20.694215
+INFO ExpandRange_: data in clevel: 2637, clevel count: 107, pairs per clevel: 24.644860
+INFO ExpandRange_: data in clevel: 2680, clevel count: 120, pairs per clevel: 22.333333
+INFO ExpandRange_: data in clevel: 2478, clevel count: 119, pairs per clevel: 20.823529
+INFO ExpandRange_: data in clevel: 2908, clevel count: 88, pairs per clevel: 33.045455
+INFO ExpandRange_: data in clevel: 2843, clevel count: 104, pairs per clevel: 27.336538
+INFO ExpandRange_: data in clevel: 2995, clevel count: 120, pairs per clevel: 24.958333
+INFO ExpandRange_: data in clevel: 2841, clevel count: 120, pairs per clevel: 23.675000
+INFO ExpandRange_: data in clevel: 2840, clevel count: 128, pairs per clevel: 22.187500
+INFO ExpandRange_: data in clevel: 2254, clevel count: 112, pairs per clevel: 20.125000
+INFO ExpandRange_: data in clevel: 2848, clevel count: 120, pairs per clevel: 23.733333
+INFO ExpandRange_: data in clevel: 2890, clevel count: 120, pairs per clevel: 24.083333
+INFO ExpandRange_: data in clevel: 2939, clevel count: 120, pairs per clevel: 24.491667
+INFO ExpandRange_: data in clevel: 3221, clevel count: 132, pairs per clevel: 24.401515
+INFO ExpandRange_: data in clevel: 3058, clevel count: 134, pairs per clevel: 22.820896
+INFO ExpandRange_: data in clevel: 3163, clevel count: 120, pairs per clevel: 26.358333
+INFO ExpandRange_: data in clevel: 3289, clevel count: 120, pairs per clevel: 27.408333
+INFO ExpandRange_: data in clevel: 4066, clevel count: 120, pairs per clevel: 33.883333
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 135744, current entry count is 10695, expansion time is 0.062235s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 256698
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 10913, clevel count: 512, pairs per clevel: 21.314453
+INFO ExpandRange_: data in clevel: 10923, clevel count: 522, pairs per clevel: 20.925287
+INFO ExpandRange_: data in clevel: 11051, clevel count: 509, pairs per clevel: 21.711198
+INFO ExpandRange_: data in clevel: 11029, clevel count: 502, pairs per clevel: 21.970120
+INFO ExpandRange_: data in clevel: 10968, clevel count: 521, pairs per clevel: 21.051823
+INFO ExpandRange_: data in clevel: 11262, clevel count: 522, pairs per clevel: 21.574713
+INFO ExpandRange_: data in clevel: 11237, clevel count: 523, pairs per clevel: 21.485660
+INFO ExpandRange_: data in clevel: 11497, clevel count: 536, pairs per clevel: 21.449627
+INFO ExpandRange_: data in clevel: 11404, clevel count: 555, pairs per clevel: 20.547748
+INFO ExpandRange_: data in clevel: 11353, clevel count: 543, pairs per clevel: 20.907919
+INFO ExpandRange_: data in clevel: 11533, clevel count: 537, pairs per clevel: 21.476723
+INFO ExpandRange_: data in clevel: 12002, clevel count: 544, pairs per clevel: 22.062500
+INFO ExpandRange_: data in clevel: 11386, clevel count: 550, pairs per clevel: 20.701818
+INFO ExpandRange_: data in clevel: 11488, clevel count: 575, pairs per clevel: 19.979130
+INFO ExpandRange_: data in clevel: 11331, clevel count: 551, pairs per clevel: 20.564428
+INFO ExpandRange_: data in clevel: 11037, clevel count: 544, pairs per clevel: 20.288603
+INFO ExpandRange_: data in clevel: 12279, clevel count: 559, pairs per clevel: 21.966011
+INFO ExpandRange_: data in clevel: 12050, clevel count: 557, pairs per clevel: 21.633752
+INFO ExpandRange_: data in clevel: 13928, clevel count: 459, pairs per clevel: 30.344227
+INFO ExpandRange_: data in clevel: 11962, clevel count: 561, pairs per clevel: 21.322638
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 536422, current entry count is 45592, expansion time is 0.150461s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 1094223
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 47451, clevel count: 2180, pairs per clevel: 21.766514
+INFO ExpandRange_: data in clevel: 46637, clevel count: 2169, pairs per clevel: 21.501614
+INFO ExpandRange_: data in clevel: 47340, clevel count: 2213, pairs per clevel: 21.391776
+INFO ExpandRange_: data in clevel: 47378, clevel count: 2261, pairs per clevel: 20.954445
+INFO ExpandRange_: data in clevel: 47320, clevel count: 2246, pairs per clevel: 21.068566
+INFO ExpandRange_: data in clevel: 47175, clevel count: 2162, pairs per clevel: 21.820074
+INFO ExpandRange_: data in clevel: 47987, clevel count: 2271, pairs per clevel: 21.130339
+INFO ExpandRange_: data in clevel: 48076, clevel count: 2282, pairs per clevel: 21.067485
+INFO ExpandRange_: data in clevel: 48124, clevel count: 2239, pairs per clevel: 21.493524
+INFO ExpandRange_: data in clevel: 48624, clevel count: 2313, pairs per clevel: 21.022049
+INFO ExpandRange_: data in clevel: 48917, clevel count: 2290, pairs per clevel: 21.361135
+INFO ExpandRange_: data in clevel: 49831, clevel count: 2311, pairs per clevel: 21.562527
+INFO ExpandRange_: data in clevel: 49773, clevel count: 2292, pairs per clevel: 21.715969
+INFO ExpandRange_: data in clevel: 50069, clevel count: 2273, pairs per clevel: 22.027717
+INFO ExpandRange_: data in clevel: 50516, clevel count: 2322, pairs per clevel: 21.755383
+INFO ExpandRange_: data in clevel: 51188, clevel count: 2350, pairs per clevel: 21.782128
+INFO ExpandRange_: data in clevel: 51630, clevel count: 2306, pairs per clevel: 22.389419
+INFO ExpandRange_: data in clevel: 51774, clevel count: 2324, pairs per clevel: 22.277969
+INFO ExpandRange_: data in clevel: 52554, clevel count: 2357, pairs per clevel: 22.296988
+INFO ExpandRange_: data in clevel: 52351, clevel count: 2379, pairs per clevel: 22.005464
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 2296631, current entry count is 195756, expansion time is 0.482198s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 4698155
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO ExpandRange_: data in clevel: 199773, clevel count: 9411, pairs per clevel: 21.227606
+INFO ExpandRange_: data in clevel: 200029, clevel count: 9341, pairs per clevel: 21.414088
+INFO ExpandRange_: data in clevel: 199428, clevel count: 9366, pairs per clevel: 21.292761
+INFO ExpandRange_: data in clevel: 199994, clevel count: 9423, pairs per clevel: 21.224026
+INFO ExpandRange_: data in clevel: 201524, clevel count: 9457, pairs per clevel: 21.309506
+INFO ExpandRange_: data in clevel: 200300, clevel count: 9352, pairs per clevel: 21.417879
+INFO ExpandRange_: data in clevel: 201226, clevel count: 9565, pairs per clevel: 21.037742
+INFO ExpandRange_: data in clevel: 203164, clevel count: 9574, pairs per clevel: 21.220389
+INFO ExpandRange_: data in clevel: 204838, clevel count: 9653, pairs per clevel: 21.220139
+INFO ExpandRange_: data in clevel: 203859, clevel count: 9593, pairs per clevel: 21.250808
+INFO ExpandRange_: data in clevel: 205522, clevel count: 9747, pairs per clevel: 21.085667
+INFO ExpandRange_: data in clevel: 206837, clevel count: 9923, pairs per clevel: 20.844200
+INFO ExpandRange_: data in clevel: 208223, clevel count: 9898, pairs per clevel: 21.036876
+INFO ExpandRange_: data in clevel: 213235, clevel count: 9970, pairs per clevel: 21.387663
+INFO ExpandRange_: data in clevel: 210633, clevel count: 10069, pairs per clevel: 20.918959
+INFO ExpandRange_: data in clevel: 212173, clevel count: 10010, pairs per clevel: 21.196104
+INFO ExpandRange_: data in clevel: 214908, clevel count: 10194, pairs per clevel: 21.081813
+INFO ExpandRange_: data in clevel: 215512, clevel count: 10342, pairs per clevel: 20.838523
+INFO ExpandRange_: data in clevel: 216001, clevel count: 10349, pairs per clevel: 20.871678
+INFO ExpandRange_: data in clevel: 216490, clevel count: 10353, pairs per clevel: 20.910847
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 7215097, current entry count is 833031, expansion time is 1.338559s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 19992766
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+WARNING Put: wait too many! 104
+INFO ExpandRange_: data in clevel: 841197, clevel count: 40034, pairs per clevel: 21.012065
+INFO ExpandRange_: data in clevel: 840770, clevel count: 40228, pairs per clevel: 20.900119
+INFO ExpandRange_: data in clevel: 839103, clevel count: 40254, pairs per clevel: 20.845208
+INFO ExpandRange_: data in clevel: 847626, clevel count: 40212, pairs per clevel: 21.078932
+INFO ExpandRange_: data in clevel: 839747, clevel count: 41096, pairs per clevel: 20.433789
+INFO ExpandRange_: data in clevel: 841224, clevel count: 40821, pairs per clevel: 20.607628
+INFO ExpandRange_: data in clevel: 846281, clevel count: 40508, pairs per clevel: 20.891700
+INFO ExpandRange_: data in clevel: 849411, clevel count: 40470, pairs per clevel: 20.988658
+INFO ExpandRange_: data in clevel: 836580, clevel count: 41621, pairs per clevel: 20.099950
+INFO ExpandRange_: data in clevel: 848874, clevel count: 40158, pairs per clevel: 21.138354
+INFO ExpandRange_: data in clevel: 850096, clevel count: 41051, pairs per clevel: 20.708290
+INFO ExpandRange_: data in clevel: 848052, clevel count: 41748, pairs per clevel: 20.313596
+INFO ExpandRange_: data in clevel: 845988, clevel count: 42136, pairs per clevel: 20.077558
+INFO ExpandRange_: data in clevel: 838785, clevel count: 42865, pairs per clevel: 19.568063
+INFO ExpandRange_: data in clevel: 843700, clevel count: 42964, pairs per clevel: 19.637371
+INFO ExpandRange_: data in clevel: 843084, clevel count: 42471, pairs per clevel: 19.850816
+INFO ExpandRange_: data in clevel: 844867, clevel count: 42697, pairs per clevel: 19.787503
+INFO ExpandRange_: data in clevel: 843785, clevel count: 43557, pairs per clevel: 19.371972
+INFO ExpandRange_: data in clevel: 844317, clevel count: 43484, pairs per clevel: 19.416728
+INFO ExpandRange_: data in clevel: 845877, clevel count: 43569, pairs per clevel: 19.414653
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 27102526, current entry count is 3435644, expansion time is 4.369300s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 82455480
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 397
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+WARNING Put: wait too many! 399
+INFO ExpandRange_: data in clevel: 3445971, clevel count: 169918, pairs per clevel: 20.280200
+INFO ExpandRange_: data in clevel: 3452856, clevel count: 170074, pairs per clevel: 20.302080
+INFO ExpandRange_: data in clevel: 3470671, clevel count: 171575, pairs per clevel: 20.228302
+INFO ExpandRange_: data in clevel: 3461467, clevel count: 171056, pairs per clevel: 20.235870
+INFO ExpandRange_: data in clevel: 3470467, clevel count: 171093, pairs per clevel: 20.284097
+INFO ExpandRange_: data in clevel: 3450526, clevel count: 170763, pairs per clevel: 20.206520
+INFO ExpandRange_: data in clevel: 3455128, clevel count: 171175, pairs per clevel: 20.184770
+INFO ExpandRange_: data in clevel: 3479027, clevel count: 172172, pairs per clevel: 20.206694
+INFO ExpandRange_: data in clevel: 3451487, clevel count: 170055, pairs per clevel: 20.296298
+INFO ExpandRange_: data in clevel: 3471880, clevel count: 171587, pairs per clevel: 20.233934
+INFO ExpandRange_: data in clevel: 3455043, clevel count: 170722, pairs per clevel: 20.237831
+INFO ExpandRange_: data in clevel: 3455135, clevel count: 172048, pairs per clevel: 20.082390
+INFO ExpandRange_: data in clevel: 3477550, clevel count: 172559, pairs per clevel: 20.152817
+INFO ExpandRange_: data in clevel: 3461997, clevel count: 172462, pairs per clevel: 20.073970
+INFO ExpandRange_: data in clevel: 3450216, clevel count: 171573, pairs per clevel: 20.109318
+INFO ExpandRange_: data in clevel: 3482847, clevel count: 172725, pairs per clevel: 20.164116
+INFO ExpandRange_: data in clevel: 3457923, clevel count: 173537, pairs per clevel: 19.926143
+INFO ExpandRange_: data in clevel: 3461843, clevel count: 173276, pairs per clevel: 19.978780
+INFO ExpandRange_: data in clevel: 3472871, clevel count: 173146, pairs per clevel: 20.057472
+INFO ExpandRange_: data in clevel: 3478364, clevel count: 171338, pairs per clevel: 20.301182
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 109191259, current entry count is 14122078, expansion time is 16.908483s
+INFO ExpandComboTree_: preparing to expand combotree. current size is 338929892
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+INFO Put: thread waiting for cv
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1742
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+WARNING Put: wait too many! 1741
+INFO ExpandRange_: data in clevel: 14125003, clevel count: 701495, pairs per clevel: 20.135572
+INFO ExpandRange_: data in clevel: 14216547, clevel count: 706235, pairs per clevel: 20.130052
+INFO ExpandRange_: data in clevel: 14197859, clevel count: 705034, pairs per clevel: 20.137836
+INFO ExpandRange_: data in clevel: 14217217, clevel count: 707936, pairs per clevel: 20.082630
+INFO ExpandRange_: data in clevel: 14134430, clevel count: 702488, pairs per clevel: 20.120529
+INFO ExpandRange_: data in clevel: 14230999, clevel count: 706652, pairs per clevel: 20.138624
+INFO ExpandRange_: data in clevel: 14216689, clevel count: 706944, pairs per clevel: 20.110064
+INFO ExpandRange_: data in clevel: 14125156, clevel count: 703186, pairs per clevel: 20.087368
+INFO ExpandRange_: data in clevel: 14151121, clevel count: 702871, pairs per clevel: 20.133312
+INFO ExpandRange_: data in clevel: 14140995, clevel count: 702436, pairs per clevel: 20.131364
+INFO ExpandRange_: data in clevel: 14163718, clevel count: 706226, pairs per clevel: 20.055503
+INFO ExpandRange_: data in clevel: 14160244, clevel count: 704002, pairs per clevel: 20.113926
+INFO ExpandRange_: data in clevel: 14256851, clevel count: 707910, pairs per clevel: 20.139355
+INFO ExpandRange_: data in clevel: 14192959, clevel count: 705912, pairs per clevel: 20.105847
+INFO ExpandRange_: data in clevel: 14165361, clevel count: 703964, pairs per clevel: 20.122280
+INFO ExpandRange_: data in clevel: 14183194, clevel count: 705342, pairs per clevel: 20.108251
+INFO ExpandRange_: data in clevel: 14224743, clevel count: 707942, pairs per clevel: 20.093091
+INFO ExpandRange_: data in clevel: 14198994, clevel count: 707912, pairs per clevel: 20.057569
+INFO ExpandRange_: data in clevel: 14199478, clevel count: 707839, pairs per clevel: 20.060322
+INFO ExpandRange_: data in clevel: 14220843, clevel count: 708324, pairs per clevel: 20.076749
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO Put: thread finish waiting for cv
+INFO ExpandComboTree_: finish expanding combotree. current size is 399729873, current entry count is 57888693, expansion time is 59.199346s
+Throughput: load, 3.179835 ,ops/us
+Throughput: delete, 6.408001 ,ops/us
+
