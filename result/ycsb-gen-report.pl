@@ -27,7 +27,7 @@ foreach (@lines) {
         }
         $thread = $2;
         $worksheet->write($row-1, $col, $thread);
-    } elsif (/Throughput: delete, (\d+(?:\.\d+)?) ,ops/) {
+    } elsif (/Throughput: get, (\d+(?:\.\d+)?) ,ops/) {
         $worksheet->write($row, $col, "$1");
     }
 }

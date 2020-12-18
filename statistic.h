@@ -8,7 +8,7 @@
 void space_usage(std::string name) {
     int pid = getpid();
     char cmd_buf[100];
-    sprintf(cmd_buf, "pmap %d > ./usage-%s.txt", pid, name);
+    sprintf(cmd_buf, "pmap %d > ./usage-%s.txt", pid, name.c_str());
     system(cmd_buf);
 }
 #else

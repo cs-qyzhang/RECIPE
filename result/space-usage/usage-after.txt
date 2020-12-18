@@ -1,0 +1,12 @@
+346986:   ./build/ycsb hot a 1
+ total         34607368K
+347242:   ./build/ycsb fastfair a 1
+ total         15786248K
+347104:   ./build/ycsb masstree a 1
+ total         16580872K
+347416:   ./build/ycsb levelhash a 1
+ total         22257808K
+347661:   ./build/ycsb combotree a 1
+ total         28854552K
+347191:   ./build/ycsb clht a 1
+ total         22675724K

@@ -1,0 +1,887 @@
+347191:   ./build/ycsb clht a 1
+0000000000400000    548K r-x-- ycsb
+0000000000688000      4K r---- ycsb
+0000000000689000      4K rw--- ycsb
+000000000068a000      4K rw---   [ anon ]
+00007f4486400000 19296256K rw---   [ anon ]
+00007f49203ff000      4K -----   [ anon ]
+00007f4920400000 3297280K rw---   [ anon ]
+00007f49e9bc7000   2048K rw---   [ anon ]
+00007f49e9dc7000     88K r-x-- libtbbmalloc.so.2
+00007f49e9ddd000   2048K ----- libtbbmalloc.so.2
+00007f49e9fdd000      4K r---- libtbbmalloc.so.2
+00007f49e9fde000      8K rw--- libtbbmalloc.so.2
+00007f49e9fe0000   8320K rw---   [ anon ]
+00007f49ea912000     60K r-x-- libbz2.so.1.0.6
+00007f49ea921000   2044K ----- libbz2.so.1.0.6
+00007f49eab20000      4K r---- libbz2.so.1.0.6
+00007f49eab21000      4K rw--- libbz2.so.1.0.6
+00007f49eab22000     92K r-x-- libelf-0.176.so
+00007f49eab39000   2044K ----- libelf-0.176.so
+00007f49ead38000      4K r---- libelf-0.176.so
+00007f49ead39000      4K rw--- libelf-0.176.so
+00007f49ead3a000     16K r-x-- libattr.so.1.1.0
+00007f49ead3e000   2044K ----- libattr.so.1.1.0
+00007f49eaf3d000      4K r---- libattr.so.1.1.0
+00007f49eaf3e000      4K rw--- libattr.so.1.1.0
+00007f49eaf3f000     84K r-x-- libz.so.1.2.7
+00007f49eaf54000   2044K ----- libz.so.1.2.7
+00007f49eb153000      4K r---- libz.so.1.2.7
+00007f49eb154000      4K rw--- libz.so.1.2.7
+00007f49eb155000    148K r-x-- liblzma.so.5.2.2
+00007f49eb17a000   2044K ----- liblzma.so.5.2.2
+00007f49eb379000      4K r---- liblzma.so.5.2.2
+00007f49eb37a000      4K rw--- liblzma.so.5.2.2
+00007f49eb37b000    312K r-x-- libdw-0.176.so
+00007f49eb3c9000   2048K ----- libdw-0.176.so
+00007f49eb5c9000      8K r---- libdw-0.176.so
+00007f49eb5cb000      4K rw--- libdw-0.176.so
+00007f49eb5cc000     16K r-x-- libcap.so.2.22
+00007f49eb5d0000   2044K ----- libcap.so.2.22
+00007f49eb7cf000      4K r---- libcap.so.2.22
+00007f49eb7d0000      4K rw--- libcap.so.2.22
+00007f49eb7d1000     84K r-x-- libkmod.so.2.2.10
+00007f49eb7e6000   2044K ----- libkmod.so.2.2.10
+00007f49eb9e5000      4K r---- libkmod.so.2.2.10
+00007f49eb9e6000      4K rw--- libkmod.so.2.2.10
+00007f49eb9e7000     16K r-x-- libuuid.so.1.3.0
+00007f49eb9eb000   2044K ----- libuuid.so.1.3.0
+00007f49ebbea000      4K r---- libuuid.so.1.3.0
+00007f49ebbeb000      4K rw--- libuuid.so.1.3.0
+00007f49ebbec000     80K r-x-- libudev.so.1.6.2
+00007f49ebc00000   2048K ----- libudev.so.1.6.2
+00007f49ebe00000      4K r---- libudev.so.1.6.2
+00007f49ebe01000      4K rw--- libudev.so.1.6.2
+00007f49ebe02000    276K r-x-- libpmemobj.so.1.0.0
+00007f49ebe47000   2048K ----- libpmemobj.so.1.0.0
+00007f49ec047000      8K r---- libpmemobj.so.1.0.0
+00007f49ec049000      4K rw--- libpmemobj.so.1.0.0
+00007f49ec04a000      4K rw---   [ anon ]
+00007f49ec04b000     16K r-x-- libdaxctl.so.1.2.1
+00007f49ec04f000   2044K ----- libdaxctl.so.1.2.1
+00007f49ec24e000      4K r---- libdaxctl.so.1.2.1
+00007f49ec24f000      4K rw--- libdaxctl.so.1.2.1
+00007f49ec250000    128K r-x-- libndctl.so.6.13.0
+00007f49ec270000   2048K ----- libndctl.so.6.13.0
+00007f49ec470000      4K r---- libndctl.so.6.13.0
+00007f49ec471000      4K rw--- libndctl.so.6.13.0
+00007f49ec472000      8K r-x-- libdl-2.17.so
+00007f49ec474000   2048K ----- libdl-2.17.so
+00007f49ec674000      4K r---- libdl-2.17.so
+00007f49ec675000      4K rw--- libdl-2.17.so
+00007f49ec676000    328K r-x-- libpmemkv.so.1
+00007f49ec6c8000   2048K ----- libpmemkv.so.1
+00007f49ec8c8000      4K r---- libpmemkv.so.1
+00007f49ec8c9000      4K rw--- libpmemkv.so.1
+00007f49ec8ca000   1736K r-x-- libpmem.so.1.0.0
+00007f49eca7c000   2044K ----- libpmem.so.1.0.0
+00007f49ecc7b000      4K r---- libpmem.so.1.0.0
+00007f49ecc7c000      4K rw--- libpmem.so.1.0.0
+00007f49ecc7d000     28K r-x-- librt-2.17.so
+00007f49ecc84000   2044K ----- librt-2.17.so
+00007f49ece83000      4K r---- librt-2.17.so
+00007f49ece84000      4K rw--- librt-2.17.so
+00007f49ece85000   1804K r-x-- libc-2.17.so
+00007f49ed048000   2048K ----- libc-2.17.so
+00007f49ed248000     16K r---- libc-2.17.so
+00007f49ed24c000      8K rw--- libc-2.17.so
+00007f49ed24e000     20K rw---   [ anon ]
+00007f49ed253000     92K r-x-- libgcc_s.so.1
+00007f49ed26a000   2044K ----- libgcc_s.so.1
+00007f49ed469000      4K r---- libgcc_s.so.1
+00007f49ed46a000      4K rw--- libgcc_s.so.1
+00007f49ed46b000   1028K r-x-- libm-2.17.so
+00007f49ed56c000   2044K ----- libm-2.17.so
+00007f49ed76b000      4K r---- libm-2.17.so
+00007f49ed76c000      4K rw--- libm-2.17.so
+00007f49ed76d000   1828K r-x-- libstdc++.so.6.0.28
+00007f49ed936000   2048K ----- libstdc++.so.6.0.28
+00007f49edb36000     44K r---- libstdc++.so.6.0.28
+00007f49edb41000     12K rw--- libstdc++.so.6.0.28
+00007f49edb44000     12K rw---   [ anon ]
+00007f49edb47000     92K r-x-- libpthread-2.17.so
+00007f49edb5e000   2044K ----- libpthread-2.17.so
+00007f49edd5d000      4K r---- libpthread-2.17.so
+00007f49edd5e000      4K rw--- libpthread-2.17.so
+00007f49edd5f000     16K rw---   [ anon ]
+00007f49edd63000    196K r-x-- libjemalloc.so.1
+00007f49edd94000   2044K ----- libjemalloc.so.1
+00007f49edf93000      8K r---- libjemalloc.so.1
+00007f49edf95000      4K rw--- libjemalloc.so.1
+00007f49edf96000      4K rw---   [ anon ]
+00007f49edf97000    192K r-x-- libtbb.so.2
+00007f49edfc7000   2044K ----- libtbb.so.2
+00007f49ee1c6000      8K r---- libtbb.so.2
+00007f49ee1c8000      8K rw--- libtbb.so.2
+00007f49ee1ca000      8K rw---   [ anon ]
+00007f49ee1cc000    116K r-x-- libcombotree.so
+00007f49ee1e9000   2044K ----- libcombotree.so
+00007f49ee3e8000      4K r---- libcombotree.so
+00007f49ee3e9000      4K rw--- libcombotree.so
+00007f49ee3ea000     12K r-x-- libboost_system-mt.so.1.53.0
+00007f49ee3ed000   2044K ----- libboost_system-mt.so.1.53.0
+00007f49ee5ec000      4K r---- libboost_system-mt.so.1.53.0
+00007f49ee5ed000      4K rw--- libboost_system-mt.so.1.53.0
+00007f49ee5ee000     84K r-x-- libboost_thread-mt.so.1.53.0
+00007f49ee603000   2044K ----- libboost_thread-mt.so.1.53.0
+00007f49ee802000      8K r---- libboost_thread-mt.so.1.53.0
+00007f49ee804000      4K rw--- libboost_thread-mt.so.1.53.0
+00007f49ee805000     12K r-x-- libboost_system.so.1.53.0
+00007f49ee808000   2044K ----- libboost_system.so.1.53.0
+00007f49eea07000      4K r---- libboost_system.so.1.53.0
+00007f49eea08000      4K rw--- libboost_system.so.1.53.0
+00007f49eea09000     24K r-x-- libatomic.so.1.2.0
+00007f49eea0f000   2044K ----- libatomic.so.1.2.0
+00007f49eec0e000      4K r---- libatomic.so.1.2.0
+00007f49eec0f000      4K rw--- libatomic.so.1.2.0
+00007f49eec10000      4K rw---   [ anon ]
+00007f49eec11000    136K r-x-- ld-2.17.so
+00007f49eede2000    200K rw---   [ anon ]
+00007f49eee30000      8K rw---   [ anon ]
+00007f49eee32000      4K r---- ld-2.17.so
+00007f49eee33000      4K rw--- ld-2.17.so
+00007f49eee34000      4K rw---   [ anon ]
+00007fff7c7ec000    136K rw---   [ stack ]
+00007fff7c901000      8K r-x--   [ anon ]
+ffffffffff600000      4K r-x--   [ anon ]
+ total         22675724K
+347661:   ./build/ycsb combotree a 1
+0000000000400000    548K r-x-- ycsb
+0000000000688000      4K r---- ycsb
+0000000000689000      4K rw--- ycsb
+000000000068a000      4K rw---   [ anon ]
+00007f3000000000 16777220K rw-s- combotree-clevel-8
+00007f389f000000 540672K rw---   [ anon ]
+00007f3afc800000 2154496K rw---   [ anon ]
+00007f3b80000000 4915204K rw-s- combotree-blevel-8
+00007f3cd4400000 135168K rw---   [ anon ]
+00007f3cdfc00000 256004K rw-s- combotree-alevel-8
+00007f3cef800000  36864K rw---   [ anon ]
+00007f3cf6800000  12288K rw---   [ anon ]
+00007f3cf8800000   4096K rw---   [ anon ]
+00007f3cf91ff000      4K -----   [ anon ]
+00007f3cf9200000   8192K rw---   [ anon ]
+00007f3cfa000000  53248K rw---   [ anon ]
+00007f3cfd600000 524288K rw-s- pmemkv (deleted)
+00007f3d1d800000  57344K rw---   [ anon ]
+00007f3d21200000   8192K rw-s- Manifest
+00007f3d21c00000 3289088K rw---   [ anon ]
+00007f3deaa00000  10240K rw---   [ anon ]
+00007f3deb5ad000     88K r-x-- libtbbmalloc.so.2
+00007f3deb5c3000   2048K ----- libtbbmalloc.so.2
+00007f3deb7c3000      4K r---- libtbbmalloc.so.2
+00007f3deb7c4000      8K rw--- libtbbmalloc.so.2
+00007f3deb7c6000    128K rw---   [ anon ]
+00007f3deb7e6000     60K r-x-- libbz2.so.1.0.6
+00007f3deb7f5000   2044K ----- libbz2.so.1.0.6
+00007f3deb9f4000      4K r---- libbz2.so.1.0.6
+00007f3deb9f5000      4K rw--- libbz2.so.1.0.6
+00007f3deb9f6000     92K r-x-- libelf-0.176.so
+00007f3deba0d000   2044K ----- libelf-0.176.so
+00007f3debc0c000      4K r---- libelf-0.176.so
+00007f3debc0d000      4K rw--- libelf-0.176.so
+00007f3debc0e000     16K r-x-- libattr.so.1.1.0
+00007f3debc12000   2044K ----- libattr.so.1.1.0
+00007f3debe11000      4K r---- libattr.so.1.1.0
+00007f3debe12000      4K rw--- libattr.so.1.1.0
+00007f3debe13000     84K r-x-- libz.so.1.2.7
+00007f3debe28000   2044K ----- libz.so.1.2.7
+00007f3dec027000      4K r---- libz.so.1.2.7
+00007f3dec028000      4K rw--- libz.so.1.2.7
+00007f3dec029000    148K r-x-- liblzma.so.5.2.2
+00007f3dec04e000   2044K ----- liblzma.so.5.2.2
+00007f3dec24d000      4K r---- liblzma.so.5.2.2
+00007f3dec24e000      4K rw--- liblzma.so.5.2.2
+00007f3dec24f000    312K r-x-- libdw-0.176.so
+00007f3dec29d000   2048K ----- libdw-0.176.so
+00007f3dec49d000      8K r---- libdw-0.176.so
+00007f3dec49f000      4K rw--- libdw-0.176.so
+00007f3dec4a0000     16K r-x-- libcap.so.2.22
+00007f3dec4a4000   2044K ----- libcap.so.2.22
+00007f3dec6a3000      4K r---- libcap.so.2.22
+00007f3dec6a4000      4K rw--- libcap.so.2.22
+00007f3dec6a5000     84K r-x-- libkmod.so.2.2.10
+00007f3dec6ba000   2044K ----- libkmod.so.2.2.10
+00007f3dec8b9000      4K r---- libkmod.so.2.2.10
+00007f3dec8ba000      4K rw--- libkmod.so.2.2.10
+00007f3dec8bb000     16K r-x-- libuuid.so.1.3.0
+00007f3dec8bf000   2044K ----- libuuid.so.1.3.0
+00007f3decabe000      4K r---- libuuid.so.1.3.0
+00007f3decabf000      4K rw--- libuuid.so.1.3.0
+00007f3decac0000     80K r-x-- libudev.so.1.6.2
+00007f3decad4000   2048K ----- libudev.so.1.6.2
+00007f3deccd4000      4K r---- libudev.so.1.6.2
+00007f3deccd5000      4K rw--- libudev.so.1.6.2
+00007f3deccd6000    276K r-x-- libpmemobj.so.1.0.0
+00007f3decd1b000   2048K ----- libpmemobj.so.1.0.0
+00007f3decf1b000      8K r---- libpmemobj.so.1.0.0
+00007f3decf1d000      4K rw--- libpmemobj.so.1.0.0
+00007f3decf1e000      4K rw---   [ anon ]
+00007f3decf1f000     16K r-x-- libdaxctl.so.1.2.1
+00007f3decf23000   2044K ----- libdaxctl.so.1.2.1
+00007f3ded122000      4K r---- libdaxctl.so.1.2.1
+00007f3ded123000      4K rw--- libdaxctl.so.1.2.1
+00007f3ded124000    128K r-x-- libndctl.so.6.13.0
+00007f3ded144000   2048K ----- libndctl.so.6.13.0
+00007f3ded344000      4K r---- libndctl.so.6.13.0
+00007f3ded345000      4K rw--- libndctl.so.6.13.0
+00007f3ded346000      8K r-x-- libdl-2.17.so
+00007f3ded348000   2048K ----- libdl-2.17.so
+00007f3ded548000      4K r---- libdl-2.17.so
+00007f3ded549000      4K rw--- libdl-2.17.so
+00007f3ded54a000    328K r-x-- libpmemkv.so.1
+00007f3ded59c000   2048K ----- libpmemkv.so.1
+00007f3ded79c000      4K r---- libpmemkv.so.1
+00007f3ded79d000      4K rw--- libpmemkv.so.1
+00007f3ded79e000   1736K r-x-- libpmem.so.1.0.0
+00007f3ded950000   2044K ----- libpmem.so.1.0.0
+00007f3dedb4f000      4K r---- libpmem.so.1.0.0
+00007f3dedb50000      4K rw--- libpmem.so.1.0.0
+00007f3dedb51000     28K r-x-- librt-2.17.so
+00007f3dedb58000   2044K ----- librt-2.17.so
+00007f3dedd57000      4K r---- librt-2.17.so
+00007f3dedd58000      4K rw--- librt-2.17.so
+00007f3dedd59000   1804K r-x-- libc-2.17.so
+00007f3dedf1c000   2048K ----- libc-2.17.so
+00007f3dee11c000     16K r---- libc-2.17.so
+00007f3dee120000      8K rw--- libc-2.17.so
+00007f3dee122000     20K rw---   [ anon ]
+00007f3dee127000     92K r-x-- libgcc_s.so.1
+00007f3dee13e000   2044K ----- libgcc_s.so.1
+00007f3dee33d000      4K r---- libgcc_s.so.1
+00007f3dee33e000      4K rw--- libgcc_s.so.1
+00007f3dee33f000   1028K r-x-- libm-2.17.so
+00007f3dee440000   2044K ----- libm-2.17.so
+00007f3dee63f000      4K r---- libm-2.17.so
+00007f3dee640000      4K rw--- libm-2.17.so
+00007f3dee641000   1828K r-x-- libstdc++.so.6.0.28
+00007f3dee80a000   2048K ----- libstdc++.so.6.0.28
+00007f3deea0a000     44K r---- libstdc++.so.6.0.28
+00007f3deea15000     12K rw--- libstdc++.so.6.0.28
+00007f3deea18000     12K rw---   [ anon ]
+00007f3deea1b000     92K r-x-- libpthread-2.17.so
+00007f3deea32000   2044K ----- libpthread-2.17.so
+00007f3deec31000      4K r---- libpthread-2.17.so
+00007f3deec32000      4K rw--- libpthread-2.17.so
+00007f3deec33000     16K rw---   [ anon ]
+00007f3deec37000    196K r-x-- libjemalloc.so.1
+00007f3deec68000   2044K ----- libjemalloc.so.1
+00007f3deee67000      8K r---- libjemalloc.so.1
+00007f3deee69000      4K rw--- libjemalloc.so.1
+00007f3deee6a000      4K rw---   [ anon ]
+00007f3deee6b000    192K r-x-- libtbb.so.2
+00007f3deee9b000   2044K ----- libtbb.so.2
+00007f3def09a000      8K r---- libtbb.so.2
+00007f3def09c000      8K rw--- libtbb.so.2
+00007f3def09e000      8K rw---   [ anon ]
+00007f3def0a0000    112K r-x-- libcombotree.so
+00007f3def0bc000   2048K ----- libcombotree.so
+00007f3def2bc000      4K r---- libcombotree.so
+00007f3def2bd000      4K rw--- libcombotree.so
+00007f3def2be000     12K r-x-- libboost_system-mt.so.1.53.0
+00007f3def2c1000   2044K ----- libboost_system-mt.so.1.53.0
+00007f3def4c0000      4K r---- libboost_system-mt.so.1.53.0
+00007f3def4c1000      4K rw--- libboost_system-mt.so.1.53.0
+00007f3def4c2000     84K r-x-- libboost_thread-mt.so.1.53.0
+00007f3def4d7000   2044K ----- libboost_thread-mt.so.1.53.0
+00007f3def6d6000      8K r---- libboost_thread-mt.so.1.53.0
+00007f3def6d8000      4K rw--- libboost_thread-mt.so.1.53.0
+00007f3def6d9000     12K r-x-- libboost_system.so.1.53.0
+00007f3def6dc000   2044K ----- libboost_system.so.1.53.0
+00007f3def8db000      4K r---- libboost_system.so.1.53.0
+00007f3def8dc000      4K rw--- libboost_system.so.1.53.0
+00007f3def8dd000     24K r-x-- libatomic.so.1.2.0
+00007f3def8e3000   2044K ----- libatomic.so.1.2.0
+00007f3defae2000      4K r---- libatomic.so.1.2.0
+00007f3defae3000      4K rw--- libatomic.so.1.2.0
+00007f3defae4000      4K rw---   [ anon ]
+00007f3defae5000    136K r-x-- ld-2.17.so
+00007f3defcb6000    200K rw---   [ anon ]
+00007f3defd04000      8K rw---   [ anon ]
+00007f3defd06000      4K r---- ld-2.17.so
+00007f3defd07000      4K rw--- ld-2.17.so
+00007f3defd08000      4K rw---   [ anon ]
+00007fff71ced000    136K rw---   [ stack ]
+00007fff71ddb000      8K r-x--   [ anon ]
+ffffffffff600000      4K r-x--   [ anon ]
+ total         28854552K
+347416:   ./build/ycsb levelhash a 1
+0000000000400000    548K r-x-- ycsb
+0000000000688000      4K r---- ycsb
+0000000000689000      4K rw--- ycsb
+000000000068a000      4K rw---   [ anon ]
+00007fd2fac00000 22171648K rw---   [ anon ]
+00007fd8443c7000   2048K rw---   [ anon ]
+00007fd8445c7000     88K r-x-- libtbbmalloc.so.2
+00007fd8445dd000   2048K ----- libtbbmalloc.so.2
+00007fd8447dd000      4K r---- libtbbmalloc.so.2
+00007fd8447de000      8K rw--- libtbbmalloc.so.2
+00007fd8447e0000   8320K rw---   [ anon ]
+00007fd84513d000     60K r-x-- libbz2.so.1.0.6
+00007fd84514c000   2044K ----- libbz2.so.1.0.6
+00007fd84534b000      4K r---- libbz2.so.1.0.6
+00007fd84534c000      4K rw--- libbz2.so.1.0.6
+00007fd84534d000     92K r-x-- libelf-0.176.so
+00007fd845364000   2044K ----- libelf-0.176.so
+00007fd845563000      4K r---- libelf-0.176.so
+00007fd845564000      4K rw--- libelf-0.176.so
+00007fd845565000     16K r-x-- libattr.so.1.1.0
+00007fd845569000   2044K ----- libattr.so.1.1.0
+00007fd845768000      4K r---- libattr.so.1.1.0
+00007fd845769000      4K rw--- libattr.so.1.1.0
+00007fd84576a000     84K r-x-- libz.so.1.2.7
+00007fd84577f000   2044K ----- libz.so.1.2.7
+00007fd84597e000      4K r---- libz.so.1.2.7
+00007fd84597f000      4K rw--- libz.so.1.2.7
+00007fd845980000    148K r-x-- liblzma.so.5.2.2
+00007fd8459a5000   2044K ----- liblzma.so.5.2.2
+00007fd845ba4000      4K r---- liblzma.so.5.2.2
+00007fd845ba5000      4K rw--- liblzma.so.5.2.2
+00007fd845ba6000    312K r-x-- libdw-0.176.so
+00007fd845bf4000   2048K ----- libdw-0.176.so
+00007fd845df4000      8K r---- libdw-0.176.so
+00007fd845df6000      4K rw--- libdw-0.176.so
+00007fd845df7000     16K r-x-- libcap.so.2.22
+00007fd845dfb000   2044K ----- libcap.so.2.22
+00007fd845ffa000      4K r---- libcap.so.2.22
+00007fd845ffb000      4K rw--- libcap.so.2.22
+00007fd845ffc000     84K r-x-- libkmod.so.2.2.10
+00007fd846011000   2044K ----- libkmod.so.2.2.10
+00007fd846210000      4K r---- libkmod.so.2.2.10
+00007fd846211000      4K rw--- libkmod.so.2.2.10
+00007fd846212000     16K r-x-- libuuid.so.1.3.0
+00007fd846216000   2044K ----- libuuid.so.1.3.0
+00007fd846415000      4K r---- libuuid.so.1.3.0
+00007fd846416000      4K rw--- libuuid.so.1.3.0
+00007fd846417000     80K r-x-- libudev.so.1.6.2
+00007fd84642b000   2048K ----- libudev.so.1.6.2
+00007fd84662b000      4K r---- libudev.so.1.6.2
+00007fd84662c000      4K rw--- libudev.so.1.6.2
+00007fd84662d000    276K r-x-- libpmemobj.so.1.0.0
+00007fd846672000   2048K ----- libpmemobj.so.1.0.0
+00007fd846872000      8K r---- libpmemobj.so.1.0.0
+00007fd846874000      4K rw--- libpmemobj.so.1.0.0
+00007fd846875000      4K rw---   [ anon ]
+00007fd846876000     16K r-x-- libdaxctl.so.1.2.1
+00007fd84687a000   2044K ----- libdaxctl.so.1.2.1
+00007fd846a79000      4K r---- libdaxctl.so.1.2.1
+00007fd846a7a000      4K rw--- libdaxctl.so.1.2.1
+00007fd846a7b000    128K r-x-- libndctl.so.6.13.0
+00007fd846a9b000   2048K ----- libndctl.so.6.13.0
+00007fd846c9b000      4K r---- libndctl.so.6.13.0
+00007fd846c9c000      4K rw--- libndctl.so.6.13.0
+00007fd846c9d000      8K r-x-- libdl-2.17.so
+00007fd846c9f000   2048K ----- libdl-2.17.so
+00007fd846e9f000      4K r---- libdl-2.17.so
+00007fd846ea0000      4K rw--- libdl-2.17.so
+00007fd846ea1000    328K r-x-- libpmemkv.so.1
+00007fd846ef3000   2048K ----- libpmemkv.so.1
+00007fd8470f3000      4K r---- libpmemkv.so.1
+00007fd8470f4000      4K rw--- libpmemkv.so.1
+00007fd8470f5000   1736K r-x-- libpmem.so.1.0.0
+00007fd8472a7000   2044K ----- libpmem.so.1.0.0
+00007fd8474a6000      4K r---- libpmem.so.1.0.0
+00007fd8474a7000      4K rw--- libpmem.so.1.0.0
+00007fd8474a8000     28K r-x-- librt-2.17.so
+00007fd8474af000   2044K ----- librt-2.17.so
+00007fd8476ae000      4K r---- librt-2.17.so
+00007fd8476af000      4K rw--- librt-2.17.so
+00007fd8476b0000   1804K r-x-- libc-2.17.so
+00007fd847873000   2048K ----- libc-2.17.so
+00007fd847a73000     16K r---- libc-2.17.so
+00007fd847a77000      8K rw--- libc-2.17.so
+00007fd847a79000     20K rw---   [ anon ]
+00007fd847a7e000     92K r-x-- libgcc_s.so.1
+00007fd847a95000   2044K ----- libgcc_s.so.1
+00007fd847c94000      4K r---- libgcc_s.so.1
+00007fd847c95000      4K rw--- libgcc_s.so.1
+00007fd847c96000   1028K r-x-- libm-2.17.so
+00007fd847d97000   2044K ----- libm-2.17.so
+00007fd847f96000      4K r---- libm-2.17.so
+00007fd847f97000      4K rw--- libm-2.17.so
+00007fd847f98000   1828K r-x-- libstdc++.so.6.0.28
+00007fd848161000   2048K ----- libstdc++.so.6.0.28
+00007fd848361000     44K r---- libstdc++.so.6.0.28
+00007fd84836c000     12K rw--- libstdc++.so.6.0.28
+00007fd84836f000     12K rw---   [ anon ]
+00007fd848372000     92K r-x-- libpthread-2.17.so
+00007fd848389000   2044K ----- libpthread-2.17.so
+00007fd848588000      4K r---- libpthread-2.17.so
+00007fd848589000      4K rw--- libpthread-2.17.so
+00007fd84858a000     16K rw---   [ anon ]
+00007fd84858e000    196K r-x-- libjemalloc.so.1
+00007fd8485bf000   2044K ----- libjemalloc.so.1
+00007fd8487be000      8K r---- libjemalloc.so.1
+00007fd8487c0000      4K rw--- libjemalloc.so.1
+00007fd8487c1000      4K rw---   [ anon ]
+00007fd8487c2000    192K r-x-- libtbb.so.2
+00007fd8487f2000   2044K ----- libtbb.so.2
+00007fd8489f1000      8K r---- libtbb.so.2
+00007fd8489f3000      8K rw--- libtbb.so.2
+00007fd8489f5000      8K rw---   [ anon ]
+00007fd8489f7000    116K r-x-- libcombotree.so
+00007fd848a14000   2044K ----- libcombotree.so
+00007fd848c13000      4K r---- libcombotree.so
+00007fd848c14000      4K rw--- libcombotree.so
+00007fd848c15000     12K r-x-- libboost_system-mt.so.1.53.0
+00007fd848c18000   2044K ----- libboost_system-mt.so.1.53.0
+00007fd848e17000      4K r---- libboost_system-mt.so.1.53.0
+00007fd848e18000      4K rw--- libboost_system-mt.so.1.53.0
+00007fd848e19000     84K r-x-- libboost_thread-mt.so.1.53.0
+00007fd848e2e000   2044K ----- libboost_thread-mt.so.1.53.0
+00007fd84902d000      8K r---- libboost_thread-mt.so.1.53.0
+00007fd84902f000      4K rw--- libboost_thread-mt.so.1.53.0
+00007fd849030000     12K r-x-- libboost_system.so.1.53.0
+00007fd849033000   2044K ----- libboost_system.so.1.53.0
+00007fd849232000      4K r---- libboost_system.so.1.53.0
+00007fd849233000      4K rw--- libboost_system.so.1.53.0
+00007fd849234000     24K r-x-- libatomic.so.1.2.0
+00007fd84923a000   2044K ----- libatomic.so.1.2.0
+00007fd849439000      4K r---- libatomic.so.1.2.0
+00007fd84943a000      4K rw--- libatomic.so.1.2.0
+00007fd84943b000      4K rw---   [ anon ]
+00007fd84943c000    136K r-x-- ld-2.17.so
+00007fd84960d000    200K rw---   [ anon ]
+00007fd84965b000      8K rw---   [ anon ]
+00007fd84965d000      4K r---- ld-2.17.so
+00007fd84965e000      4K rw--- ld-2.17.so
+00007fd84965f000      4K rw---   [ anon ]
+00007ffe5c215000   4112K rw---   [ stack ]
+00007ffe5c769000      8K r-x--   [ anon ]
+ffffffffff600000      4K r-x--   [ anon ]
+ total         22257808K
+347104:   ./build/ycsb masstree a 1
+0000000000400000    548K r-x-- ycsb
+0000000000688000      4K r---- ycsb
+0000000000689000      4K rw--- ycsb
+000000000068a000      4K rw---   [ anon ]
+00007f0e19c00000 16498688K rw---   [ anon ]
+00007f1208fc7000   2048K rw---   [ anon ]
+00007f12091c7000     88K r-x-- libtbbmalloc.so.2
+00007f12091dd000   2048K ----- libtbbmalloc.so.2
+00007f12093dd000      4K r---- libtbbmalloc.so.2
+00007f12093de000      8K rw--- libtbbmalloc.so.2
+00007f12093e0000   8320K rw---   [ anon ]
+00007f1209cf8000     60K r-x-- libbz2.so.1.0.6
+00007f1209d07000   2044K ----- libbz2.so.1.0.6
+00007f1209f06000      4K r---- libbz2.so.1.0.6
+00007f1209f07000      4K rw--- libbz2.so.1.0.6
+00007f1209f08000     92K r-x-- libelf-0.176.so
+00007f1209f1f000   2044K ----- libelf-0.176.so
+00007f120a11e000      4K r---- libelf-0.176.so
+00007f120a11f000      4K rw--- libelf-0.176.so
+00007f120a120000     16K r-x-- libattr.so.1.1.0
+00007f120a124000   2044K ----- libattr.so.1.1.0
+00007f120a323000      4K r---- libattr.so.1.1.0
+00007f120a324000      4K rw--- libattr.so.1.1.0
+00007f120a325000     84K r-x-- libz.so.1.2.7
+00007f120a33a000   2044K ----- libz.so.1.2.7
+00007f120a539000      4K r---- libz.so.1.2.7
+00007f120a53a000      4K rw--- libz.so.1.2.7
+00007f120a53b000    148K r-x-- liblzma.so.5.2.2
+00007f120a560000   2044K ----- liblzma.so.5.2.2
+00007f120a75f000      4K r---- liblzma.so.5.2.2
+00007f120a760000      4K rw--- liblzma.so.5.2.2
+00007f120a761000    312K r-x-- libdw-0.176.so
+00007f120a7af000   2048K ----- libdw-0.176.so
+00007f120a9af000      8K r---- libdw-0.176.so
+00007f120a9b1000      4K rw--- libdw-0.176.so
+00007f120a9b2000     16K r-x-- libcap.so.2.22
+00007f120a9b6000   2044K ----- libcap.so.2.22
+00007f120abb5000      4K r---- libcap.so.2.22
+00007f120abb6000      4K rw--- libcap.so.2.22
+00007f120abb7000     84K r-x-- libkmod.so.2.2.10
+00007f120abcc000   2044K ----- libkmod.so.2.2.10
+00007f120adcb000      4K r---- libkmod.so.2.2.10
+00007f120adcc000      4K rw--- libkmod.so.2.2.10
+00007f120adcd000     16K r-x-- libuuid.so.1.3.0
+00007f120add1000   2044K ----- libuuid.so.1.3.0
+00007f120afd0000      4K r---- libuuid.so.1.3.0
+00007f120afd1000      4K rw--- libuuid.so.1.3.0
+00007f120afd2000     80K r-x-- libudev.so.1.6.2
+00007f120afe6000   2048K ----- libudev.so.1.6.2
+00007f120b1e6000      4K r---- libudev.so.1.6.2
+00007f120b1e7000      4K rw--- libudev.so.1.6.2
+00007f120b1e8000    276K r-x-- libpmemobj.so.1.0.0
+00007f120b22d000   2048K ----- libpmemobj.so.1.0.0
+00007f120b42d000      8K r---- libpmemobj.so.1.0.0
+00007f120b42f000      4K rw--- libpmemobj.so.1.0.0
+00007f120b430000      4K rw---   [ anon ]
+00007f120b431000     16K r-x-- libdaxctl.so.1.2.1
+00007f120b435000   2044K ----- libdaxctl.so.1.2.1
+00007f120b634000      4K r---- libdaxctl.so.1.2.1
+00007f120b635000      4K rw--- libdaxctl.so.1.2.1
+00007f120b636000    128K r-x-- libndctl.so.6.13.0
+00007f120b656000   2048K ----- libndctl.so.6.13.0
+00007f120b856000      4K r---- libndctl.so.6.13.0
+00007f120b857000      4K rw--- libndctl.so.6.13.0
+00007f120b858000      8K r-x-- libdl-2.17.so
+00007f120b85a000   2048K ----- libdl-2.17.so
+00007f120ba5a000      4K r---- libdl-2.17.so
+00007f120ba5b000      4K rw--- libdl-2.17.so
+00007f120ba5c000    328K r-x-- libpmemkv.so.1
+00007f120baae000   2048K ----- libpmemkv.so.1
+00007f120bcae000      4K r---- libpmemkv.so.1
+00007f120bcaf000      4K rw--- libpmemkv.so.1
+00007f120bcb0000   1736K r-x-- libpmem.so.1.0.0
+00007f120be62000   2044K ----- libpmem.so.1.0.0
+00007f120c061000      4K r---- libpmem.so.1.0.0
+00007f120c062000      4K rw--- libpmem.so.1.0.0
+00007f120c063000     28K r-x-- librt-2.17.so
+00007f120c06a000   2044K ----- librt-2.17.so
+00007f120c269000      4K r---- librt-2.17.so
+00007f120c26a000      4K rw--- librt-2.17.so
+00007f120c26b000   1804K r-x-- libc-2.17.so
+00007f120c42e000   2048K ----- libc-2.17.so
+00007f120c62e000     16K r---- libc-2.17.so
+00007f120c632000      8K rw--- libc-2.17.so
+00007f120c634000     20K rw---   [ anon ]
+00007f120c639000     92K r-x-- libgcc_s.so.1
+00007f120c650000   2044K ----- libgcc_s.so.1
+00007f120c84f000      4K r---- libgcc_s.so.1
+00007f120c850000      4K rw--- libgcc_s.so.1
+00007f120c851000   1028K r-x-- libm-2.17.so
+00007f120c952000   2044K ----- libm-2.17.so
+00007f120cb51000      4K r---- libm-2.17.so
+00007f120cb52000      4K rw--- libm-2.17.so
+00007f120cb53000   1828K r-x-- libstdc++.so.6.0.28
+00007f120cd1c000   2048K ----- libstdc++.so.6.0.28
+00007f120cf1c000     44K r---- libstdc++.so.6.0.28
+00007f120cf27000     12K rw--- libstdc++.so.6.0.28
+00007f120cf2a000     12K rw---   [ anon ]
+00007f120cf2d000     92K r-x-- libpthread-2.17.so
+00007f120cf44000   2044K ----- libpthread-2.17.so
+00007f120d143000      4K r---- libpthread-2.17.so
+00007f120d144000      4K rw--- libpthread-2.17.so
+00007f120d145000     16K rw---   [ anon ]
+00007f120d149000    196K r-x-- libjemalloc.so.1
+00007f120d17a000   2044K ----- libjemalloc.so.1
+00007f120d379000      8K r---- libjemalloc.so.1
+00007f120d37b000      4K rw--- libjemalloc.so.1
+00007f120d37c000      4K rw---   [ anon ]
+00007f120d37d000    192K r-x-- libtbb.so.2
+00007f120d3ad000   2044K ----- libtbb.so.2
+00007f120d5ac000      8K r---- libtbb.so.2
+00007f120d5ae000      8K rw--- libtbb.so.2
+00007f120d5b0000      8K rw---   [ anon ]
+00007f120d5b2000    116K r-x-- libcombotree.so
+00007f120d5cf000   2044K ----- libcombotree.so
+00007f120d7ce000      4K r---- libcombotree.so
+00007f120d7cf000      4K rw--- libcombotree.so
+00007f120d7d0000     12K r-x-- libboost_system-mt.so.1.53.0
+00007f120d7d3000   2044K ----- libboost_system-mt.so.1.53.0
+00007f120d9d2000      4K r---- libboost_system-mt.so.1.53.0
+00007f120d9d3000      4K rw--- libboost_system-mt.so.1.53.0
+00007f120d9d4000     84K r-x-- libboost_thread-mt.so.1.53.0
+00007f120d9e9000   2044K ----- libboost_thread-mt.so.1.53.0
+00007f120dbe8000      8K r---- libboost_thread-mt.so.1.53.0
+00007f120dbea000      4K rw--- libboost_thread-mt.so.1.53.0
+00007f120dbeb000     12K r-x-- libboost_system.so.1.53.0
+00007f120dbee000   2044K ----- libboost_system.so.1.53.0
+00007f120dded000      4K r---- libboost_system.so.1.53.0
+00007f120ddee000      4K rw--- libboost_system.so.1.53.0
+00007f120ddef000     24K r-x-- libatomic.so.1.2.0
+00007f120ddf5000   2044K ----- libatomic.so.1.2.0
+00007f120dff4000      4K r---- libatomic.so.1.2.0
+00007f120dff5000      4K rw--- libatomic.so.1.2.0
+00007f120dff6000      4K rw---   [ anon ]
+00007f120dff7000    136K r-x-- ld-2.17.so
+00007f120e1c8000    200K rw---   [ anon ]
+00007f120e216000      8K rw---   [ anon ]
+00007f120e218000      4K r---- ld-2.17.so
+00007f120e219000      4K rw--- ld-2.17.so
+00007f120e21a000      4K rw---   [ anon ]
+00007ffcfcc78000    136K rw---   [ stack ]
+00007ffcfccb5000      8K r-x--   [ anon ]
+ffffffffff600000      4K r-x--   [ anon ]
+ total         16580872K
+347242:   ./build/ycsb fastfair a 1
+0000000000400000    548K r-x-- ycsb
+0000000000688000      4K r---- ycsb
+0000000000689000      4K rw--- ycsb
+000000000068a000      4K rw---   [ anon ]
+00007fda87000000 15704064K rw---   [ anon ]
+00007fde45a00000  10240K rw---   [ anon ]
+00007fde465a5000     88K r-x-- libtbbmalloc.so.2
+00007fde465bb000   2048K ----- libtbbmalloc.so.2
+00007fde467bb000      4K r---- libtbbmalloc.so.2
+00007fde467bc000      8K rw--- libtbbmalloc.so.2
+00007fde467be000    128K rw---   [ anon ]
+00007fde467de000     60K r-x-- libbz2.so.1.0.6
+00007fde467ed000   2044K ----- libbz2.so.1.0.6
+00007fde469ec000      4K r---- libbz2.so.1.0.6
+00007fde469ed000      4K rw--- libbz2.so.1.0.6
+00007fde469ee000     92K r-x-- libelf-0.176.so
+00007fde46a05000   2044K ----- libelf-0.176.so
+00007fde46c04000      4K r---- libelf-0.176.so
+00007fde46c05000      4K rw--- libelf-0.176.so
+00007fde46c06000     16K r-x-- libattr.so.1.1.0
+00007fde46c0a000   2044K ----- libattr.so.1.1.0
+00007fde46e09000      4K r---- libattr.so.1.1.0
+00007fde46e0a000      4K rw--- libattr.so.1.1.0
+00007fde46e0b000     84K r-x-- libz.so.1.2.7
+00007fde46e20000   2044K ----- libz.so.1.2.7
+00007fde4701f000      4K r---- libz.so.1.2.7
+00007fde47020000      4K rw--- libz.so.1.2.7
+00007fde47021000    148K r-x-- liblzma.so.5.2.2
+00007fde47046000   2044K ----- liblzma.so.5.2.2
+00007fde47245000      4K r---- liblzma.so.5.2.2
+00007fde47246000      4K rw--- liblzma.so.5.2.2
+00007fde47247000    312K r-x-- libdw-0.176.so
+00007fde47295000   2048K ----- libdw-0.176.so
+00007fde47495000      8K r---- libdw-0.176.so
+00007fde47497000      4K rw--- libdw-0.176.so
+00007fde47498000     16K r-x-- libcap.so.2.22
+00007fde4749c000   2044K ----- libcap.so.2.22
+00007fde4769b000      4K r---- libcap.so.2.22
+00007fde4769c000      4K rw--- libcap.so.2.22
+00007fde4769d000     84K r-x-- libkmod.so.2.2.10
+00007fde476b2000   2044K ----- libkmod.so.2.2.10
+00007fde478b1000      4K r---- libkmod.so.2.2.10
+00007fde478b2000      4K rw--- libkmod.so.2.2.10
+00007fde478b3000     16K r-x-- libuuid.so.1.3.0
+00007fde478b7000   2044K ----- libuuid.so.1.3.0
+00007fde47ab6000      4K r---- libuuid.so.1.3.0
+00007fde47ab7000      4K rw--- libuuid.so.1.3.0
+00007fde47ab8000     80K r-x-- libudev.so.1.6.2
+00007fde47acc000   2048K ----- libudev.so.1.6.2
+00007fde47ccc000      4K r---- libudev.so.1.6.2
+00007fde47ccd000      4K rw--- libudev.so.1.6.2
+00007fde47cce000    276K r-x-- libpmemobj.so.1.0.0
+00007fde47d13000   2048K ----- libpmemobj.so.1.0.0
+00007fde47f13000      8K r---- libpmemobj.so.1.0.0
+00007fde47f15000      4K rw--- libpmemobj.so.1.0.0
+00007fde47f16000      4K rw---   [ anon ]
+00007fde47f17000     16K r-x-- libdaxctl.so.1.2.1
+00007fde47f1b000   2044K ----- libdaxctl.so.1.2.1
+00007fde4811a000      4K r---- libdaxctl.so.1.2.1
+00007fde4811b000      4K rw--- libdaxctl.so.1.2.1
+00007fde4811c000    128K r-x-- libndctl.so.6.13.0
+00007fde4813c000   2048K ----- libndctl.so.6.13.0
+00007fde4833c000      4K r---- libndctl.so.6.13.0
+00007fde4833d000      4K rw--- libndctl.so.6.13.0
+00007fde4833e000      8K r-x-- libdl-2.17.so
+00007fde48340000   2048K ----- libdl-2.17.so
+00007fde48540000      4K r---- libdl-2.17.so
+00007fde48541000      4K rw--- libdl-2.17.so
+00007fde48542000    328K r-x-- libpmemkv.so.1
+00007fde48594000   2048K ----- libpmemkv.so.1
+00007fde48794000      4K r---- libpmemkv.so.1
+00007fde48795000      4K rw--- libpmemkv.so.1
+00007fde48796000   1736K r-x-- libpmem.so.1.0.0
+00007fde48948000   2044K ----- libpmem.so.1.0.0
+00007fde48b47000      4K r---- libpmem.so.1.0.0
+00007fde48b48000      4K rw--- libpmem.so.1.0.0
+00007fde48b49000     28K r-x-- librt-2.17.so
+00007fde48b50000   2044K ----- librt-2.17.so
+00007fde48d4f000      4K r---- librt-2.17.so
+00007fde48d50000      4K rw--- librt-2.17.so
+00007fde48d51000   1804K r-x-- libc-2.17.so
+00007fde48f14000   2048K ----- libc-2.17.so
+00007fde49114000     16K r---- libc-2.17.so
+00007fde49118000      8K rw--- libc-2.17.so
+00007fde4911a000     20K rw---   [ anon ]
+00007fde4911f000     92K r-x-- libgcc_s.so.1
+00007fde49136000   2044K ----- libgcc_s.so.1
+00007fde49335000      4K r---- libgcc_s.so.1
+00007fde49336000      4K rw--- libgcc_s.so.1
+00007fde49337000   1028K r-x-- libm-2.17.so
+00007fde49438000   2044K ----- libm-2.17.so
+00007fde49637000      4K r---- libm-2.17.so
+00007fde49638000      4K rw--- libm-2.17.so
+00007fde49639000   1828K r-x-- libstdc++.so.6.0.28
+00007fde49802000   2048K ----- libstdc++.so.6.0.28
+00007fde49a02000     44K r---- libstdc++.so.6.0.28
+00007fde49a0d000     12K rw--- libstdc++.so.6.0.28
+00007fde49a10000     12K rw---   [ anon ]
+00007fde49a13000     92K r-x-- libpthread-2.17.so
+00007fde49a2a000   2044K ----- libpthread-2.17.so
+00007fde49c29000      4K r---- libpthread-2.17.so
+00007fde49c2a000      4K rw--- libpthread-2.17.so
+00007fde49c2b000     16K rw---   [ anon ]
+00007fde49c2f000    196K r-x-- libjemalloc.so.1
+00007fde49c60000   2044K ----- libjemalloc.so.1
+00007fde49e5f000      8K r---- libjemalloc.so.1
+00007fde49e61000      4K rw--- libjemalloc.so.1
+00007fde49e62000      4K rw---   [ anon ]
+00007fde49e63000    192K r-x-- libtbb.so.2
+00007fde49e93000   2044K ----- libtbb.so.2
+00007fde4a092000      8K r---- libtbb.so.2
+00007fde4a094000      8K rw--- libtbb.so.2
+00007fde4a096000      8K rw---   [ anon ]
+00007fde4a098000    116K r-x-- libcombotree.so
+00007fde4a0b5000   2044K ----- libcombotree.so
+00007fde4a2b4000      4K r---- libcombotree.so
+00007fde4a2b5000      4K rw--- libcombotree.so
+00007fde4a2b6000     12K r-x-- libboost_system-mt.so.1.53.0
+00007fde4a2b9000   2044K ----- libboost_system-mt.so.1.53.0
+00007fde4a4b8000      4K r---- libboost_system-mt.so.1.53.0
+00007fde4a4b9000      4K rw--- libboost_system-mt.so.1.53.0
+00007fde4a4ba000     84K r-x-- libboost_thread-mt.so.1.53.0
+00007fde4a4cf000   2044K ----- libboost_thread-mt.so.1.53.0
+00007fde4a6ce000      8K r---- libboost_thread-mt.so.1.53.0
+00007fde4a6d0000      4K rw--- libboost_thread-mt.so.1.53.0
+00007fde4a6d1000     12K r-x-- libboost_system.so.1.53.0
+00007fde4a6d4000   2044K ----- libboost_system.so.1.53.0
+00007fde4a8d3000      4K r---- libboost_system.so.1.53.0
+00007fde4a8d4000      4K rw--- libboost_system.so.1.53.0
+00007fde4a8d5000     24K r-x-- libatomic.so.1.2.0
+00007fde4a8db000   2044K ----- libatomic.so.1.2.0
+00007fde4aada000      4K r---- libatomic.so.1.2.0
+00007fde4aadb000      4K rw--- libatomic.so.1.2.0
+00007fde4aadc000      4K rw---   [ anon ]
+00007fde4aadd000    136K r-x-- ld-2.17.so
+00007fde4acae000    200K rw---   [ anon ]
+00007fde4acfc000      8K rw---   [ anon ]
+00007fde4acfe000      4K r---- ld-2.17.so
+00007fde4acff000      4K rw--- ld-2.17.so
+00007fde4ad00000      4K rw---   [ anon ]
+00007ffef8101000    136K rw---   [ stack ]
+00007ffef81f2000      8K r-x--   [ anon ]
+ffffffffff600000      4K r-x--   [ anon ]
+ total         15786248K
+346986:   ./build/ycsb hot a 1
+0000000000400000    548K r-x-- ycsb
+0000000000688000      4K r---- ycsb
+0000000000689000      4K rw--- ycsb
+000000000068a000      4K rw---   [ anon ]
+00007f826d000000 34525184K rw---   [ anon ]
+00007f8aa87c7000   2048K rw---   [ anon ]
+00007f8aa89c7000     88K r-x-- libtbbmalloc.so.2
+00007f8aa89dd000   2048K ----- libtbbmalloc.so.2
+00007f8aa8bdd000      4K r---- libtbbmalloc.so.2
+00007f8aa8bde000      8K rw--- libtbbmalloc.so.2
+00007f8aa8be0000   8320K rw---   [ anon ]
+00007f8aa953b000     60K r-x-- libbz2.so.1.0.6
+00007f8aa954a000   2044K ----- libbz2.so.1.0.6
+00007f8aa9749000      4K r---- libbz2.so.1.0.6
+00007f8aa974a000      4K rw--- libbz2.so.1.0.6
+00007f8aa974b000     92K r-x-- libelf-0.176.so
+00007f8aa9762000   2044K ----- libelf-0.176.so
+00007f8aa9961000      4K r---- libelf-0.176.so
+00007f8aa9962000      4K rw--- libelf-0.176.so
+00007f8aa9963000     16K r-x-- libattr.so.1.1.0
+00007f8aa9967000   2044K ----- libattr.so.1.1.0
+00007f8aa9b66000      4K r---- libattr.so.1.1.0
+00007f8aa9b67000      4K rw--- libattr.so.1.1.0
+00007f8aa9b68000     84K r-x-- libz.so.1.2.7
+00007f8aa9b7d000   2044K ----- libz.so.1.2.7
+00007f8aa9d7c000      4K r---- libz.so.1.2.7
+00007f8aa9d7d000      4K rw--- libz.so.1.2.7
+00007f8aa9d7e000    148K r-x-- liblzma.so.5.2.2
+00007f8aa9da3000   2044K ----- liblzma.so.5.2.2
+00007f8aa9fa2000      4K r---- liblzma.so.5.2.2
+00007f8aa9fa3000      4K rw--- liblzma.so.5.2.2
+00007f8aa9fa4000    312K r-x-- libdw-0.176.so
+00007f8aa9ff2000   2048K ----- libdw-0.176.so
+00007f8aaa1f2000      8K r---- libdw-0.176.so
+00007f8aaa1f4000      4K rw--- libdw-0.176.so
+00007f8aaa1f5000     16K r-x-- libcap.so.2.22
+00007f8aaa1f9000   2044K ----- libcap.so.2.22
+00007f8aaa3f8000      4K r---- libcap.so.2.22
+00007f8aaa3f9000      4K rw--- libcap.so.2.22
+00007f8aaa3fa000     84K r-x-- libkmod.so.2.2.10
+00007f8aaa40f000   2044K ----- libkmod.so.2.2.10
+00007f8aaa60e000      4K r---- libkmod.so.2.2.10
+00007f8aaa60f000      4K rw--- libkmod.so.2.2.10
+00007f8aaa610000     16K r-x-- libuuid.so.1.3.0
+00007f8aaa614000   2044K ----- libuuid.so.1.3.0
+00007f8aaa813000      4K r---- libuuid.so.1.3.0
+00007f8aaa814000      4K rw--- libuuid.so.1.3.0
+00007f8aaa815000     80K r-x-- libudev.so.1.6.2
+00007f8aaa829000   2048K ----- libudev.so.1.6.2
+00007f8aaaa29000      4K r---- libudev.so.1.6.2
+00007f8aaaa2a000      4K rw--- libudev.so.1.6.2
+00007f8aaaa2b000    276K r-x-- libpmemobj.so.1.0.0
+00007f8aaaa70000   2048K ----- libpmemobj.so.1.0.0
+00007f8aaac70000      8K r---- libpmemobj.so.1.0.0
+00007f8aaac72000      4K rw--- libpmemobj.so.1.0.0
+00007f8aaac73000      4K rw---   [ anon ]
+00007f8aaac74000     16K r-x-- libdaxctl.so.1.2.1
+00007f8aaac78000   2044K ----- libdaxctl.so.1.2.1
+00007f8aaae77000      4K r---- libdaxctl.so.1.2.1
+00007f8aaae78000      4K rw--- libdaxctl.so.1.2.1
+00007f8aaae79000    128K r-x-- libndctl.so.6.13.0
+00007f8aaae99000   2048K ----- libndctl.so.6.13.0
+00007f8aab099000      4K r---- libndctl.so.6.13.0
+00007f8aab09a000      4K rw--- libndctl.so.6.13.0
+00007f8aab09b000      8K r-x-- libdl-2.17.so
+00007f8aab09d000   2048K ----- libdl-2.17.so
+00007f8aab29d000      4K r---- libdl-2.17.so
+00007f8aab29e000      4K rw--- libdl-2.17.so
+00007f8aab29f000    328K r-x-- libpmemkv.so.1
+00007f8aab2f1000   2048K ----- libpmemkv.so.1
+00007f8aab4f1000      4K r---- libpmemkv.so.1
+00007f8aab4f2000      4K rw--- libpmemkv.so.1
+00007f8aab4f3000   1736K r-x-- libpmem.so.1.0.0
+00007f8aab6a5000   2044K ----- libpmem.so.1.0.0
+00007f8aab8a4000      4K r---- libpmem.so.1.0.0
+00007f8aab8a5000      4K rw--- libpmem.so.1.0.0
+00007f8aab8a6000     28K r-x-- librt-2.17.so
+00007f8aab8ad000   2044K ----- librt-2.17.so
+00007f8aabaac000      4K r---- librt-2.17.so
+00007f8aabaad000      4K rw--- librt-2.17.so
+00007f8aabaae000   1804K r-x-- libc-2.17.so
+00007f8aabc71000   2048K ----- libc-2.17.so
+00007f8aabe71000     16K r---- libc-2.17.so
+00007f8aabe75000      8K rw--- libc-2.17.so
+00007f8aabe77000     20K rw---   [ anon ]
+00007f8aabe7c000     92K r-x-- libgcc_s.so.1
+00007f8aabe93000   2044K ----- libgcc_s.so.1
+00007f8aac092000      4K r---- libgcc_s.so.1
+00007f8aac093000      4K rw--- libgcc_s.so.1
+00007f8aac094000   1028K r-x-- libm-2.17.so
+00007f8aac195000   2044K ----- libm-2.17.so
+00007f8aac394000      4K r---- libm-2.17.so
+00007f8aac395000      4K rw--- libm-2.17.so
+00007f8aac396000   1828K r-x-- libstdc++.so.6.0.28
+00007f8aac55f000   2048K ----- libstdc++.so.6.0.28
+00007f8aac75f000     44K r---- libstdc++.so.6.0.28
+00007f8aac76a000     12K rw--- libstdc++.so.6.0.28
+00007f8aac76d000     12K rw---   [ anon ]
+00007f8aac770000     92K r-x-- libpthread-2.17.so
+00007f8aac787000   2044K ----- libpthread-2.17.so
+00007f8aac986000      4K r---- libpthread-2.17.so
+00007f8aac987000      4K rw--- libpthread-2.17.so
+00007f8aac988000     16K rw---   [ anon ]
+00007f8aac98c000    196K r-x-- libjemalloc.so.1
+00007f8aac9bd000   2044K ----- libjemalloc.so.1
+00007f8aacbbc000      8K r---- libjemalloc.so.1
+00007f8aacbbe000      4K rw--- libjemalloc.so.1
+00007f8aacbbf000      4K rw---   [ anon ]
+00007f8aacbc0000    192K r-x-- libtbb.so.2
+00007f8aacbf0000   2044K ----- libtbb.so.2
+00007f8aacdef000      8K r---- libtbb.so.2
+00007f8aacdf1000      8K rw--- libtbb.so.2
+00007f8aacdf3000      8K rw---   [ anon ]
+00007f8aacdf5000    116K r-x-- libcombotree.so
+00007f8aace12000   2044K ----- libcombotree.so
+00007f8aad011000      4K r---- libcombotree.so
+00007f8aad012000      4K rw--- libcombotree.so
+00007f8aad013000     12K r-x-- libboost_system-mt.so.1.53.0
+00007f8aad016000   2044K ----- libboost_system-mt.so.1.53.0
+00007f8aad215000      4K r---- libboost_system-mt.so.1.53.0
+00007f8aad216000      4K rw--- libboost_system-mt.so.1.53.0
+00007f8aad217000     84K r-x-- libboost_thread-mt.so.1.53.0
+00007f8aad22c000   2044K ----- libboost_thread-mt.so.1.53.0
+00007f8aad42b000      8K r---- libboost_thread-mt.so.1.53.0
+00007f8aad42d000      4K rw--- libboost_thread-mt.so.1.53.0
+00007f8aad42e000     12K r-x-- libboost_system.so.1.53.0
+00007f8aad431000   2044K ----- libboost_system.so.1.53.0
+00007f8aad630000      4K r---- libboost_system.so.1.53.0
+00007f8aad631000      4K rw--- libboost_system.so.1.53.0
+00007f8aad632000     24K r-x-- libatomic.so.1.2.0
+00007f8aad638000   2044K ----- libatomic.so.1.2.0
+00007f8aad837000      4K r---- libatomic.so.1.2.0
+00007f8aad838000      4K rw--- libatomic.so.1.2.0
+00007f8aad839000      4K rw---   [ anon ]
+00007f8aad83a000    136K r-x-- ld-2.17.so
+00007f8aada0b000    200K rw---   [ anon ]
+00007f8aada59000      8K rw---   [ anon ]
+00007f8aada5b000      4K r---- ld-2.17.so
+00007f8aada5c000      4K rw--- ld-2.17.so
+00007f8aada5d000      4K rw---   [ anon ]
+00007ffc1377d000    136K rw---   [ stack ]
+00007ffc137bf000      8K r-x--   [ anon ]
+ffffffffff600000      4K r-x--   [ anon ]
+ total         34607368K
