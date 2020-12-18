@@ -856,6 +856,8 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
         }
 
+        std::cout << "ComboTree Usage: " << human_readable(tree->Usage()) << std::endl;
+
         space_usage("combotree");
 
         {

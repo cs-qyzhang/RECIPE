@@ -1,4 +1,5 @@
 #include <mutex>
+#include <iomanip>
 #include <chrono>
 
 #define STAT_SPACE_USAGE
@@ -58,3 +59,27 @@ class StatLatency {
     inline __attribute__((always_inline)) void stop() {}
 };
 #endif
+
+// return human readable string of size
+std::string human_readable(double size) {
+  static const std::string suffix[] = {
+    "B",
+    "KB",
+    "MB",
+    "GB"
+  };
+  const int arr_len = 4;
+
+  std::ostringstream out;
+  out.precision(2);
+  for (int divs = 0; divs < arr_len; ++divs) {
+    if (size >= 1024.0) {
+      size /= 1024.0;
+    } else {
+      out << std::fixed << size;
+      return out.str() + suffix[divs];
+    }
+  }
+  out << std::fixed << size;
+  return out.str() + suffix[arr_len - 1];
+}
