@@ -845,12 +845,20 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
         {
             // Load
+            std::vector<std::thread> threads;
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    tree->Put(init_keys[i], init_keys[i]);
-                }
-            });
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                uint64_t start_key = LOAD_SIZE / num_thread * i;
+                uint64_t thread_size = (i != num_thread-1) ? (LOAD_SIZE/num_thread) : (LOAD_SIZE - (LOAD_SIZE/num_thread*(num_thread-1)));
+                uint64_t end_key = start_key + thread_size;
+                threads.emplace_back([=,&init_keys](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        tree->Put(init_keys[j], init_keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -862,37 +870,46 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
         {
             // Run
+            std::vector<std::thread> threads;
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    if (ops[i] == OP_INSERT) {
-                        tree->Put(keys[i], keys[i]);
-                    } else if (ops[i] == OP_READ) {
-                        uint64_t value;
-                        bool ret = tree->Get(keys[i], value);
-                        if (ret != true)
-                            printf("GET ERROR!\n");
-                    } else if (ops[i] == OP_SCAN) {
-                        uint64_t buf[200];
-                        int resultsFound = 0;
-                        uint64_t start_key = keys[i];
-                        combotree::ComboTree::NoSortIter iter(tree, start_key);
-                        for (size_t j = 0; j < ranges[i]; ++j) {
-                            if (iter.key() != iter.value())
-                                printf("SCAN ERROR!\n");
-                            iter.key() == iter.value();
-                            if (!iter.next())
-                                break;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                uint64_t start_key = RUN_SIZE / num_thread * i;
+                uint64_t thread_size = (i != num_thread-1) ? (RUN_SIZE/num_thread) : (RUN_SIZE - (RUN_SIZE/num_thread*(num_thread-1)));
+                uint64_t end_key = start_key + thread_size;
+                threads.emplace_back([=,&keys,&ops,&ranges](){
+                    uint64_t value;
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        if (ops[j] == OP_INSERT) {
+                            tree->Put(keys[j], keys[j]);
+                        } else if (ops[j] == OP_READ) {
+                            uint64_t value;
+                            bool ret = tree->Get(keys[j], value);
+                            if (ret != true)
+                                printf("GET ERROR!\n");
+                        } else if (ops[j] == OP_SCAN) {
+                            uint64_t buf[200];
+                            int resultsFound = 0;
+                            uint64_t start_key = keys[j];
+                            combotree::ComboTree::NoSortIter iter(tree, start_key);
+                            for (size_t k = 0; k < ranges[j]; ++k) {
+                                if (iter.key() != iter.value())
+                                    printf("SCAN ERROR!\n");
+                                iter.key() == iter.value();
+                                if (!iter.next())
+                                    break;
+                            }
+                        } else if (ops[j] == OP_UPDATE) {
+                            std::cout << "NOT SUPPORTED CMD!\n";
+                            exit(0);
                         }
-                    } else if (ops[i] == OP_UPDATE) {
-                        std::cout << "NOT SUPPORTED CMD!\n";
-                        exit(0);
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: run, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
+            printf("Throughput: run, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
         }
     }
 }
