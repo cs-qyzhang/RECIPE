@@ -10,6 +10,8 @@
 
 using namespace std;
 
+#define STAT_LATENCY
+
 #include "P-ART/Tree.h"
 #include "third-party/FAST_FAIR/btree.h"
 #include "third-party/CCEH/src/Level_hashing.h"
@@ -314,6 +316,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     range_complete.store(0);
     range_incomplete.store(0);
 
+    std::vector<std::pair<uint64_t,uint64_t>> rec_latency;
+#ifdef STAT_LATENCY
+    rec_latency.resize(LOAD_SIZE);
+#endif
+
     space_usage("before");
 
     if (index_type == TYPE_ART) {
@@ -325,8 +332,10 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 auto t = tree.getThreadInfo();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
+                    stat_latency_start();
                     Key *key = key->make_leaf(init_keys[i], sizeof(uint64_t), init_keys[i]);
                     tree.insert(key, t);
+                    stat_latency_stop(i);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -379,6 +388,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
+                    stat_latency_start();
                     IntKeyVal *key;
                     posix_memalign((void **)&key, 64, sizeof(IntKeyVal));
                     key->key = init_keys[i]; key->value = init_keys[i];
@@ -387,6 +397,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         fprintf(stderr, "[HOT] load insert fail\n");
                         exit(1);
                     }
+                    stat_latency_stop(i);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -448,7 +459,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
                 t->AssignGCID(thread_id);
                 for (uint64_t i = start_key; i < end_key; i++) {
+                    stat_latency_start();
                     t->Insert(init_keys[i], init_keys[i]);
+                    stat_latency_stop(i);
                 }
                 t->UnregisterThread(thread_id);
             };
@@ -529,7 +542,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 auto t = tree->getThreadInfo();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
+                    stat_latency_start();
                     tree->put(init_keys[i], &init_keys[i], t);
+                    stat_latency_stop(i);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -592,7 +607,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                 barrier_cross(&barrier);
 
                 for (uint64_t i = start_key; i < end_key; i++) {
+                    stat_latency_start();
                     clht_put(tds[thread_id].ht, init_keys[i], init_keys[i]);
+                    stat_latency_stop(i);
                 }
             };
 
@@ -666,7 +683,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
+                    stat_latency_start();
                     bt->btree_insert(init_keys[i], (char *) &init_keys[i]);
+                    stat_latency_stop(i);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -713,7 +732,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
+                    stat_latency_start();
                     table->Insert(init_keys[i], reinterpret_cast<const char*>(&init_keys[i]));
+                    stat_latency_stop(i);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -757,7 +778,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
+                    stat_latency_start();
                     table->Insert(init_keys[i], reinterpret_cast<const char*>(&init_keys[i]));
+                    stat_latency_stop(i);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -803,7 +826,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
+                    stat_latency_start();
                     woart_insert(t, init_keys[i], sizeof(uint64_t), &init_keys[i]);
+                    stat_latency_stop(i);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -851,9 +876,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                 uint64_t start_key = LOAD_SIZE / num_thread * i;
                 uint64_t thread_size = (i != num_thread-1) ? (LOAD_SIZE/num_thread) : (LOAD_SIZE - (LOAD_SIZE/num_thread*(num_thread-1)));
                 uint64_t end_key = start_key + thread_size;
-                threads.emplace_back([=,&init_keys](){
+                threads.emplace_back([=,&init_keys,&rec_latency](){
                     for (size_t j = start_key; j < end_key; ++j) {
+                        stat_latency_start();
                         tree->Put(init_keys[j], init_keys[j]);
+                        stat_latency_stop(j);
                     }
                 });
             }
@@ -912,6 +939,10 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             printf("Throughput: run, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
         }
     }
+
+#ifdef STAT_LATENCY
+    OutputLatency(rec_latency);
+#endif
 }
 
 int main(int argc, char **argv) {

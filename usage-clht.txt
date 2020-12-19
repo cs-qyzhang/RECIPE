@@ -1,0 +1,165 @@
+140416:   ./build/ycsb clht a 1
+000055c25534f000    104K r---- ycsb
+000055c255369000    432K r-x-- ycsb
+000055c2553d5000     52K r---- ycsb
+000055c2553e3000      8K r---- ycsb
+000055c2553e5000      4K rw--- ycsb
+000055c2553e6000      4K rw---   [ anon ]
+00007f3782300000  17408K rw---   [ anon ]
+00007f37835ff000      4K -----   [ anon ]
+00007f3783600000   8192K rw---   [ anon ]
+00007f3783e00000 3678208K rw---   [ anon ]
+00007f38647a1000   6160K rw---   [ anon ]
+00007f3864da5000    216K r-x-- libtbbmalloc.so.2
+00007f3864ddb000   2048K ----- libtbbmalloc.so.2
+00007f3864fdb000      4K r---- libtbbmalloc.so.2
+00007f3864fdc000     12K rw--- libtbbmalloc.so.2
+00007f3864fdf000    132K rw---   [ anon ]
+00007f3865000000  16384K rw---   [ anon ]
+00007f3866018000    368K rw---   [ anon ]
+00007f3866074000    480K r---- libcrypto.so.1.1
+00007f38660ec000   1644K r-x-- libcrypto.so.1.1
+00007f3866287000    580K r---- libcrypto.so.1.1
+00007f3866318000    176K r---- libcrypto.so.1.1
+00007f3866344000      8K rw--- libcrypto.so.1.1
+00007f3866346000     16K rw---   [ anon ]
+00007f386634a000     12K r---- liblzma.so.5.2.4
+00007f386634d000     96K r-x-- liblzma.so.5.2.4
+00007f3866365000     44K r---- liblzma.so.5.2.4
+00007f3866370000      4K ----- liblzma.so.5.2.4
+00007f3866371000      4K r---- liblzma.so.5.2.4
+00007f3866372000      4K rw--- liblzma.so.5.2.4
+00007f3866373000      8K rw---   [ anon ]
+00007f3866375000     12K r---- libkmod.so.2.3.5
+00007f3866378000     64K r-x-- libkmod.so.2.3.5
+00007f3866388000     24K r---- libkmod.so.2.3.5
+00007f386638e000      4K r---- libkmod.so.2.3.5
+00007f386638f000      4K rw--- libkmod.so.2.3.5
+00007f3866390000      8K r---- libuuid.so.1.3.0
+00007f3866392000     16K r-x-- libuuid.so.1.3.0
+00007f3866396000      4K r---- libuuid.so.1.3.0
+00007f3866397000      4K r---- libuuid.so.1.3.0
+00007f3866398000      4K rw--- libuuid.so.1.3.0
+00007f3866399000     20K r---- libudev.so.1.6.17
+00007f386639e000    112K r-x-- libudev.so.1.6.17
+00007f38663ba000     40K r---- libudev.so.1.6.17
+00007f38663c4000      4K r---- libudev.so.1.6.17
+00007f38663c5000      4K rw--- libudev.so.1.6.17
+00007f38663c6000     12K r---- libnuma.so.1.0.0
+00007f38663c9000     20K r-x-- libnuma.so.1.0.0
+00007f38663ce000      8K r---- libnuma.so.1.0.0
+00007f38663d0000      4K ----- libnuma.so.1.0.0
+00007f38663d1000      4K r---- libnuma.so.1.0.0
+00007f38663d2000      4K rw--- libnuma.so.1.0.0
+00007f38663d3000      8K r---- libdaxctl.so.1.4.0
+00007f38663d5000     16K r-x-- libdaxctl.so.1.4.0
+00007f38663d9000      8K r---- libdaxctl.so.1.4.0
+00007f38663db000      4K r---- libdaxctl.so.1.4.0
+00007f38663dc000      4K rw--- libdaxctl.so.1.4.0
+00007f38663dd000      8K rw---   [ anon ]
+00007f38663df000     32K r---- libndctl.so.6.16.0
+00007f38663e7000     68K r-x-- libndctl.so.6.16.0
+00007f38663f8000     32K r---- libndctl.so.6.16.0
+00007f3866400000      4K r---- libndctl.so.6.16.0
+00007f3866401000      4K rw--- libndctl.so.6.16.0
+00007f3866402000     44K r---- libmemkind.so.0.0.1
+00007f386640d000    496K r-x-- libmemkind.so.0.0.1
+00007f3866489000     72K r---- libmemkind.so.0.0.1
+00007f386649b000     24K r---- libmemkind.so.0.0.1
+00007f38664a1000     12K rw--- libmemkind.so.0.0.1
+00007f38664a4000   2156K rw---   [ anon ]
+00007f38666bf000     28K r---- libpmemobj.so.1.0.0
+00007f38666c6000    184K r-x-- libpmemobj.so.1.0.0
+00007f38666f4000     68K r---- libpmemobj.so.1.0.0
+00007f3866705000      4K ----- libpmemobj.so.1.0.0
+00007f3866706000      8K r---- libpmemobj.so.1.0.0
+00007f3866708000      4K rw--- libpmemobj.so.1.0.0
+00007f3866709000      4K rw---   [ anon ]
+00007f386670a000     12K r---- librt-2.31.so
+00007f386670d000     16K r-x-- librt-2.31.so
+00007f3866711000      4K r---- librt-2.31.so
+00007f3866712000      4K ----- librt-2.31.so
+00007f3866713000      4K r---- librt-2.31.so
+00007f3866714000      4K rw--- librt-2.31.so
+00007f3866715000      4K r---- libdl-2.31.so
+00007f3866716000      8K r-x-- libdl-2.31.so
+00007f3866718000      4K r---- libdl-2.31.so
+00007f3866719000      4K r---- libdl-2.31.so
+00007f386671a000      4K rw--- libdl-2.31.so
+00007f386671b000      8K rw---   [ anon ]
+00007f386671d000     24K r---- libpmemkv.so.1
+00007f3866723000    156K r-x-- libpmemkv.so.1
+00007f386674a000     44K r---- libpmemkv.so.1
+00007f3866755000      8K r---- libpmemkv.so.1
+00007f3866757000      4K rw--- libpmemkv.so.1
+00007f3866758000     12K r---- libpmem.so.1.0.0
+00007f386675b000    236K r-x-- libpmem.so.1.0.0
+00007f3866796000     20K r---- libpmem.so.1.0.0
+00007f386679b000      4K r---- libpmem.so.1.0.0
+00007f386679c000      4K rw--- libpmem.so.1.0.0
+00007f386679d000    148K r---- libc-2.31.so
+00007f38667c2000   1504K r-x-- libc-2.31.so
+00007f386693a000    296K r---- libc-2.31.so
+00007f3866984000      4K ----- libc-2.31.so
+00007f3866985000     12K r---- libc-2.31.so
+00007f3866988000     12K rw--- libc-2.31.so
+00007f386698b000     16K rw---   [ anon ]
+00007f386698f000     12K r---- libgcc_s.so.1
+00007f3866992000     72K r-x-- libgcc_s.so.1
+00007f38669a4000     16K r---- libgcc_s.so.1
+00007f38669a8000      4K r---- libgcc_s.so.1
+00007f38669a9000      4K rw--- libgcc_s.so.1
+00007f38669aa000     60K r---- libm-2.31.so
+00007f38669b9000    668K r-x-- libm-2.31.so
+00007f3866a60000    604K r---- libm-2.31.so
+00007f3866af7000      4K r---- libm-2.31.so
+00007f3866af8000      4K rw--- libm-2.31.so
+00007f3866af9000    600K r---- libstdc++.so.6.0.28
+00007f3866b8f000    960K r-x-- libstdc++.so.6.0.28
+00007f3866c7f000    292K r---- libstdc++.so.6.0.28
+00007f3866cc8000      4K ----- libstdc++.so.6.0.28
+00007f3866cc9000     44K r---- libstdc++.so.6.0.28
+00007f3866cd4000     12K rw--- libstdc++.so.6.0.28
+00007f3866cd7000     12K rw---   [ anon ]
+00007f3866cda000     28K r---- libpthread-2.31.so
+00007f3866ce1000     68K r-x-- libpthread-2.31.so
+00007f3866cf2000     20K r---- libpthread-2.31.so
+00007f3866cf7000      4K r---- libpthread-2.31.so
+00007f3866cf8000      4K rw--- libpthread-2.31.so
+00007f3866cf9000     24K rw---   [ anon ]
+00007f3866cff000     28K r---- libjemalloc.so.2
+00007f3866d06000    612K r-x-- libjemalloc.so.2
+00007f3866d9f000     64K r---- libjemalloc.so.2
+00007f3866daf000      4K ----- libjemalloc.so.2
+00007f3866db0000     20K r---- libjemalloc.so.2
+00007f3866db5000      4K rw--- libjemalloc.so.2
+00007f3866db6000   2196K rw---   [ anon ]
+00007f3866fdb000    384K r-x-- libtbb.so.2
+00007f386703b000   2048K ----- libtbb.so.2
+00007f386723b000      4K r---- libtbb.so.2
+00007f386723c000     20K rw--- libtbb.so.2
+00007f3867241000      8K rw---   [ anon ]
+00007f3867243000    132K r---- libcombotree.so
+00007f3867264000    160K r-x-- libcombotree.so
+00007f386728c000     44K r---- libcombotree.so
+00007f3867297000      4K ----- libcombotree.so
+00007f3867298000      4K r---- libcombotree.so
+00007f3867299000      8K rw--- libcombotree.so
+00007f386729b000      8K r---- libatomic.so.1.2.0
+00007f386729d000     12K r-x-- libatomic.so.1.2.0
+00007f38672a0000      8K r---- libatomic.so.1.2.0
+00007f38672a2000      4K r---- libatomic.so.1.2.0
+00007f38672a3000      4K rw--- libatomic.so.1.2.0
+00007f38672a4000      4K rw---   [ anon ]
+00007f38672cc000      8K rw---   [ anon ]
+00007f38672ce000      4K r---- ld-2.31.so
+00007f38672cf000    140K r-x-- ld-2.31.so
+00007f38672f2000     32K r---- ld-2.31.so
+00007f38672fb000      4K r---- ld-2.31.so
+00007f38672fc000      4K rw--- ld-2.31.so
+00007f38672fd000      4K rw---   [ anon ]
+00007ffe6150e000    140K rw---   [ stack ]
+00007ffe615d9000     12K r----   [ anon ]
+00007ffe615dc000      4K r-x--   [ anon ]
+ffffffffff600000      4K --x--   [ anon ]
+ total          3748724K

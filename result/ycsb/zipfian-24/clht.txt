@@ -1,0 +1,12 @@
+clht, workloada, threads 24
+Throughput: load, 3.845183 ,ops/us
+Throughput: run, 15.493811 ,ops/us
+[GCOLLE-99] collected: 9   | took:   56077026352 ti = 26.703346 s
+clht, workloadb, threads 24
+Throughput: load, 3.808936 ,ops/us
+Throughput: run, 44.117388 ,ops/us
+[GCOLLE-99] collected: 9   | took:   56609211876 ti = 26.956768 s
+clht, workloadc, threads 24
+Throughput: load, 3.891037 ,ops/us
+Throughput: run, 64.186500 ,ops/us
+[GCOLLE-99] collected: 9   | took:   55550487394 ti = 26.452613 s

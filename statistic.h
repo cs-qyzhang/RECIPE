@@ -1,6 +1,7 @@
 #include <mutex>
 #include <iomanip>
 #include <chrono>
+#include <sys/time.h>
 
 #define STAT_SPACE_USAGE
 // #undef STAT_LATENCY
@@ -17,47 +18,38 @@ void space_usage(std::string name) {}
 #endif
 
 #ifdef STAT_LATENCY
-std::mutex stat_latency_lock;
-std::vector<double> latency;
-class StatLatency {
-  public:
-    StatLatency(size_t record_interval = 1000)
-        : record_interval_(record_interval), cnt_(0) {}
+#define LATENCY_INTERVAL 10000
 
-    inline __attribute__((always_inline)) void start() {
-        if (cnt_++ == 0) {
-            start_time_ = std::chrono::high_resolution_clock::now();
-        }
+uint64_t GetMilliseconds() {
+  struct timeval tp;
+  gettimeofday(&tp, NULL);
+  return tp.tv_sec * 1000 + tp.tv_usec / 1000;
+}
+
+#define stat_latency_start()  uint64_t begin_millisec = GetMilliseconds()
+#define stat_latency_stop(i) rec_latency[i].first = begin_millisec;\
+                                            rec_latency[i].second = (GetMilliseconds()-begin_millisec)
+
+void OutputLatency(std::vector<std::pair<uint64_t,uint64_t>> &latency) {
+  std::sort(latency.begin(), latency.end());
+  std::cout << latency.size() << std::endl;
+  std::ofstream out("latency.txt");
+  if (!out.good()) {
+    std::cout << "can't open latency.txt!" << std::endl;
+  } else {
+    uint64_t sum = 0;
+    for (uint64_t i = 0; i < latency.size(); ++i) {
+      sum += latency[i].second;
+      if (((i+1) % LATENCY_INTERVAL) == 0) {
+        out << (double)sum / (double)LATENCY_INTERVAL << std::endl;
+        sum = 0;
+      }
     }
-
-    inline __attribute__((always_inline)) void stop() {
-        if (cnt_ == record_interval_) {
-            auto stop_time = std::chrono::high_resolution_clock::now();
-            cnt_ = 0;
-            double lat = std::chrono::duration_cast<std::chrono::microseconds>(
-                            stop_time-start_time_).count();
-            latency_.push_back(lat);
-            stat_latency_lock.lock();
-            latency.push_back(lat);
-            stat_latency_lock.unlock();
-        }
-    }
-
-  private:
-    std::vector<double> latency_;
-    size_t record_interval_;
-    size_t cnt_;
-    std::chrono::high_resolution_clock::time_point start_time_;
-};
-#else
-class StatLatency {
-  public:
-    StatLatency(size_t record_interval = 1000);
-
-    inline __attribute__((always_inline)) void start() {}
-
-    inline __attribute__((always_inline)) void stop() {}
-};
+  }
+}
+#else // STAT_LATENCY
+#define stat_latency_start()
+#define stat_latency_stop(i)
 #endif
 
 // return human readable string of size

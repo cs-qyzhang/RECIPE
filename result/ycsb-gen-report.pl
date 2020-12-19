@@ -16,7 +16,7 @@ my $prog = "prog";
 chomp(@lines = <>);
 
 foreach (@lines) {
-    if (/(.+), workloada, threads (\d+)/) {
+    if (/(.+), workload([a-f]), threads 48/) {
         if ($prog ne $1) {
             $row = $row + 2;
             $prog = $1;
@@ -25,9 +25,9 @@ foreach (@lines) {
         } else {
             $col++;
         }
-        $thread = $2;
-        $worksheet->write($row-1, $col, $thread);
-    } elsif (/Throughput: get, (\d+(?:\.\d+)?) ,ops/) {
+        $workload = $2;
+        $worksheet->write($row-1, $col, $workload);
+    } elsif (/Throughput: run, (\d+(?:\.\d+)?) ,ops/) {
         $worksheet->write($row, $col, "$1");
     }
 }

@@ -1,0 +1,14 @@
+clht, workloada, threads 48
+Throughput: load, 1.264517 ,ops/us
+[CLHT] wrong key read: 0expected: 1741226800284925071
+clht, workloadb, threads 48
+Throughput: load, 1.273135 ,ops/us
+Throughput: run, 40.606828 ,ops/us
+[GCOLLE-99] collected: 10  | took:  218029624446 ti = 103.823631 s
+clht, workloadc, threads 48
+Throughput: load, 1.261975 ,ops/us
+Throughput: run, 47.918424 ,ops/us
+[GCOLLE-99] collected: 10  | took:  217638820406 ti = 103.637534 s
+clht, workloadd, threads 48
+Throughput: load, 1.273602 ,ops/us
+[CLHT] wrong key read: 0expected: 2435231524686472372
