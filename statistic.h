@@ -20,15 +20,15 @@ void space_usage(std::string name) {}
 #ifdef STAT_LATENCY
 #define LATENCY_INTERVAL 10000
 
-uint64_t GetMilliseconds() {
+uint64_t GetMicroseconds() {
   struct timeval tp;
   gettimeofday(&tp, NULL);
-  return tp.tv_sec * 1000 + tp.tv_usec / 1000;
+  return tp.tv_sec * 1000000 + tp.tv_usec;
 }
 
-#define stat_latency_start()  uint64_t begin_millisec = GetMilliseconds()
-#define stat_latency_stop(i) rec_latency[i].first = begin_millisec;\
-                                            rec_latency[i].second = (GetMilliseconds()-begin_millisec)
+#define stat_latency_start()  uint64_t begin_microsec = GetMicroseconds()
+#define stat_latency_stop(i) rec_latency[i].first = begin_microsec;\
+                                            rec_latency[i].second = (GetMicroseconds()-begin_microsec)
 
 void OutputLatency(std::vector<std::pair<uint64_t,uint64_t>> &latency) {
   std::sort(latency.begin(), latency.end());
