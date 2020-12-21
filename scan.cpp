@@ -28,6 +28,8 @@ using namespace std;
 #include <idx/contenthelpers/OptionalValue.hpp>
 #endif
 
+#undef STAT_LATENCY
+
 using namespace wangziqi2013::bwtree;
 
 // index types
@@ -310,7 +312,7 @@ void ycsb_load_run_randint(int index_type, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 auto t = tree.getThreadInfo();
-                Key **results = new Key*[range+1];
+                Key **results = new Key*[range];
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
                     Key *continueKey = NULL;
                     size_t resultsFound = 0;
@@ -409,8 +411,8 @@ void ycsb_load_run_randint(int index_type, int num_thread,
                 uint64_t end_key = start_key + RUN_SIZE / num_thread;
 
                 t->AssignGCID(thread_id);
+                uint64_t* buf = new uint64_t[range];
                 for (uint64_t i = start_key; i < end_key; i++) {
-                    uint64_t* buf = new uint64_t[range];
                     auto it = t->Begin(keys[i]);
 
                     int resultsFound = 0;
@@ -457,8 +459,8 @@ void ycsb_load_run_randint(int index_type, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 auto t = tree->getThreadInfo();
+                uint64_t* buf = new uint64_t[range];
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    uint64_t* buf = new uint64_t[range];
                     int ret = tree->scan(keys[i], range, buf, t);
                 }
             });
@@ -486,10 +488,10 @@ void ycsb_load_run_randint(int index_type, int num_thread,
             // Run
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
+                uint64_t* buf = new uint64_t[range];
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                        uint64_t* buf = new uint64_t[range];
-                        int resultsFound = 0;
-                        bt->btree_search_range (keys[i], UINT64_MAX, buf, range, resultsFound);
+                    int resultsFound = 0;
+                    bt->btree_search_range (keys[i], UINT64_MAX, buf, range, resultsFound);
                 }
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
@@ -518,8 +520,8 @@ void ycsb_load_run_randint(int index_type, int num_thread,
             // Run
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
+                unsigned long* buf = new unsigned long[range];
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    unsigned long* buf = new unsigned long[range];
                     woart_scan(t, keys[i], range, buf);
                 }
             });
@@ -562,14 +564,14 @@ void ycsb_load_run_randint(int index_type, int num_thread,
                 uint64_t start_key = RUN_SIZE / num_thread * i;
                 uint64_t thread_size = (i != num_thread-1) ? (RUN_SIZE/num_thread) : (RUN_SIZE - (RUN_SIZE/num_thread*(num_thread-1)));
                 uint64_t end_key = start_key + thread_size;
+                uint64_t* buf = new uint64_t[range];
                 threads.emplace_back([=,&keys,&ops](){
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
                         uint64_t start_key = keys[j];
                         combotree::ComboTree::NoSortIter iter(tree, start_key);
                         for (size_t k = 0; k < range; ++k) {
-                            if (iter.key() != iter.value())
-                                printf("SCAN ERROR!\n");
+                            buf[k] = iter.key();
                             if (!iter.next())
                                 break;
                         }
