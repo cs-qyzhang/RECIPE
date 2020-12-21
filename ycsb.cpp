@@ -871,13 +871,13 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             std::vector<std::thread> threads;
-            int combotree_wait_cnt = 0;
+            std::atomic<int> wait_cnt = 0;
             auto starttime = std::chrono::high_resolution_clock::now();
             for (uint64_t i = 0; i < num_thread; ++i) {
                 uint64_t start_key = LOAD_SIZE / num_thread * i;
                 uint64_t thread_size = (i != num_thread-1) ? (LOAD_SIZE/num_thread) : (LOAD_SIZE - (LOAD_SIZE/num_thread*(num_thread-1)));
                 uint64_t end_key = start_key + thread_size;
-                threads.emplace_back([=,&init_keys,&rec_latency](){
+                threads.emplace_back([=,&init_keys,&rec_latency,&wait_cnt](){
                     for (size_t j = start_key; j < end_key; ++j) {
                         stat_latency_start();
                         tree->Put(init_keys[j], init_keys[j]);
@@ -886,7 +886,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         // some thread sleep when expanding
                         if (rec_latency[j].second > 1500) {
                             rec_latency[j].second = 3;
-                            combotree_wait_cnt++;
+                            wait_cnt++;
                         }
 #endif
                     }
@@ -898,7 +898,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
 #ifdef STAT_LATENCY
-            printf("ComboTree very large latency count: %d\n", combotree_wait_cnt);
+            printf("ComboTree very large latency count: %d\n", wait_cnt);
 #endif
         }
 
