@@ -898,7 +898,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
 #ifdef STAT_LATENCY
-            printf("ComboTree very large latency count: %d\n", wait_cnt);
+            printf("ComboTree very large latency count: %d\n", wait_cnt.load());
 #endif
         }
 
