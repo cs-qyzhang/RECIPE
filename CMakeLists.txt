@@ -123,3 +123,7 @@ target_link_libraries(get_put_bench Indexes atomic boost_system boost_thread com
 add_executable(delete_bench delete_bench.cpp)
 target_link_directories(delete_bench PUBLIC ${ComboTree_DIR}/build)
 target_link_libraries(delete_bench Indexes atomic boost_system boost_thread combotree)
+
+add_executable(scan scan.cpp)
+target_link_directories(scan PUBLIC ${ComboTree_DIR}/build)
+target_link_libraries(scan Indexes atomic boost_system boost_thread combotree)
