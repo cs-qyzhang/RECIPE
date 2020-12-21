@@ -881,6 +881,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         stat_latency_start();
                         tree->Put(init_keys[j], init_keys[j]);
                         stat_latency_stop(j);
+                        // some thread sleep when expanding
+                        if (rec_latency[j].second > 1000)
+                            rec_latency[j].second = 3;
                     }
                 });
             }
