@@ -458,7 +458,7 @@ void ycsb_load_run_randint(int index_type, int num_thread,
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 auto t = tree->getThreadInfo();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    uint64_t buf = new uint64_t[range];
+                    uint64_t* buf = new uint64_t[range];
                     int ret = tree->scan(keys[i], range, buf, t);
                 }
             });
