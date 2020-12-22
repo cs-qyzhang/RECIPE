@@ -61,6 +61,7 @@ enum {
     WORKLOAD_D,
     WORKLOAD_E,
     WORKLOAD_F,
+    WORKLOAD_LOAD,
 };
 
 namespace Dummy {
@@ -253,6 +254,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     } else if (wl == WORKLOAD_F) {
         init_file = "./index-microbench/workloads/loadf_unif_int.dat";
         txn_file = "./index-microbench/workloads/txnsf_unif_int.dat";
+    } else if (wl == WORKLOAD_LOAD) {
+        init_file = "./index-microbench/workloads/loadload_unif_int.dat";
+        txn_file = "./index-microbench/workloads/txnsload_unif_int.dat";
     }
 
     std::ifstream infile_load(init_file);
@@ -884,8 +888,8 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         stat_latency_stop(j);
 #ifdef STAT_LATENCY
                         // some thread sleep when expanding
-                        if (rec_latency[j].second > 1500) {
-                            rec_latency[j].second = 3;
+                        if (rec_latency[j].second > 10000) {
+                            // rec_latency[j].second = 3;
                             wait_cnt++;
                         }
 #endif
@@ -1007,6 +1011,8 @@ int main(int argc, char **argv) {
         wl = WORKLOAD_D;
     } else if (strcmp(argv[2], "e") == 0) {
         wl = WORKLOAD_E;
+    } else if (strcmp(argv[2], "load") == 0) {
+        wl = WORKLOAD_LOAD;
     } else {
         fprintf(stderr, "Unknown workload: %s\n", argv[2]);
         exit(1);
