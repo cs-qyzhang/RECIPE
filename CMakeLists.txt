@@ -114,7 +114,7 @@ set(YCSB_TEST ycsb.cpp)
 add_executable(ycsb ${YCSB_TEST})
 
 target_link_directories(ycsb PUBLIC ${ComboTree_DIR}/build)
-target_link_libraries(ycsb Indexes atomic boost_system boost_thread combotree)
+target_link_libraries(ycsb Indexes atomic boost_system boost_thread combotree papi)
 
 add_executable(get_put_bench get_put_bench.cpp)
 target_link_directories(get_put_bench PUBLIC ${ComboTree_DIR}/build)
