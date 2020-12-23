@@ -11,6 +11,7 @@
 using namespace std;
 
 #define STAT_LATENCY
+#define STAT_PAPI
 
 #include "P-ART/Tree.h"
 #include "third-party/FAST_FAIR/btree.h"
@@ -23,6 +24,7 @@ using namespace std;
 #include "ssmem.h"
 #include "combotree/combotree.h"
 #include "statistic.h"
+#include "papi_llc_cache_miss.h"
 
 #ifdef HOT
 #include <hot/rowex/HOTRowex.hpp>
@@ -323,6 +325,13 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     std::vector<std::pair<uint64_t,uint64_t>> rec_latency;
 #ifdef STAT_LATENCY
     rec_latency.resize(LOAD_SIZE);
+#endif
+
+#ifdef STAT_PAPI
+    long long* load_count  = new long long[num_thread];
+    long long* store_count = new long long[num_thread];
+    long long* llc_access  = new long long[num_thread];
+    long long* llc_miss    = new long long[num_thread];
 #endif
 
     space_usage("before");
@@ -919,6 +928,8 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                 uint64_t thread_size = (i != num_thread-1) ? (RUN_SIZE/num_thread) : (RUN_SIZE - (RUN_SIZE/num_thread*(num_thread-1)));
                 uint64_t end_key = start_key + thread_size;
                 threads.emplace_back([=,&keys,&ops,&ranges](){
+                    CacheMissStat cache_stat;
+                    cache_stat.Start();
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
                         if (ops[j] == OP_INSERT) {
@@ -945,6 +956,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                             exit(0);
                         }
                     }
+                    cache_stat.Stop();
+                    load_count[i] = cache_stat.GetLoadCount();
+                    store_count[i] = cache_stat.GetStoreCount();
+                    llc_access[i] = cache_stat.GetL3AccessCount();
+                    llc_miss[i] = cache_stat.GetL3MissCount();
                 });
             }
             for (auto& t : threads)
@@ -952,6 +968,31 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: run, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
+
+            long long total_load_count = 0;
+            long long total_store_count = 0;
+            long long total_llc_access = 0;
+            long long total_llc_miss = 0;
+            for (int i = 0; i < num_thread; ++i) {
+                total_load_count += load_count[i];
+                total_store_count += store_count[i];
+                total_llc_access += llc_access[i];
+                total_llc_miss += llc_miss[i];
+
+                std::cout << "Thread " << i << ":" << std::endl;
+                std::cout << "Load Instructions:  " << load_count[i] << std::endl;
+                std::cout << "Store Instructions: " << store_count[i] << std::endl;
+                std::cout << "L3 Cache Access:    " << llc_access[i] << std::endl;
+                std::cout << "L3 Cache Misses:    " << llc_miss[i] << std::endl;
+                std::cout << "L3 Cache Miss Rate: " << (double)llc_miss[i] / (double)llc_access[i] * 100.0 << "%" << std::endl;
+                std::cout << std::endl;
+            }
+            std::cout << "Total:" << std::endl;
+            std::cout << "Load Instructions:  " << total_load_count << std::endl;
+            std::cout << "Store Instructions: " << total_store_count << std::endl;
+            std::cout << "L3 Cache Access:    " << total_llc_access << std::endl;
+            std::cout << "L3 Cache Misses:    " << total_llc_miss << std::endl;
+            std::cout << "L3 Cache Miss Rate: " << (double)total_llc_miss / (double)total_llc_access * 100.0 << "%" << std::endl;
         }
     }
 
@@ -1038,7 +1079,17 @@ int main(int argc, char **argv) {
 
     printf("%s, workload%s, threads %s\n", argv[1], argv[2], argv[3]);
 
+#ifdef STAT_PAPI
+    if(PAPI_library_init(PAPI_VER_CURRENT) != PAPI_VER_CURRENT) {
+        std::cerr << "PAPI_library_init ERROR!" << std::endl;
+        return -1;
+    }
+#endif
+
     ycsb_load_run_randint(index_type, wl, num_thread, init_keys, keys, ranges, ops);
 
+#ifdef STAT_PAPI
+    PAPI_shutdown();
+#endif
     return 0;
 }
