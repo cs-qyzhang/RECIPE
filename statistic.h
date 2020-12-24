@@ -3,9 +3,6 @@
 #include <chrono>
 #include <sys/time.h>
 
-#define STAT_SPACE_USAGE
-// #undef STAT_LATENCY
-
 #ifdef STAT_SPACE_USAGE
 void space_usage(std::string name) {
     int pid = getpid();

@@ -10,8 +10,9 @@
 
 using namespace std;
 
-#define STAT_LATENCY
+// #define STAT_LATENCY
 #define STAT_PAPI
+#define STAT_SPACE_USAGE
 
 #include "P-ART/Tree.h"
 #include "third-party/FAST_FAIR/btree.h"
@@ -1100,6 +1101,18 @@ int main(int argc, char **argv) {
     memset(&ops[0], 0x00, RUN_SIZE * sizeof(int));
 
     printf("%s, workload%s, threads %s\n", argv[1], argv[2], argv[3]);
+
+#ifdef STAT_PAPI
+    std::cout << "STAT_PAPI enabled" << std::endl;
+#endif
+
+#ifdef STAT_SPACE_USAGE
+    std::cout << "STAT_SPACE_USAGE enabled" << std::endl;
+#endif
+
+#ifdef STAT_LATENCY
+    std::cout << "STAT_LATENCY enabled" << std::endl;
+#endif
 
 #ifdef STAT_PAPI
     if(PAPI_library_init(PAPI_VER_CURRENT) != PAPI_VER_CURRENT) {
