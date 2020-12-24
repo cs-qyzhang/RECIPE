@@ -24,14 +24,43 @@ const int NUM_EVENTS = sizeof(event_list) / sizeof(int);
 
 class CacheMissStat {
  public:
-  CacheMissStat() {
+  CacheMissStat() : event_set_(PAPI_NULL) {
+    int retval;
+
+    /* Creating the eventset */
+    if ( (retval = PAPI_create_eventset(&event_set_)) != PAPI_OK)
+      ERROR_RETURN(retval);
+
+    // If any of the required events do not exist we just exit
+    for(int i = 0; i < NUM_EVENTS; i++) {
+      if(PAPI_query_event(event_list[i]) != PAPI_OK) {
+        std::cerr << "ERROR: PAPI event " << i << "ed is not supported" << std::endl;
+        exit(1);
+      }
+    }
+
+    for (int i = 0; i < NUM_EVENTS; ++i) {
+      if ( (retval = PAPI_add_event(event_set_, event_list[i])) != PAPI_OK)
+        ERROR_RETURN(retval);
+    }
+
+    /* get the number of events in the event set */
+    int number = 0;
+    if ( (retval = PAPI_list_events(event_set_, NULL, &number)) != PAPI_OK)
+      ERROR_RETURN(retval);
+
+    if (number != NUM_EVENTS) {
+      fprintf(stderr, "There are %d events in the event set\n", number);
+      exit(-1);
+    }
+
     for (int i = 0; i < NUM_EVENTS; ++i)
       values_[i] = 0;
   }
 
   void Start() {
     int retval;
-    if ( (retval = PAPI_start_counters((int*)event_list, NUM_EVENTS)) != PAPI_OK)
+    if ( (retval = PAPI_start(event_set_)) != PAPI_OK)
       ERROR_RETURN(retval);
   }
 
@@ -55,6 +84,7 @@ class CacheMissStat {
   }
 
  private:
+  int event_set_;
   long long values_[NUM_EVENTS];
 };
 #endif

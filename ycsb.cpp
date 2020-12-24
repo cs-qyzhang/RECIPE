@@ -6,7 +6,6 @@
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
-#include "tbb/tbb.h"
 
 using namespace std;
 
@@ -1010,7 +1009,6 @@ int main(int argc, char **argv) {
     }
 
     int num_thread = atoi(argv[3]);
-    tbb::task_scheduler_init init(num_thread);
 
     std::vector<uint64_t> init_keys;
     std::vector<uint64_t> keys;
