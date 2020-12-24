@@ -81,5 +81,5 @@ struct PerfEvent {
 
 #if !defined(STAT_PERF) && !defined(STAT_PAPI)
 #define llc_stat_start()
-#define llc_stat_stop(i)
+#define llc_stat_stop()
 #endif
