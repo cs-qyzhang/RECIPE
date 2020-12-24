@@ -9,6 +9,14 @@
 #include <linux/perf_event.h>
 #include <asm/unistd.h>
 
+#ifdef STAT_PERF
+#define llc_stat_start() PerfEvent perf;perf.Start();
+#define llc_stat_stop() perf.Stop();  \
+                        std::cout << "Read Access:  " << perf.ReadAccess() << std::endl;\
+                        std::cout << "Read Miss:    " << perf.ReadMiss() << std::endl;\
+                        std::cout << "Write Access: " << perf.WriteAccess() << std::endl;\
+                        std::cout << "Write Miss:   " << perf.WriteMiss() << std::endl;
+
 static long perf_event_open(struct perf_event_attr *hw_event, pid_t pid,
                             int cpu, int group_fd, unsigned long flags) {
   return syscall(__NR_perf_event_open, hw_event, pid, cpu, group_fd, flags);
@@ -68,3 +76,10 @@ struct PerfEvent {
   long long WriteAccess() { return count[2]; }
   long long WriteMiss()   { return count[3]; }
 };
+
+#endif
+
+#if !defined(STAT_PERF) && !defined(STAT_PAPI)
+#define llc_stat_start()
+#define llc_stat_stop(i)
+#endif

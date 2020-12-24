@@ -1,3 +1,5 @@
+#define STAT_PERF
+
 #include <iostream>
 #include "perf_event.h"
 

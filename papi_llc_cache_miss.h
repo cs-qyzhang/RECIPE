@@ -13,9 +13,9 @@ const int NUM_EVENTS = sizeof(event_list) / sizeof(int);
 
 #ifdef STAT_PAPI
 
-#define papi_stat_start() CacheMissStat cache_stat;\
+#define llc_stat_start() CacheMissStat cache_stat;\
                          cache_stat.Start();
-#define papi_stat_stop(i) \
+#define llc_stat_stop() \
                     cache_stat.Stop();\
                     load_count[i] = cache_stat.GetLoadCount();\
                     store_count[i] = cache_stat.GetStoreCount();\
@@ -24,43 +24,14 @@ const int NUM_EVENTS = sizeof(event_list) / sizeof(int);
 
 class CacheMissStat {
  public:
-  CacheMissStat() : event_set_(PAPI_NULL) {
-    int retval;
-
-    /* Creating the eventset */
-    if ( (retval = PAPI_create_eventset(&event_set_)) != PAPI_OK)
-      ERROR_RETURN(retval);
-
-    // If any of the required events do not exist we just exit
-    for(int i = 0; i < NUM_EVENTS; i++) {
-      if(PAPI_query_event(event_list[i]) != PAPI_OK) {
-        std::cerr << "ERROR: PAPI event " << i << "ed is not supported" << std::endl;
-        exit(1);
-      }
-    }
-
-    for (int i = 0; i < NUM_EVENTS; ++i) {
-      if ( (retval = PAPI_add_event(event_set_, event_list[i])) != PAPI_OK)
-        ERROR_RETURN(retval);
-    }
-
-    /* get the number of events in the event set */
-    int number = 0;
-    if ( (retval = PAPI_list_events(event_set_, NULL, &number)) != PAPI_OK)
-      ERROR_RETURN(retval);
-
-    if (number != NUM_EVENTS) {
-      fprintf(stderr, "There are %d events in the event set\n", number);
-      exit(-1);
-    }
-
+  CacheMissStat() {
     for (int i = 0; i < NUM_EVENTS; ++i)
       values_[i] = 0;
   }
 
   void Start() {
     int retval;
-    if ( (retval = PAPI_start(event_set_)) != PAPI_OK)
+    if ( (retval = PAPI_start_counters((int*)event_list, NUM_EVENTS)) != PAPI_OK)
       ERROR_RETURN(retval);
   }
 
@@ -84,13 +55,6 @@ class CacheMissStat {
   }
 
  private:
-  int event_set_;
   long long values_[NUM_EVENTS];
 };
-
-#else
-
-#define papi_stat_start()
-#define papi_stat_stop(i)
-
 #endif
