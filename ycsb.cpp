@@ -878,7 +878,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
                 int tid = thread_id.fetch_add(1);
-                llc_stat_start();
+                papi_stat_start();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
                     if (ops[i] == OP_INSERT) {
                         woart_insert(t, keys[i], sizeof(uint64_t), &keys[i]);
@@ -896,7 +896,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         exit(0);
                     }
                 }
-                llc_stat_stop(tid);
+                papi_stat_stop(tid);
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
@@ -953,8 +953,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                 uint64_t thread_size = (i != num_thread-1) ? (RUN_SIZE/num_thread) : (RUN_SIZE - (RUN_SIZE/num_thread*(num_thread-1)));
                 uint64_t end_key = start_key + thread_size;
                 threads.emplace_back([&,i](){
-                    CacheMissStat cache_stat;
-                    cache_stat.Start();
+                    papi_stat_start();
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
                         if (ops[j] == OP_INSERT) {
@@ -981,11 +980,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                             exit(0);
                         }
                     }
-                    cache_stat.Stop();
-                    load_count[i] = cache_stat.GetLoadCount();
-                    store_count[i] = cache_stat.GetStoreCount();
-                    llc_access[i] = cache_stat.GetL3AccessCount();
-                    llc_miss[i] = cache_stat.GetL3MissCount();
+                    papi_stat_stop(i);
                 });
             }
             for (auto& t : threads)
