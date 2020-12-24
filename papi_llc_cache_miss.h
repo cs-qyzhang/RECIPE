@@ -11,6 +11,17 @@ const int NUM_EVENTS = sizeof(event_list) / sizeof(int);
 
 #define ERROR_RETURN(retval) { std::cerr << "Error " << retval << ": " << __FILE__ << ":line " << __LINE__ << std::endl;  exit(retval); }
 
+#ifdef STAT_PAPI
+
+#define llc_stat_start() CacheMissStat cache_stat;\
+                         cache_stat.Start();
+#define llc_stat_stop(i) \
+                    cache_stat.Stop();\
+                    load_count[i] = cache_stat.GetLoadCount();\
+                    store_count[i] = cache_stat.GetStoreCount();\
+                    llc_access[i] = cache_stat.GetL3AccessCount();\
+                    llc_miss[i] = cache_stat.GetL3MissCount();
+
 class CacheMissStat {
  public:
   CacheMissStat() : event_set_(PAPI_NULL) {
@@ -76,3 +87,6 @@ class CacheMissStat {
   int event_set_;
   long long values_[NUM_EVENTS];
 };
+
+#else
+#endif
