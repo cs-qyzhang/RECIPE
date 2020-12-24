@@ -362,7 +362,10 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             // Run
             Key *end = end->make_leaf(UINT64_MAX, sizeof(uint64_t), 0);
             auto starttime = std::chrono::high_resolution_clock::now();
+            std::atomic<int> thread_id(0);
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
+                int tid = thread_id.fetch_add(1);
+                papi_stat_start();
                 auto t = tree.getThreadInfo();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
                     if (ops[i] == OP_INSERT) {
@@ -387,6 +390,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         exit(0);
                     }
                 }
+                papi_stat_stop(tid);
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
@@ -423,7 +427,10 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Run
             auto starttime = std::chrono::high_resolution_clock::now();
+            std::atomic<int> thread_id(0);
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
+                int tid = thread_id.fetch_add(1);
+                papi_stat_start();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
                     if (ops[i] == OP_INSERT) {
                         IntKeyVal *key;
@@ -448,6 +455,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         exit(0);
                     }
                 }
+                papi_stat_stop(tid);
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
@@ -500,6 +508,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             next_thread_id.store(0);
             t->UpdateThreadLocal(num_thread);
             auto func = [&]() {
+                papi_stat_start();
                 std::vector<uint64_t> v{};
                 v.reserve(1);
                 int thread_id = next_thread_id.fetch_add(1);
@@ -532,6 +541,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                     }
                 }
                 t->UnregisterThread(thread_id);
+                papi_stat_stop(thread_id);
             };
 
             std::vector<std::thread> thread_group;
@@ -569,8 +579,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
         {
             // Run
+            std::atomic<int> thread_id(0);
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
+                int tid = thread_id.fetch_add(1);
+                papi_stat_start();
                 auto t = tree->getThreadInfo();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
                     if (ops[i] == OP_INSERT) {
@@ -590,6 +603,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         tree->put(keys[i], &keys[i], t);
                     }
                 }
+                papi_stat_stop(tid);
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
@@ -647,6 +661,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             next_thread_id.store(0);
             auto func = [&]() {
+                papi_stat_start();
                 int thread_id = next_thread_id.fetch_add(1);
                 tds[thread_id].id = thread_id;
                 tds[thread_id].ht = hashtable;
@@ -674,6 +689,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         exit(0);
                     }
                 }
+                papi_stat_stop(thread_id);
             };
 
             std::vector<std::thread> thread_group;
@@ -710,8 +726,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
         {
             // Run
+            std::atomic<int> thread_id(0);
             auto starttime = std::chrono::high_resolution_clock::now();
             tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
+                int tid = thread_id.fetch_add(1);
+                papi_stat_start();
                 for (uint64_t i = scope.begin(); i != scope.end(); i++) {
                     if (ops[i] == OP_INSERT) {
                         bt->btree_insert(keys[i], (char *) &keys[i]);
@@ -732,6 +751,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         exit(0);
                     }
                 }
+                papi_stat_stop(tid);
             });
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);

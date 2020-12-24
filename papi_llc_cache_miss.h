@@ -13,9 +13,9 @@ const int NUM_EVENTS = sizeof(event_list) / sizeof(int);
 
 #ifdef STAT_PAPI
 
-#define llc_stat_start() CacheMissStat cache_stat;\
+#define papi_stat_start() CacheMissStat cache_stat;\
                          cache_stat.Start();
-#define llc_stat_stop(i) \
+#define papi_stat_stop(i) \
                     cache_stat.Stop();\
                     load_count[i] = cache_stat.GetLoadCount();\
                     store_count[i] = cache_stat.GetStoreCount();\
