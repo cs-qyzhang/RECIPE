@@ -26,6 +26,7 @@ using namespace std;
 #include "combotree/combotree.h"
 #include "statistic.h"
 #include "papi_llc_cache_miss.h"
+#include "perf_event.h"
 
 #ifdef HOT
 #include <hot/rowex/HOTRowex.hpp>
@@ -955,6 +956,8 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                 uint64_t end_key = start_key + thread_size;
                 threads.emplace_back([&,i](){
                     papi_stat_start();
+                    PerfEvent perf;
+                    perf.Start();
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
                         if (ops[j] == OP_INSERT) {
@@ -982,6 +985,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         }
                     }
                     papi_stat_stop(i);
+                    perf.Stop();
+                    std::cout << "Read Access:  " << perf.ReadAccess() << std::endl;
+                    std::cout << "Read Miss:    " << perf.ReadMiss() << std::endl;
+                    std::cout << "Write Access: " << perf.WriteAccess() << std::endl;
+                    std::cout << "Write Miss:   " << perf.WriteMiss() << std::endl;
                 });
             }
             for (auto& t : threads)

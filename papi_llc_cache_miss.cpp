@@ -1,3 +1,5 @@
+#define STAT_PAPI
+
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -17,24 +19,10 @@ int main(void) {
   CacheMissStat stat;
   stat.Start();
 
-  std::vector<std::thread> threads;
-  for (int i = 0; i < 16; ++i) {
-    threads.emplace_back([](){
-      CacheMissStat s;
-
-      s.Start();
-      int* array = new int[1000000];
-      for (int i = 0; i < 1000000; ++i) {
-        array[i] = i;
-      }
-
-      s.Stop();
-      s.PrintStat();
-    });
+  int* array = new int[1000000];
+  for (int i = 0; i < 1000000; ++i) {
+    array[i] = i;
   }
-
-  for (auto& t : threads)
-    t.join();
 
   stat.Stop();
   stat.PrintStat();

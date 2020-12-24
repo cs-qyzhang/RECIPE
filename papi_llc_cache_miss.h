@@ -89,4 +89,8 @@ class CacheMissStat {
 };
 
 #else
+
+#define papi_stat_start()
+#define papi_stat_stop(i)
+
 #endif
