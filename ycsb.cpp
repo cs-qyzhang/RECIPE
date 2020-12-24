@@ -882,8 +882,6 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                 start_end_key(RUN_SIZE);
                 threads.emplace_back([&,start_key,end_key,i](){
                     llc_stat_start();
-                    PerfEvent perf;
-                    perf.Start();
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
                         if (ops[j] == OP_INSERT) {
