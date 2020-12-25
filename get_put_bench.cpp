@@ -224,6 +224,11 @@ void loadKey(TID tid, Key &key) {
     return ;
 }
 
+#define start_end_key(total) \
+    uint64_t start_key = total / num_thread * i;    \
+    uint64_t thread_size = (i != num_thread-1) ? (total / num_thread) : (total - (total / num_thread * (num_thread - 1)));  \
+    uint64_t end_key = start_key + thread_size;
+
 void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         std::vector<uint64_t> &init_keys,
         std::vector<uint64_t> &keys,
@@ -283,13 +288,19 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree.getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    Key *key = key->make_leaf(init_keys[i], sizeof(uint64_t), init_keys[i]);
-                    tree.insert(key, t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree.getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        Key *key = key->make_leaf(init_keys[j], sizeof(uint64_t), init_keys[j]);
+                        tree.insert(key, t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -299,17 +310,23 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             // Get
             Key *end = end->make_leaf(UINT64_MAX, sizeof(uint64_t), 0);
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE/2), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree.getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    Key *key = key->make_leaf(keys[i], sizeof(uint64_t), 0);
-                    uint64_t *val = reinterpret_cast<uint64_t *>(tree.lookup(key, t));
-                    if (*val != keys[i]) {
-                        std::cout << "[ART] wrong key read: " << val << " expected:" << keys[i] << std::endl;
-                        exit(1);
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree.getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        Key *key = key->make_leaf(keys[j], sizeof(uint64_t), 0);
+                        uint64_t *val = reinterpret_cast<uint64_t *>(tree.lookup(key, t));
+                        if (*val != keys[j]) {
+                            std::cout << "[ART] wrong key read: " << val << " expected:" << keys[j] << std::endl;
+                            exit(1);
+                        }
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: get, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -319,13 +336,21 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             // Put
             Key *end = end->make_leaf(UINT64_MAX, sizeof(uint64_t), 0);
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(RUN_SIZE/2, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree.getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    Key *key = key->make_leaf(keys[i], sizeof(uint64_t), keys[i]);
-                    tree.insert(key, t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                start_key += RUN_SIZE / 2;
+                end_key += RUN_SIZE / 2;
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree.getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        Key *key = key->make_leaf(keys[j], sizeof(uint64_t), keys[j]);
+                        tree.insert(key, t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: put, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -337,18 +362,24 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    IntKeyVal *key;
-                    posix_memalign((void **)&key, 64, sizeof(IntKeyVal));
-                    key->key = init_keys[i]; key->value = init_keys[i];
-                    Dummy::clflush((char *)key, sizeof(IntKeyVal), true, true);
-                    if (!(mTrie.insert(key))) {
-                        fprintf(stderr, "[HOT] load insert fail\n");
-                        exit(1);
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        IntKeyVal *key;
+                        posix_memalign((void **)&key, 64, sizeof(IntKeyVal));
+                        key->key = init_keys[j]; key->value = init_keys[j];
+                        Dummy::clflush((char *)key, sizeof(IntKeyVal), true, true);
+                        if (!(mTrie.insert(key))) {
+                            fprintf(stderr, "[HOT] load insert fail\n");
+                            exit(1);
+                        }
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -357,16 +388,22 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Get
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE/2), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    idx::contenthelpers::OptionalValue<IntKeyVal *> result = mTrie.lookup(keys[i]);
-                    if (!result.mIsValid || result.mValue->value != keys[i]) {
-                        printf("mIsValid = %d\n", result.mIsValid);
-                        printf("Return value = %lu, Correct value = %lu\n", result.mValue->value, keys[i]);
-                        exit(1);
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        idx::contenthelpers::OptionalValue<IntKeyVal *> result = mTrie.lookup(keys[j]);
+                        if (!result.mIsValid || result.mValue->value != keys[j]) {
+                            printf("mIsValid = %d\n", result.mIsValid);
+                            printf("Return value = %lu, Correct value = %lu\n", result.mValue->value, keys[j]);
+                            exit(1);
+                        }
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: get, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -375,18 +412,26 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Put
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(RUN_SIZE/2, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    IntKeyVal *key;
-                    posix_memalign((void **)&key, 64, sizeof(IntKeyVal));
-                    key->key = keys[i]; key->value = keys[i];
-                    Dummy::clflush((char *)key, sizeof(IntKeyVal), true, true);
-                    if (!(mTrie.insert(key))) {
-                        fprintf(stderr, "[HOT] run insert fail\n");
-                        exit(1);
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                start_key += RUN_SIZE/2;
+                end_key += RUN_SIZE/2;
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        IntKeyVal *key;
+                        posix_memalign((void **)&key, 64, sizeof(IntKeyVal));
+                        key->key = keys[j]; key->value = keys[j];
+                        Dummy::clflush((char *)key, sizeof(IntKeyVal), true, true);
+                        if (!(mTrie.insert(key))) {
+                            fprintf(stderr, "[HOT] run insert fail\n");
+                            exit(1);
+                        }
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: put, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -398,12 +443,18 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree->getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    tree->put(init_keys[i], &init_keys[i], t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree->getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        tree->put(init_keys[j], &init_keys[j], t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -412,16 +463,22 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Get
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE/2), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree->getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    uint64_t *ret = reinterpret_cast<uint64_t *> (tree->get(keys[i], t));
-                    if (*ret != keys[i]) {
-                        printf("[MASS] search key = %lu, search value = %lu\n", keys[i], *ret);
-                        exit(1);
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree->getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        uint64_t *ret = reinterpret_cast<uint64_t *> (tree->get(keys[j], t));
+                        if (*ret != keys[j]) {
+                            printf("[MASS] search key = %lu, search value = %lu\n", keys[j], *ret);
+                            exit(1);
+                        }
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: get, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -430,12 +487,20 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Put
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(RUN_SIZE/2, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree->getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    tree->put(keys[i], &keys[i], t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                start_key += RUN_SIZE/2;
+                end_key += RUN_SIZE/2;
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree->getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        tree->put(keys[j], &keys[j], t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: put, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -452,31 +517,19 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            next_thread_id.store(0);
-            auto func = [&]() {
-                int thread_id = next_thread_id.fetch_add(1);
-                tds[thread_id].id = thread_id;
-                tds[thread_id].ht = hashtable;
-
-                uint64_t start_key = LOAD_SIZE / num_thread * (uint64_t)thread_id;
-                uint64_t thread_size = (thread_id != num_thread-1) ? (LOAD_SIZE/num_thread) : (LOAD_SIZE - (LOAD_SIZE/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
-
-                clht_gc_thread_init(tds[thread_id].ht, tds[thread_id].id);
-                barrier_cross(&barrier);
-
-                for (uint64_t i = start_key; i < end_key; i++) {
-                    clht_put(tds[thread_id].ht, init_keys[i], init_keys[i]);
-                }
-            };
-
-            std::vector<std::thread> thread_group;
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group.push_back(std::thread{func});
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group[i].join();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    tds[i].id = i;
+                    tds[i].ht = hashtable;
+                    clht_gc_thread_init(tds[i].ht, tds[i].id);
+                    barrier_cross(&barrier);
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        clht_put(tds[i].ht, init_keys[j], init_keys[j]);
+                    }
+                });
+            }
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -487,36 +540,26 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Get
             auto starttime = std::chrono::high_resolution_clock::now();
-            next_thread_id.store(0);
-            auto func = [&]() {
-                int thread_id = next_thread_id.fetch_add(1);
-                tds[thread_id].id = thread_id;
-                tds[thread_id].ht = hashtable;
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    tds[i].id = i;
+                    tds[i].ht = hashtable;
+                    clht_gc_thread_init(tds[i].ht, tds[i].id);
+                    barrier_cross(&barrier);
 
-                uint64_t size = RUN_SIZE / 2;
-                uint64_t start_key = size / num_thread * (uint64_t)thread_id;
-                uint64_t thread_size = (thread_id != num_thread-1) ? (size/num_thread) : (size - (size/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
-
-                clht_gc_thread_init(tds[thread_id].ht, tds[thread_id].id);
-                barrier_cross(&barrier);
-
-                for (uint64_t i = start_key; i < end_key; i++) {
-                    uintptr_t val = clht_get(tds[thread_id].ht->ht, keys[i]);
-                    if (val != keys[i]) {
-                        std::cout << "[CLHT] wrong key read: " << val << "expected: " << keys[i] << std::endl;
-                        exit(1);
+                    for (uint64_t j = start_key; j < end_key; j++) {
+                        uintptr_t val = clht_get(tds[i].ht->ht, keys[j]);
+                        if (val != keys[j]) {
+                            std::cout << "[CLHT] wrong key read: " << val << "expected: " << keys[j] << std::endl;
+                            exit(1);
+                        }
                     }
-                }
-            };
-
-            std::vector<std::thread> thread_group;
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group.push_back(std::thread{func});
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group[i].join();
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: get, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -525,32 +568,24 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Put
             auto starttime = std::chrono::high_resolution_clock::now();
-            next_thread_id.store(0);
-            auto func = [&]() {
-                int thread_id = next_thread_id.fetch_add(1);
-                tds[thread_id].id = thread_id;
-                tds[thread_id].ht = hashtable;
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                start_key += RUN_SIZE/2;
+                end_key += RUN_SIZE/2;
+                threads.emplace_back([&,start_key,end_key,i](){
+                    tds[i].id = i;
+                    tds[i].ht = hashtable;
+                    clht_gc_thread_init(tds[i].ht, tds[i].id);
+                    barrier_cross(&barrier);
 
-                uint64_t size = RUN_SIZE / 2;
-                uint64_t start_key = size / num_thread * (uint64_t)thread_id + RUN_SIZE/2;
-                uint64_t thread_size = (thread_id != num_thread-1) ? (size/num_thread) : (size - (size/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
-
-                clht_gc_thread_init(tds[thread_id].ht, tds[thread_id].id);
-                barrier_cross(&barrier);
-
-                for (uint64_t i = start_key; i < end_key; i++) {
-                    clht_put(tds[thread_id].ht, keys[i], keys[i]);
-                }
-            };
-
-            std::vector<std::thread> thread_group;
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group.push_back(std::thread{func});
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group[i].join();
+                    for (uint64_t j = start_key; j < end_key; j++) {
+                        clht_put(tds[i].ht, keys[j], keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: put, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -562,11 +597,17 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    bt->btree_insert(init_keys[i], (char *) &init_keys[i]);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        bt->btree_insert(init_keys[j], (char *) &init_keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -575,17 +616,23 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Get
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE/2), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    uint64_t *ret = reinterpret_cast<uint64_t *>(bt->btree_search(keys[i]));
-                    if (ret == NULL) {
-                        //printf("NULL is found\n");
-                    } else if (*ret != keys[i]) {
-                        //printf("[FASTFAIR] wrong value is returned: <expected> %lu\n", keys[i]);
-                        //exit(1);
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        uint64_t *ret = reinterpret_cast<uint64_t *>(bt->btree_search(keys[j]));
+                        if (ret == NULL) {
+                            //printf("NULL is found\n");
+                        } else if (*ret != keys[j]) {
+                            //printf("[FASTFAIR] wrong value is returned: <expected> %lu\n", keys[i]);
+                            //exit(1);
+                        }
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: get, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -594,11 +641,19 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Put
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(RUN_SIZE/2, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    bt->btree_insert(keys[i], (char *) &keys[i]);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                start_key += RUN_SIZE/2;
+                end_key += RUN_SIZE/2;
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        bt->btree_insert(keys[j], (char *) &keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: put, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -609,11 +664,17 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    table->Insert(init_keys[i], reinterpret_cast<const char*>(&init_keys[i]));
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        table->Insert(init_keys[j], reinterpret_cast<const char*>(&init_keys[j]));
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -622,15 +683,21 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Get
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE/2), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    auto val = table->Get(keys[i]);
-                    if (val == NONE) {
-                        std::cout << "[Level Hashing] wrong key read: " << *(uint64_t *)val << " expected: " << keys[i] << std::endl;
-                        exit(1);
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                threads.emplace_back([&,i,start_key,end_key](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        auto val = table->Get(keys[j]);
+                        if (val == NONE) {
+                            std::cout << "[Level Hashing] wrong key read: " << *(uint64_t *)val << " expected: " << keys[j] << std::endl;
+                            exit(1);
+                        }
                     }
-                }
-            });
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: get, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
@@ -639,17 +706,26 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Put
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(RUN_SIZE/2, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    table->Insert(keys[i], reinterpret_cast<const char*>(&keys[i]));
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE/2);
+                start_key += RUN_SIZE/2;
+                end_key += RUN_SIZE/2;
+                threads.emplace_back([&,i,start_key,end_key](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        table->Insert(keys[j], reinterpret_cast<const char*>(&keys[j]));
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: put, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
         }
     } else if (index_type == TYPE_CCEH) {
         Hash *table = new CCEH(2);
+        exit(-1);
 
         {
             // Load
@@ -701,9 +777,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
             for (uint64_t i = 0; i < num_thread; ++i) {
-                uint64_t start_key = LOAD_SIZE / num_thread * i;
-                uint64_t thread_size = (i != num_thread-1) ? (LOAD_SIZE/num_thread) : (LOAD_SIZE - (LOAD_SIZE/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
+                start_end_key(LOAD_SIZE);
                 threads.emplace_back([=,&init_keys](){
                     for (size_t j = start_key; j < end_key; ++j) {
                         tree->Put(init_keys[j], init_keys[j]);
@@ -722,10 +796,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             std::vector<std::thread> threads;
             auto starttime = std::chrono::high_resolution_clock::now();
             for (uint64_t i = 0; i < num_thread; ++i) {
-                uint64_t size = RUN_SIZE / 2;
-                uint64_t start_key = size / num_thread * i;
-                uint64_t thread_size = (i != num_thread-1) ? (size/num_thread) : (size - (size/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
+                start_end_key(RUN_SIZE/2);
                 threads.emplace_back([=,&keys](){
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
@@ -747,10 +818,9 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             std::vector<std::thread> threads;
             auto starttime = std::chrono::high_resolution_clock::now();
             for (uint64_t i = 0; i < num_thread; ++i) {
-                uint64_t size = RUN_SIZE / 2;
-                uint64_t start_key = size / num_thread * i + RUN_SIZE/2;
-                uint64_t thread_size = (i != num_thread-1) ? (size/num_thread) : (size - (size/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
+                start_end_key(RUN_SIZE/2);
+                start_key += RUN_SIZE/2;
+                end_key += RUN_SIZE/2;
                 threads.emplace_back([=,&keys](){
                     for (size_t j = start_key; j < end_key; ++j) {
                         tree->Put(keys[j], keys[j]);

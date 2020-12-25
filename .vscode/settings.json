@@ -2,6 +2,7 @@
     "files.associations": {
         "*.h": "cpp",
         "*.sty": "latex-expl3",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "*.tcc": "cpp"
     }
 }
