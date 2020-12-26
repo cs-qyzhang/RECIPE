@@ -512,8 +512,6 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
         thread_data_t *tds = (thread_data_t *) malloc(num_thread * sizeof(thread_data_t));
 
-        std::atomic<int> next_thread_id;
-
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
