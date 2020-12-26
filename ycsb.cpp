@@ -711,6 +711,65 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             printf("Throughput: run, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
         }
         clht_gc_destroy(hashtable);
+    } else if (index_type == TYPE_CCEH) {
+        Hash *table = new CCEH(2);
+
+        {
+            // Load
+            auto starttime = std::chrono::system_clock::now();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        stat_latency_start();
+                        table->Insert(init_keys[j], reinterpret_cast<const char*>(&init_keys[j]));
+                        stat_latency_stop(j);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::system_clock::now() - starttime);
+            printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
+        }
+
+        {
+            // Run
+            auto starttime = std::chrono::system_clock::now();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    llc_stat_start();
+
+                    for (uint64_t j = start_key; j < end_key; j++) {
+                        if (ops[j] == OP_INSERT) {
+                            table->Insert(keys[j], reinterpret_cast<const char*>(&keys[j]));
+                        } else if (ops[j] == OP_READ) {
+                            uint64_t *val = reinterpret_cast<uint64_t *>(const_cast<char *>(table->Get(keys[j])));
+                            if (val == NULL) {
+                                //std::cout << "[CCEH] wrong value is read <expected:> " << keys[i] << std::endl;
+                                //exit(1);
+                            }
+                        } else if (ops[j] == OP_SCAN) {
+                            std::cout << "NOT SUPPORTED CMD!\n";
+                            exit(0);
+                        } else if (ops[j] == OP_UPDATE) {
+                            std::cout << "NOT SUPPORTED CMD!\n";
+                            exit(0);
+                        }
+                    }
+                    llc_stat_stop();
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::system_clock::now() - starttime);
+            printf("Throughput: run, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
+        }
     } else if (index_type == TYPE_FASTFAIR) {
         fastfair::btree *bt = new fastfair::btree();
 
