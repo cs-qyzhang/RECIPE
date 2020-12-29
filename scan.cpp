@@ -485,7 +485,7 @@ void ycsb_load_run_randint(int index_type, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             for (uint64_t i = 0; i < num_thread; ++i) {
                 start_end_key(LOAD_SIZE);
-                threads.emplace_back([=,&init_keys,&rec_latency](){
+                threads.emplace_back([&,start_key,end_key,i](){
                     for (size_t j = start_key; j < end_key; ++j) {
                         tree->Put(init_keys[j], init_keys[j]);
                     }
@@ -507,11 +507,10 @@ void ycsb_load_run_randint(int index_type, int num_thread,
             for (uint64_t i = 0; i < num_thread; ++i) {
                 start_end_key(RUN_SIZE);
                 uint64_t* buf = new uint64_t[range];
-                threads.emplace_back([=,&keys,&ops](){
+                threads.emplace_back([&,start_key,end_key,i](){
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
-                        uint64_t start_key = keys[j];
-                        combotree::ComboTree::NoSortIter iter(tree, start_key);
+                        combotree::ComboTree::NoSortIter iter(tree, keys[j]);
                         for (size_t k = 0; k < range; ++k) {
                             buf[k] = iter.key();
                             if (!iter.next())

@@ -735,6 +735,8 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
         }
 
+        space_usage("cceh");
+
         {
             // Run
             auto starttime = std::chrono::system_clock::now();
@@ -952,8 +954,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                         } else if (ops[j] == OP_SCAN) {
                             uint64_t buf[200];
                             int resultsFound = 0;
-                            uint64_t start_key = keys[j];
-                            combotree::ComboTree::NoSortIter iter(tree, start_key);
+                            combotree::ComboTree::NoSortIter iter(tree, keys[j]);
                             for (size_t k = 0; k < ranges[j]; ++k) {
                                 if (iter.key() != iter.value())
                                     printf("SCAN ERROR!\n");

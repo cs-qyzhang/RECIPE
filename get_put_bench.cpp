@@ -841,7 +841,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             for (uint64_t i = 0; i < num_thread; ++i) {
                 start_end_key(LOAD_SIZE);
-                threads.emplace_back([=,&init_keys](){
+                threads.emplace_back([&,start_key,end_key,i](){
                     for (size_t j = start_key; j < end_key; ++j) {
                         tree->Put(init_keys[j], init_keys[j]);
                     }
@@ -860,7 +860,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             auto starttime = std::chrono::high_resolution_clock::now();
             for (uint64_t i = 0; i < num_thread; ++i) {
                 start_end_key(RUN_SIZE/2);
-                threads.emplace_back([=,&keys](){
+                threads.emplace_back([&,start_key,end_key,i](){
                     uint64_t value;
                     for (size_t j = start_key; j < end_key; ++j) {
                         bool ret = tree->Get(keys[j], value);
@@ -884,7 +884,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                 start_end_key(RUN_SIZE/2);
                 start_key += RUN_SIZE/2;
                 end_key += RUN_SIZE/2;
-                threads.emplace_back([=,&keys](){
+                threads.emplace_back([&,start_key,end_key,i](){
                     for (size_t j = start_key; j < end_key; ++j) {
                         tree->Put(keys[j], keys[j]);
                     }
