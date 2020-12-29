@@ -458,10 +458,12 @@ void ycsb_load_run_randint(int index_type, int num_thread,
 
         {
             // Scan
+            int range = 10;
+            size_t scan_size = RUN_SIZE/range;
             auto starttime = std::chrono::high_resolution_clock::now();
             std::vector<thread> threads;
             for (uint64_t i = 0; i < num_thread; ++i) {
-                start_end_key(RUN_SIZE);
+                start_end_key(scan_size);
                 threads.emplace_back([&,start_key,end_key,i](){
                     uint64_t* buf = new uint64_t[range];
                     for (size_t j = start_key; j < end_key; ++j) {
@@ -474,7 +476,76 @@ void ycsb_load_run_randint(int index_type, int num_thread,
                 t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: scan, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
+            printf("Throughput: scan 10, %f ,ops/us\n", (scan_size * 1.0) / duration.count());
+        }
+
+        {
+            // Scan
+            int range = 100;
+            size_t scan_size = RUN_SIZE/range;
+            auto starttime = std::chrono::high_resolution_clock::now();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(scan_size);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    uint64_t* buf = new uint64_t[range];
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        int resultsFound = 0;
+                        bt->btree_search_range(keys[j], UINT64_MAX, buf, range, resultsFound);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::high_resolution_clock::now() - starttime);
+            printf("Throughput: scan 100, %f ,ops/us\n", (scan_size * 1.0) / duration.count());
+        }
+
+        {
+            // Scan
+            int range = 1000;
+            size_t scan_size = RUN_SIZE/range;
+            auto starttime = std::chrono::high_resolution_clock::now();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(scan_size);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    uint64_t* buf = new uint64_t[range];
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        int resultsFound = 0;
+                        bt->btree_search_range(keys[j], UINT64_MAX, buf, range, resultsFound);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::high_resolution_clock::now() - starttime);
+            printf("Throughput: scan 1000, %f ,ops/us\n", (scan_size * 1.0) / duration.count());
+        }
+
+        {
+            // Scan
+            int range = 10000;
+            size_t scan_size = RUN_SIZE/range;
+            auto starttime = std::chrono::high_resolution_clock::now();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(scan_size);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    uint64_t* buf = new uint64_t[range];
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        int resultsFound = 0;
+                        bt->btree_search_range(keys[j], UINT64_MAX, buf, range, resultsFound);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::high_resolution_clock::now() - starttime);
+            printf("Throughput: scan 10000, %f ,ops/us\n", (scan_size * 1.0) / duration.count());
         }
     } else if (index_type == TYPE_COMBOTREE) {
         combotree::ComboTree *tree = new combotree::ComboTree("/pmem0/combotree", (100*1024*1024*1024UL), true);
