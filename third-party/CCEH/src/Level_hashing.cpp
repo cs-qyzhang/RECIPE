@@ -5,7 +5,7 @@
 #include "src/Level_hashing.h"
 #include "util/hash.h"
 #include "util/persist.h"
-#include <sys/times.h>
+#include <sys/time.h>
 
 using namespace std;
 

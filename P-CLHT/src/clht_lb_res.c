@@ -36,7 +36,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <emmintrin.h>
-#include <sys/times.h>
+#include <sys/time.h>
 
 #include "clht_lb_res.h"
 
