@@ -1,4 +1,4 @@
-/*   
+/*
  *   File: clht_lb_res.c
  *   Author: Vasileios Trigonakis <vasileios.trigonakis@epfl.ch>
  *   Description: lock-based cache-line hash table with resizing.
@@ -36,6 +36,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <emmintrin.h>
+#include <sys/times.h>
 
 #include "clht_lb_res.h"
 
@@ -80,7 +81,7 @@ clht_type_desc()
 }
 
     inline int
-is_power_of_two (unsigned int x) 
+is_power_of_two (unsigned int x)
 {
     return ((x != 0) && !(x & (x - 1)));
 }
@@ -180,7 +181,7 @@ static inline void movnt64(uint64_t *dest, uint64_t const src, bool front, bool 
 
 /* Create a new bucket. */
     bucket_t*
-clht_bucket_create() 
+clht_bucket_create()
 {
     bucket_t* bucket = NULL;
     bucket = (bucket_t *) memalign(CACHE_LINE_SIZE, sizeof(bucket_t));
@@ -216,7 +217,7 @@ clht_bucket_create_stats(clht_hashtable_t* h, int* resize)
 
 clht_hashtable_t* clht_hashtable_create(uint64_t num_buckets);
 
-    clht_t* 
+    clht_t*
 clht_create(uint64_t num_buckets)
 {
     clht_t* w = (clht_t*) memalign(CACHE_LINE_SIZE, sizeof(clht_t));
@@ -266,7 +267,7 @@ clht_hashtable_create(uint64_t num_buckets)
 
     /* hashtable->table = calloc(num_buckets, (sizeof(bucket_t))); */
     hashtable->table = (bucket_t*) memalign(CACHE_LINE_SIZE, num_buckets * (sizeof(bucket_t)));
-    if (hashtable->table == NULL) 
+    if (hashtable->table == NULL)
     {
         printf("** alloc: hashtable->table\n"); fflush(stdout);
         free(hashtable);
@@ -307,7 +308,7 @@ clht_hashtable_create(uint64_t num_buckets)
 
 /* Hash a key for a particular hash table. */
     uint64_t
-clht_hash(clht_hashtable_t* hashtable, clht_addr_t key) 
+clht_hash(clht_hashtable_t* hashtable, clht_addr_t key)
 {
     /* uint64_t hashval; */
     /* return __ac_Jenkins_hash_64(key) & (hashtable->hash); */
@@ -358,7 +359,7 @@ clht_get(clht_hashtable_t* hashtable, clht_addr_t key)
 bucket_exists(volatile bucket_t* bucket, clht_addr_t key)
 {
     uint32_t j;
-    do 
+    do
     {
         for (j = 0; j < ENTRIES_PER_BUCKET; j++)
         {
@@ -368,7 +369,7 @@ bucket_exists(volatile bucket_t* bucket, clht_addr_t key)
             }
         }
         bucket = bucket->next;
-    } 
+    }
     while (unlikely(bucket != NULL));
     return false;
 }
@@ -403,11 +404,11 @@ clht_put(clht_t* h, clht_addr_t key, clht_val_t val)
     clht_val_t* empty_v = NULL;
 
     uint32_t j;
-    do 
+    do
     {
         for (j = 0; j < ENTRIES_PER_BUCKET; j++)
         {
-            if (bucket->key[j] == key) 
+            if (bucket->key[j] == key)
             {
                 LOCK_RLS(lock);
                 return false;
@@ -457,7 +458,7 @@ clht_put(clht_t* h, clht_addr_t key, clht_val_t val)
                 /* ht_resize_pes(h, 1); */
 				DEBUG_PRINT("Calling ht_status for key %ld\n", (long)key);
                 int ret = ht_status(h, 1, 0);
-				
+
 				// if crash, return true, because the insert anyway succeeded
 				if (ret == 0)
 					return true;
@@ -633,12 +634,16 @@ ht_resize_help(clht_hashtable_t* h)
     h->helper_done = 1;
 }
 
-
 // return -1 if crash is simulated.
     int
 ht_resize_pes(clht_t* h, int is_increase, int by)
 {
-//    ticks s = getticks();
+    ticks s = getticks();
+
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    long long start_micro_sec = (long long)1000000*(long long)tv.tv_sec+(long long)tv.tv_usec;
+    printf("start resize at %lld, size %lld\n", start_micro_sec, clht_size(h->ht));
 
     check_ht_status_steps = CLHT_STATUS_INVOK;
 
@@ -663,7 +668,7 @@ ht_resize_pes(clht_t* h, int is_increase, int by)
         num_buckets_new = ht_old->num_buckets / CLHT_RATIO_HALVE;
     }
 
-    /* printf("// resizing: from %8zu to %8zu buckets\n", ht_old->num_buckets, num_buckets_new); */
+    printf("// resizing: from %8zu to %8zu buckets\n", ht_old->num_buckets, num_buckets_new);
 
     clht_hashtable_t* ht_new = clht_hashtable_create(num_buckets_new);
     ht_new->version = ht_old->version + 1;
@@ -741,18 +746,18 @@ ht_resize_pes(clht_t* h, int is_increase, int by)
     		DEBUG_PRINT("-------------ht current------------\n");
     		clht_print(h->ht);
     		DEBUG_PRINT("-------------------------\n");
-        	return -1; 
-        }   
+        	return -1;
+        }
 
-    else if (pid > 0){ 
+    else if (pid > 0){
         int returnStatus;
-        waitpid(pid, &returnStatus, 0); 
+        waitpid(pid, &returnStatus, 0);
         DEBUG_PRINT("Continuing in parent process to finish resizing during ins\n");
-    }   
+    }
     else {
         DEBUG_PRINT("Fork failed");
         return 0;
-    }   
+    }
 #endif
 
 	// atomically swap the root pointer
@@ -788,14 +793,14 @@ ht_resize_pes(clht_t* h, int is_increase, int by)
 		return 0;
 	}
 #endif
-	DEBUG_PRINT("Parent reached correctly\n"); 
+	DEBUG_PRINT("Parent reached correctly\n");
     ht_old->table_new = ht_new;
     TRYLOCK_RLS(h->resize_lock);
 
-//    ticks e = getticks() - s;
-//    double mba = (ht_new->num_buckets * 64) / (1024.0 * 1024);
-//    printf("[RESIZE-%02d] to #bu %7zu = MB: %7.2f    | took: %13llu ti = %8.6f s\n",
-//            clht_gc_get_id(), ht_new->num_buckets, mba, (unsigned long long) e, e / 2.1e9);
+    ticks e = getticks() - s;
+    double mba = (ht_new->num_buckets * 64) / (1024.0 * 1024);
+    printf("[RESIZE-%02d] to #bu %7zu = MB: %7.2f    | took: %13llu ti = %8.6f s\n",
+            clht_gc_get_id(), ht_new->num_buckets, mba, (unsigned long long) e, e / 2.1e9);
 
 #if defined(CLHTDEBUG)
 	DEBUG_PRINT("-------------ht old------------\n");
@@ -812,6 +817,10 @@ ht_resize_pes(clht_t* h, int is_increase, int by)
 #else
     clht_gc_release(ht_old);
 #endif
+
+    gettimeofday(&tv,NULL);
+    long long stop_micro_sec = (long long)1000000*(long long)tv.tv_sec+(long long)tv.tv_usec;
+    printf("stop resize at %lld, size %lld\n", stop_micro_sec, clht_size(h->ht));
 
     if (ht_resize_again)
     {

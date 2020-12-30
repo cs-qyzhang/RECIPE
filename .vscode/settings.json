@@ -3,6 +3,7 @@
         "*.h": "cpp",
         "*.sty": "latex-expl3",
         "chrono": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "shared_mutex": "cpp"
     }
 }
