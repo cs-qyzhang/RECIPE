@@ -5,6 +5,7 @@
 #include "src/Level_hashing.h"
 #include "util/hash.h"
 #include "util/persist.h"
+#include <sys/times.h>
 
 using namespace std;
 
@@ -174,7 +175,7 @@ void LevelHashing::resize(void) {
   struct timeval tv;
   gettimeofday(&tv,NULL);
   long long start_micro_sec = (long long)1000000*(long long)tv.tv_sec+(long long)tv.tv_usec;
-  printf("start resize at %lld, size %lld\n", start_micro_sec, clht_size(h->ht));
+  printf("start resize at %lld, size ??\n", start_micro_sec);
 
   std::unique_lock<std::shared_mutex> *lock[nlocks];
   for(int i=0;i<nlocks;i++){
@@ -275,7 +276,7 @@ void LevelHashing::resize(void) {
 
   gettimeofday(&tv,NULL);
   long long stop_micro_sec = (long long)1000000*(long long)tv.tv_sec+(long long)tv.tv_usec;
-  printf("stop resize at %lld, size %lld\n", stop_micro_sec, clht_size(h->ht));
+  printf("stop resize at %lld, size ??\n", stop_micro_sec);
 }
 
 uint8_t LevelHashing::try_movement(uint64_t idx, uint64_t level_num, Key_t& key, Value_t value) {
