@@ -252,31 +252,30 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     std::string read("READ");
     std::string scan("SCAN");
 
-    int count = 0;
-    while (count < LOAD_SIZE && infile_load.good()) {
-        infile_load >> op >> key;
-        if (op.compare(insert) != 0) {
-            std::cout << "READING LOAD FILE FAIL!\n";
-            return ;
-        }
-        init_keys.push_back(key);
-        count++;
+    std::ifstream data("./build/data.dat");
+    if (!data.good()) {
+        std::cout << "can not open data.dat!" << std::endl;
+        assert(0);
     }
-
-    LOAD_SIZE = count;
-    fprintf(stderr, "LOAD SIZE: %d\n", LOAD_SIZE);
-
-    std::ifstream infile_txn(txn_file);
-
-    count = 0;
-    while (count < RUN_SIZE && infile_txn.good()) {
-        infile_txn >> op >> key;
-        keys.push_back(key);
-        count++;
+    for (size_t i = 0; i < LOAD_SIZE; ++i) {
+        uint64_t k;
+        data >> k;
+        init_keys.push_back(k);
     }
+    for (size_t i = 0; i < RUN_SIZE/2; ++i)
+        keys.push_back(init_keys[i]);
+    for (size_t i = 0; i < RUN_SIZE/2; ++i) {
+        uint64_t k;
+        data >> k;
+        keys.push_back(k);
+    }
+    std::cout << "finish read data.dat" << std::endl;
 
-    RUN_SIZE = count;
-    fprintf(stderr, "RUN SIZE: %d\n", RUN_SIZE);
+    if (init_keys.size() != LOAD_SIZE)
+        std::cerr << "load size error: " << init_keys.size() << std::endl;
+
+    if (keys.size() != RUN_SIZE)
+        std::cerr << "run size error: " << keys.size() << std::endl;
 
     std::atomic<int> range_complete, range_incomplete;
     range_complete.store(0);
