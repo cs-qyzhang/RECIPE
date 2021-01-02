@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
+#include <sys/time.h>
 
 using namespace std;
 
@@ -642,6 +643,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
         thread_data_t *tds = (thread_data_t *) malloc(num_thread * sizeof(thread_data_t));
 
+        struct timeval tv;
+        gettimeofday(&tv,NULL);
+        long long start_micro_sec = (long long)1000000*(long long)tv.tv_sec+(long long)tv.tv_usec;
+        printf("start at %lld\n", start_micro_sec);
+
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
@@ -838,6 +844,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     } else if (index_type == TYPE_LEVELHASH) {
         Hash *table = new LevelHashing(10);
 
+        struct timeval tv;
+        gettimeofday(&tv,NULL);
+        long long start_micro_sec = (long long)1000000*(long long)tv.tv_sec+(long long)tv.tv_usec;
+        printf("start at %lld\n", start_micro_sec);
+
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
@@ -897,6 +908,11 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         }
     } else if (index_type == TYPE_COMBOTREE) {
         combotree::ComboTree *tree = new combotree::ComboTree("/pmem0/combotree", (100*1024*1024*1024UL), true);
+
+        struct timeval tv;
+        gettimeofday(&tv,NULL);
+        long long start_micro_sec = (long long)1000000*(long long)tv.tv_sec+(long long)tv.tv_usec;
+        printf("start at %lld\n", start_micro_sec);
 
         {
             // Load

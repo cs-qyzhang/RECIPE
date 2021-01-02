@@ -262,13 +262,8 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         data >> k;
         init_keys.push_back(k);
     }
-    for (size_t i = 0; i < RUN_SIZE/2; ++i)
+    for (size_t i = 0; i < RUN_SIZE; ++i)
         keys.push_back(init_keys[i]);
-    for (size_t i = 0; i < RUN_SIZE/2; ++i) {
-        uint64_t k;
-        data >> k;
-        keys.push_back(k);
-    }
     std::cout << "finish read data.dat" << std::endl;
 
     if (init_keys.size() != LOAD_SIZE)
