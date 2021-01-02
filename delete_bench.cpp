@@ -224,6 +224,11 @@ void loadKey(TID tid, Key &key) {
     return ;
 }
 
+#define start_end_key(total) \
+    uint64_t start_key = total / num_thread * i;    \
+    uint64_t thread_size = (i != num_thread-1) ? (total / num_thread) : (total - (total / num_thread * (num_thread - 1)));  \
+    uint64_t end_key = start_key + thread_size;
+
 void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         std::vector<uint64_t> &init_keys,
         std::vector<uint64_t> &keys,
