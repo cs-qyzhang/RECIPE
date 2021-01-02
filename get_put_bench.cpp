@@ -785,52 +785,6 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: put, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
         }
-    } else if (index_type == TYPE_CCEH) {
-        Hash *table = new CCEH(2);
-        exit(-1);
-
-        {
-            // Load
-            auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    table->Insert(init_keys[i], reinterpret_cast<const char*>(&init_keys[i]));
-                }
-            });
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
-        }
-
-        {
-            // Get
-            auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE/2), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    uint64_t *val = reinterpret_cast<uint64_t *>(const_cast<char *>(table->Get(keys[i])));
-                    if (val == NULL) {
-                        //std::cout << "[CCEH] wrong value is read <expected:> " << keys[i] << std::endl;
-                        //exit(1);
-                    }
-                }
-            });
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: get, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
-        }
-
-        {
-            // Put
-            auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(RUN_SIZE/2, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    table->Insert(keys[i], reinterpret_cast<const char*>(&keys[i]));
-                }
-            });
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: run, %f ,ops/us\n", (RUN_SIZE/2.0 * 1.0) / duration.count());
-        }
     } else if (index_type == TYPE_COMBOTREE) {
         combotree::ComboTree *tree = new combotree::ComboTree("/pmem0/combotree", (100*1024*1024*1024UL), true);
 

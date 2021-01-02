@@ -234,7 +234,7 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     std::string txn_file;
 
     init_file = "./index-microbench/workloads/loadload_unif_int.dat";
-    txn_file = "./index-microbench/workloads/delete_unif_int.dat";
+    txn_file = "./index-microbench/workloads/get_put_unif_int.dat";
 
     std::ifstream infile_load(init_file);
 
@@ -247,31 +247,30 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
     std::string read("READ");
     std::string scan("SCAN");
 
-    int count = 0;
-    while (count < LOAD_SIZE && infile_load.good()) {
-        infile_load >> op >> key;
-        if (op.compare(insert) != 0) {
-            std::cout << "READING LOAD FILE FAIL!\n";
-            return ;
-        }
-        init_keys.push_back(key);
-        count++;
+    std::ifstream data("./build/data.dat");
+    if (!data.good()) {
+        std::cout << "can not open data.dat!" << std::endl;
+        assert(0);
     }
-
-    LOAD_SIZE = count;
-    fprintf(stderr, "LOAD SIZE: %d\n", LOAD_SIZE);
-
-    std::ifstream infile_txn(txn_file);
-
-    count = 0;
-    while (count < RUN_SIZE && infile_txn.good()) {
-        infile_txn >> op >> key;
-        keys.push_back(key);
-        count++;
+    for (size_t i = 0; i < LOAD_SIZE; ++i) {
+        uint64_t k;
+        data >> k;
+        init_keys.push_back(k);
     }
+    for (size_t i = 0; i < RUN_SIZE/2; ++i)
+        keys.push_back(init_keys[i]);
+    for (size_t i = 0; i < RUN_SIZE/2; ++i) {
+        uint64_t k;
+        data >> k;
+        keys.push_back(k);
+    }
+    std::cout << "finish read data.dat" << std::endl;
 
-    RUN_SIZE = count;
-    fprintf(stderr, "RUN SIZE: %d\n", RUN_SIZE);
+    if (init_keys.size() != LOAD_SIZE)
+        std::cerr << "load size error: " << init_keys.size() << std::endl;
+
+    if (keys.size() != RUN_SIZE)
+        std::cerr << "run size error: " << keys.size() << std::endl;
 
     std::atomic<int> range_complete, range_incomplete;
     range_complete.store(0);
@@ -283,13 +282,19 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree.getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    Key *key = key->make_leaf(init_keys[i], sizeof(uint64_t), init_keys[i]);
-                    tree.insert(key, t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree.getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        Key *key = key->make_leaf(init_keys[j], sizeof(uint64_t), init_keys[j]);
+                        tree.insert(key, t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -299,73 +304,41 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
             // Delete
             Key *end = end->make_leaf(UINT64_MAX, sizeof(uint64_t), 0);
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree.getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    Key *key = key->make_leaf(keys[i], sizeof(uint64_t), 0);
-                    tree.remove(key, t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree.getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        Key *key = key->make_leaf(keys[j], sizeof(uint64_t), 0);
+                        tree.remove(key, t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
         }
-#ifdef HOT
-    } else if (index_type == TYPE_HOT) {
-        hot::rowex::HOTRowex<IntKeyVal *, IntKeyExtractor> mTrie;
-
-        {
-            // Load
-            auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    IntKeyVal *key;
-                    posix_memalign((void **)&key, 64, sizeof(IntKeyVal));
-                    key->key = init_keys[i]; key->value = init_keys[i];
-                    Dummy::clflush((char *)key, sizeof(IntKeyVal), true, true);
-                    if (!(mTrie.insert(key))) {
-                        fprintf(stderr, "[HOT] load insert fail\n");
-                        exit(1);
-                    }
-                }
-            });
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
-        }
-
-        {
-            // Delete FIXME:
-            auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    IntKeyVal *key;
-                    posix_memalign((void **)&key, 64, sizeof(IntKeyVal));
-                    key->key = keys[i]; key->value = keys[i];
-                    Dummy::clflush((char *)key, sizeof(IntKeyVal), true, true);
-                    if (!(mTrie.insert(key))) {
-                        fprintf(stderr, "[HOT] run insert fail\n");
-                        exit(1);
-                    }
-                }
-            });
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
-        }
-#endif
     } else if (index_type == TYPE_MASSTREE) {
         masstree::masstree *tree = new masstree::masstree();
 
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree->getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    tree->put(init_keys[i], &init_keys[i], t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree->getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        tree->put(init_keys[j], &init_keys[j], t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -374,12 +347,18 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Delete
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                auto t = tree->getThreadInfo();
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    tree->del(keys[i], t);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    auto t = tree->getThreadInfo();
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        tree->del(keys[j], t);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
@@ -391,36 +370,22 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
 
         thread_data_t *tds = (thread_data_t *) malloc(num_thread * sizeof(thread_data_t));
 
-        std::atomic<int> next_thread_id;
-
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            next_thread_id.store(0);
-            auto func = [&]() {
-                int thread_id = next_thread_id.fetch_add(1);
-                tds[thread_id].id = thread_id;
-                tds[thread_id].ht = hashtable;
-
-                uint64_t start_key = LOAD_SIZE / num_thread * (uint64_t)thread_id;
-                uint64_t thread_size = (thread_id != num_thread-1) ? (LOAD_SIZE/num_thread) : (LOAD_SIZE - (LOAD_SIZE/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
-
-                clht_gc_thread_init(tds[thread_id].ht, tds[thread_id].id);
-                barrier_cross(&barrier);
-
-                for (uint64_t i = start_key; i < end_key; i++) {
-                    clht_put(tds[thread_id].ht, init_keys[i], init_keys[i]);
-                }
-            };
-
-            std::vector<std::thread> thread_group;
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group.push_back(std::thread{func});
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group[i].join();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    tds[i].id = i;
+                    tds[i].ht = hashtable;
+                    clht_gc_thread_init(tds[i].ht, tds[i].id);
+                    barrier_cross(&barrier);
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        clht_put(tds[i].ht, init_keys[j], init_keys[j]);
+                    }
+                });
+            }
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -431,47 +396,84 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Delete
             auto starttime = std::chrono::high_resolution_clock::now();
-            next_thread_id.store(0);
-            auto func = [&]() {
-                int thread_id = next_thread_id.fetch_add(1);
-                tds[thread_id].id = thread_id;
-                tds[thread_id].ht = hashtable;
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    tds[i].id = i;
+                    tds[i].ht = hashtable;
+                    clht_gc_thread_init(tds[i].ht, tds[i].id);
+                    barrier_cross(&barrier);
 
-                uint64_t start_key = RUN_SIZE / num_thread * (uint64_t)thread_id;
-                uint64_t thread_size = (thread_id != num_thread-1) ? (RUN_SIZE/num_thread) : (RUN_SIZE - (RUN_SIZE/num_thread*(num_thread-1)));
-                uint64_t end_key = start_key + thread_size;
-
-                clht_gc_thread_init(tds[thread_id].ht, tds[thread_id].id);
-                barrier_cross(&barrier);
-
-                for (uint64_t i = start_key; i < end_key; i++) {
-                    clht_remove(tds[thread_id].ht, keys[i]);
-                }
-            };
-
-            std::vector<std::thread> thread_group;
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group.push_back(std::thread{func});
-
-            for (int i = 0; i < num_thread; i++)
-                thread_group[i].join();
+                    for (uint64_t j = start_key; j < end_key; j++) {
+                        clht_remove(tds[i].ht, keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
         }
         clht_gc_destroy(hashtable);
+    } else if (index_type == TYPE_CCEH) {
+        Hash *table = new CCEH(2);
+
+        {
+            // Load
+            auto starttime = std::chrono::system_clock::now();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        table->Insert(init_keys[j], reinterpret_cast<const char*>(&init_keys[j]));
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::system_clock::now() - starttime);
+            printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
+        }
+
+        {
+            // Delete
+            auto starttime = std::chrono::system_clock::now();
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (uint64_t j = start_key; j < end_key; j++) {
+                        table->Delete(keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::system_clock::now() - starttime);
+            printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
+        }
     } else if (index_type == TYPE_FASTFAIR) {
         fastfair::btree *bt = new fastfair::btree();
 
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    bt->btree_insert(init_keys[i], (char *) &init_keys[i]);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        bt->btree_insert(init_keys[j], (char *) &init_keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -480,11 +482,17 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Delete
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    bt->btree_delete(keys[i]);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        bt->btree_delete(keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
@@ -495,39 +503,17 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Load
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    table->Insert(init_keys[i], reinterpret_cast<const char*>(&init_keys[i]));
-                }
-            });
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
-        }
-
-        {
-            // Put
-            auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    table->Delete(keys[i]);
-                }
-            });
-            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-                    std::chrono::high_resolution_clock::now() - starttime);
-            printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
-        }
-    } else if (index_type == TYPE_COMBOTREE) {
-        combotree::ComboTree *tree = new combotree::ComboTree("/pmem0/combotree", (100*1024*1024*1024UL), true);
-
-        {
-            // Load
-            auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, LOAD_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    tree->Put(init_keys[i], init_keys[i]);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        table->Insert(init_keys[j], reinterpret_cast<const char*>(&init_keys[j]));
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
@@ -536,11 +522,58 @@ void ycsb_load_run_randint(int index_type, int wl, int num_thread,
         {
             // Delete
             auto starttime = std::chrono::high_resolution_clock::now();
-            tbb::parallel_for(tbb::blocked_range<uint64_t>(0, RUN_SIZE), [&](const tbb::blocked_range<uint64_t> &scope) {
-                for (uint64_t i = scope.begin(); i != scope.end(); i++) {
-                    tree->Delete(keys[i]);
-                }
-            });
+            std::vector<thread> threads;
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,i,start_key,end_key](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        table->Delete(keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::high_resolution_clock::now() - starttime);
+            printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
+        }
+    } else if (index_type == TYPE_COMBOTREE) {
+        combotree::ComboTree *tree = new combotree::ComboTree("/pmem0/combotree", (100*1024*1024*1024UL), true);
+
+        {
+            std::vector<std::thread> threads;
+            // Load
+            auto starttime = std::chrono::high_resolution_clock::now();
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(LOAD_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        tree->Put(init_keys[j], init_keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+                    std::chrono::high_resolution_clock::now() - starttime);
+            printf("Throughput: load, %f ,ops/us\n", (LOAD_SIZE * 1.0) / duration.count());
+        }
+
+        {
+            // Delete
+            std::vector<std::thread> threads;
+            auto starttime = std::chrono::high_resolution_clock::now();
+            for (uint64_t i = 0; i < num_thread; ++i) {
+                start_end_key(RUN_SIZE);
+                threads.emplace_back([&,start_key,end_key,i](){
+                    uint64_t value;
+                    for (size_t j = start_key; j < end_key; ++j) {
+                        tree->Delete(keys[j]);
+                    }
+                });
+            }
+            for (auto& t : threads)
+                t.join();
             auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
                     std::chrono::high_resolution_clock::now() - starttime);
             printf("Throughput: delete, %f ,ops/us\n", (RUN_SIZE * 1.0) / duration.count());
